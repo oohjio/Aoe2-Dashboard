@@ -21,6 +21,7 @@ class RatingPlotWidget(PlotWidget):
         left_label_str = "Team Rating of " + self.player_name
         self.setLabel("left", left_label_str)
         # self.setLabel("bottom", "Time")
+        
         self.setMouseEnabled(x=False, y=False)
 
         left_axis: AxisItem = self.getAxis("left")
@@ -80,15 +81,18 @@ class TeamTableWidget(TableWidget):
 
         self.setData(self.player_data)
 
-    def update_team(self, team: [BasicPlayerInfo]):
+    def update_team(self, team: list[BasicPlayerInfo]):
+        self.numbers_of_players = len(team)
+        self.player_data = numpy.resize(self.player_data, len(team))
+
         for index, player in enumerate(team):
             self.update_player(index, player)
 
-        self.player_data = numpy.resize(self.player_data, len(team))
         self.setData(self.player_data)
         self.resize(300, 20 + len(team) * 25)
 
         self.setCurrentIndex(self.model().createIndex(0, 0))
+        self.setHidden(False)
 
     def update_player(self, player_nr: int, data: BasicPlayerInfo):
         self.player_data[player_nr][0] = data.name
@@ -101,7 +105,3 @@ class TeamTableWidget(TableWidget):
     def selec_changed(self):
         row = self.currentIndex().row()
         self.parent().player_selection_changed(self.team, row)
-
-
-
-
