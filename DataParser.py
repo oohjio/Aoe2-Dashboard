@@ -1,10 +1,11 @@
 import json
 from dataclasses import dataclass
-from datetime import datetime
+from typing import List
+
 import numpy as np
 from PySide6.QtCore import QSettings
 
-_k_player_id_key = "player/player_id"
+import keys
 
 
 @dataclass
@@ -38,15 +39,16 @@ class CurrentMatch:
     is_ranked: bool
     num_players: int
     leaderboard_id: int
+    server: str
 
-    team_1_players: [BasicPlayerInfo]
-    team_2_players: [BasicPlayerInfo]
+    team_1_players: list[BasicPlayerInfo]
+    team_2_players: list[BasicPlayerInfo]
 
 
 class DataParser:
 
     @staticmethod
-    def compile_ratings_history(rating_history: list) -> ([], []):
+    def compile_ratings_history(rating_history: list) -> tuple[list, list]:
 
         ratings = np.zeros(len(rating_history), dtype=int)
         timestamps = np.zeros(len(rating_history), dtype=int)
@@ -66,9 +68,10 @@ class DataParser:
         match_map_type = match_info.get("map_type", 999)
         match_is_ranked = match_info.get("ranked", False)
         match_leaderboard_id = match_info.get("leaderboard_id", 999)
+        match_server = match_info.get("server", "Unknown")
 
-        team_1: [BasicPlayerInfo] = []
-        team_2: [BasicPlayerInfo] = []
+        team_1: list[BasicPlayerInfo] = []
+        team_2: list[BasicPlayerInfo] = []
 
         players = match_info.get("players", [])
 
@@ -89,7 +92,7 @@ class DataParser:
 
         # check if team 1 has player, else switch
         settings = QSettings()
-        player_id = int(settings.value(_k_player_id_key))
+        player_id = int(settings.value(keys._k_player_id_key))
         player_found = False
         for player in team_1:
             if player.profile_id == player_id: player_found = True
@@ -99,7 +102,7 @@ class DataParser:
             team_1 = team_2_temp
 
         new_match = CurrentMatch(match_uuid, match_map_type, match_is_ranked, match_num_players, match_leaderboard_id,
-                                 team_1, team_2)
+                                 match_server, team_1, team_2)
         return new_match
 
     @staticmethod
@@ -110,4 +113,24 @@ class DataParser:
             for civ in civ_info:
                 id_enumerate = civ.get("id")
                 if id_enumerate == civ_id: return civ.get("string")
+            return "Unknown"
+
+    @staticmethod
+    def get_key_for_map(map_id: int) -> str:
+        with open("example_data/string_list_aoe2net.json", "r") as read_file:
+            data = json.load(read_file)
+            map_info = data.get("map_type", [])
+            for map in map_info:
+                id_enumerate = map.get("id")
+                if id_enumerate == map_id: return map.get("string")
+            return "Unknown"
+
+    @staticmethod
+    def get_key_for_leaderboard(leaderboard_id: int) -> str:
+        with open("example_data/string_list_aoe2net.json", "r") as read_file:
+            data = json.load(read_file)
+            lb_info = data.get("leaderboard", [])
+            for lb in lb_info:
+                id_enumerate = lb.get("id")
+                if id_enumerate == leaderboard_id: return lb.get("string")
             return "Unknown"
