@@ -46,7 +46,10 @@ class CurrentMatch:
 
 
 class DataParser:
-
+    """
+    This class provides static methods for parsing json from Aoe2.net data.
+    Example Data can be found in the example_data directory
+    """
     @staticmethod
     def compile_ratings_history(rating_history: list) -> tuple[list, list]:
 
@@ -104,6 +107,10 @@ class DataParser:
         new_match = CurrentMatch(match_uuid, match_map_type, match_is_ranked, match_num_players, match_leaderboard_id,
                                  match_server, team_1, team_2)
         return new_match
+    
+    # The next methods provide the language specific names for civs, maps, and the leaderboard
+    # Todo: The file shouldnt be a local file, it could be either saved in the directory for the users locale or stored in an object in the runtime
+    # Todo: Language Support
 
     @staticmethod
     def get_key_for_civ(civ_id: int) -> str:

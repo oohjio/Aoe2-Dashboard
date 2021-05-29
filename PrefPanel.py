@@ -1,7 +1,6 @@
 import json
-
-from threading import Thread
 from queue import Queue
+from threading import Thread
 
 import requests
 from PySide6.QtCore import *
@@ -12,7 +11,7 @@ from APIStringGenerator import APIStringGenerator
 
 
 class PrefPanel(QWidget):
-
+    """Panel that displays a field for setting a new player_id, has founctions to determine if a player_id is valid"""
     def __init__(self):
         super().__init__()
 
@@ -76,11 +75,14 @@ class PrefPanel(QWidget):
 
     @staticmethod
     def does_player_exist(player_id: int, q: Queue, _sentinel):
-        """This function checks whether a player_id exists on the RM 1v1 Leaderboard and then on the Team RM
-        Leaderboard."""
+        """
+        This function checks whether a player_id exists on the RM 1v1 Leaderboard and then on the Team RM Leaderboard. DM / EW ladder momentan not supported
+        Player needs to be found on one of those leaderboards in order to be a valid player_id
+        Needs to be called with a Queue item that returns informations of the current process
+        """
 
         player_found = False
-        # check if player exists on leaderboards
+
         # first 1v1 Leaderboard
         url_str = APIStringGenerator.get_API_string_for_rating_history(3, player_id, 1)
         try:

@@ -9,19 +9,18 @@ from DataParser import BasicPlayerInfo
 
 
 class RatingPlotWidget(PlotWidget):
-    def __init__(self, data_team_ranking, player_name: str, parent=None, background='default', plotItem=None, **kargs):
-        super().__init__(parent, background, plotItem, **kargs)
-        self.data_team_ranking = data_team_ranking
+    """
+    Plot Widget inherited by pyqtgraph's PlotWidget for displaying Ratings in a timeframe
+    """
+
+    def __init__(self, player_name: str, parent=None, background='default', plotItem=None, **kargs):
+        super().__init__(parent, background, plotItem,
+                         axisItems={'bottom': DateAxisItem()}, **kargs)
+
         self.player_name = player_name
-
-        ratings_team = self.data_team_ranking[0]
-        timestamps_team = self.data_team_ranking[1]
-
         self.setBackground(None)
-        left_label_str = "Team Rating of " + self.player_name
-        self.setLabel("left", left_label_str)
         # self.setLabel("bottom", "Time")
-        
+
         self.setMouseEnabled(x=False, y=False)
 
         left_axis: AxisItem = self.getAxis("left")
@@ -30,33 +29,64 @@ class RatingPlotWidget(PlotWidget):
         bottom_axis: AxisItem = self.getAxis("bottom")
         bottom_axis.setGrid(10)
 
-        plot_team: PlotDataItem = self.plot()
+        self.data_team_ranking = None
+        self.data_1v1_ranking = None
 
-        pen = mkPen((15, 153, 246), width=2)
-        plot_team.setPen(pen)
-        plot_team.setData(y=ratings_team, x=timestamps_team)
+        left_label_str = "Rating of " + self.player_name
+        self.setLabel("left", left_label_str)
 
-        y_max_val = ratings_team[ratings_team.argmax()]
-        y_min_val = ratings_team[ratings_team.argmin()]
+    def plot_rating(self, ratingdata, leaderboard_id):
+        pen = mkPen((0, 0, 0), width=2)
+        if leaderboard_id == 3:
+            self.data_1v1_ranking = ratingdata
+            pen = mkPen((255, 96, 62), width=2)
+        elif leaderboard_id == 4:
+            self.data_team_ranking = ratingdata
+            pen = mkPen((15, 153, 246), width=2)
 
-        self.setYRange(y_min_val, y_max_val, padding=0.02)
+        ratings = ratingdata[0]
+        timestamps = ratingdata[1]
+
+        plot: PlotDataItem = self.plot()
+        
+        plot.setPen(pen)
+        plot.setData(y=ratings, x=timestamps)
+
+    def set_min_max_values(self):
+        """I think this function is obsolete"""
+        # set y Range
+        y_min_vals = []
+        y_max_vals = []
+
+        if self.data_1v1_ranking is not None and len(self.data_1v1_ranking[0]) > 0:
+            ratings = self.data_1v1_ranking[0]
+            y_max_vals.append(ratings[ratings.argmax()])
+            y_min_vals.append(ratings[ratings.argmin()])
+
+        if self.data_team_ranking is not None and len(self.data_team_ranking[0]) > 0:
+            ratings = self.data_team_ranking[0]
+            y_max_vals.append(ratings[ratings.argmax()])
+            y_min_vals.append(ratings[ratings.argmin()])
+
+        y_min_vals.sort()
+        y_min_val = y_min_vals[0]
+        y_max_vals.sort(reverse=True)
+        y_max_val = y_max_vals[0]
+        print(y_min_vals, y_min_val)
+        print(y_max_vals, y_max_val)
+
+        self.setYRange(y_min_val, y_max_val)
         self.setLimits(yMax=y_max_val, yMin=y_min_val)
 
-        x_max_val = time.time()
-        x_min_val = timestamps_team[timestamps_team.argmin()]
-        self.setXRange(x_min_val, x_max_val)
-        self.setLimits(xMax=x_max_val)
-
-        rating_mean = ratings_team.mean()
-        mean_x = [0, x_max_val]
-        mean_y = [rating_mean, rating_mean]
-        plot_team_mean: PlotDataItem = self.plot()
-        pen = mkPen((223, 178, 21), width=1)
-        plot_team_mean.setPen(pen)
-        plot_team_mean.setData(y=mean_y, x=mean_x)
+        # x_max_val = time.time()
+        # x_min_val = timestamps_team[timestamps_team.argmin()]
+        # self.setXRange(x_min_val, x_max_val)
+        # self.setLimits(xMax=x_max_val)
 
 
 class TeamTableWidget(TableWidget):
+    """Widget for displaying player infos. Inherits from pygtgraphs's TableWidget. Mostly has functions of a QtTableWidget except for the setData function"""
+
     def __init__(self, team, number_of_players, parent=None, *args, **kwds):
         super().__init__(parent, *args, **kwds)
 
@@ -73,7 +103,8 @@ class TeamTableWidget(TableWidget):
 
         self.itemSelectionChanged.connect(self.selec_changed)
 
-        self.player_data = np.zeros(4, dtype=[('Name', object), ('Civ', object), ('Rating', int), ('Win %', float)])
+        self.player_data = np.zeros(
+            4, dtype=[('Name', object), ('Civ', object), ('Rating', int), ('Win %', float)])
 
         for x in range(0, self.numbers_of_players):
             player_name = "Player " + str(x + 1)
