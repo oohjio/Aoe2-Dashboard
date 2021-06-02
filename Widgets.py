@@ -8,6 +8,7 @@ from pyqtgraph import *
 import numpy as np
 import time
 from DataParser import BasicPlayerInfo
+import typing
 
 
 class RatingPlotWidget(PlotWidget):
@@ -131,3 +132,20 @@ class TeamTableWidget(TableWidget):
         import webbrowser
         player_id = self.players[row].profile_id
         webbrowser.open(APIStringGenerator.get_AoE2_net_link_for_player_id(player_id), new=2)
+
+
+class LegendItem(QWidget):
+    def __init__(self, parent: typing.Optional[QWidget], color) -> None:
+        super().__init__(parent=parent)
+        
+        self.setMinimumSize(30, 10)
+        self.color = color
+
+    def paintEvent(self, e):
+        painter = QPainter(self)
+
+        # Team Rating Line
+        pen_team = mkPen(self.color, width=2)
+        painter.setPen(pen_team)
+        painter.drawLine(0, self.height()/2, self.width() - self.width() / 10, self.height()/2)
+        painter.end()    
