@@ -1,3 +1,5 @@
+from APIStringGenerator import APIStringGenerator
+from datetime import tzinfo
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
@@ -35,6 +37,9 @@ class RatingPlotWidget(PlotWidget):
         left_label_str = "Rating of " + self.player_name
         self.setLabel("left", left_label_str)
 
+        self.stored_leaderboard_ratings = np.empty(6, dtype=tuple)
+        self.stored_plot_items = np.empty(6, dtype=PlotDataItem)
+
     def plot_rating(self, ratingdata, leaderboard_id):
         pen = mkPen((0, 0, 0), width=2)
         if leaderboard_id == 3:
@@ -48,40 +53,22 @@ class RatingPlotWidget(PlotWidget):
         timestamps = ratingdata[1]
 
         plot: PlotDataItem = self.plot()
-        
+
         plot.setPen(pen)
         plot.setData(y=ratings, x=timestamps)
 
-    def set_min_max_values(self):
-        """I think this function is obsolete"""
-        # set y Range
-        y_min_vals = []
-        y_max_vals = []
+        self.stored_leaderboard_ratings[leaderboard_id] = ratingdata
+        self.stored_plot_items[leaderboard_id] = plot
 
-        if self.data_1v1_ranking is not None and len(self.data_1v1_ranking[0]) > 0:
-            ratings = self.data_1v1_ranking[0]
-            y_max_vals.append(ratings[ratings.argmax()])
-            y_min_vals.append(ratings[ratings.argmin()])
+    def update_displayed_plots(self, leaderboard_id, checked):
+        if checked == True:
+            ratings, timestamps = self.stored_leaderboard_ratings[leaderboard_id]
+            self.stored_plot_items[leaderboard_id].setData(
+                y=ratings, x=timestamps)
+        else:
+            self.stored_plot_items[leaderboard_id].clear()
 
-        if self.data_team_ranking is not None and len(self.data_team_ranking[0]) > 0:
-            ratings = self.data_team_ranking[0]
-            y_max_vals.append(ratings[ratings.argmax()])
-            y_min_vals.append(ratings[ratings.argmin()])
-
-        y_min_vals.sort()
-        y_min_val = y_min_vals[0]
-        y_max_vals.sort(reverse=True)
-        y_max_val = y_max_vals[0]
-        print(y_min_vals, y_min_val)
-        print(y_max_vals, y_max_val)
-
-        self.setYRange(y_min_val, y_max_val)
-        self.setLimits(yMax=y_max_val, yMin=y_min_val)
-
-        # x_max_val = time.time()
-        # x_min_val = timestamps_team[timestamps_team.argmin()]
-        # self.setXRange(x_min_val, x_max_val)
-        # self.setLimits(xMax=x_max_val)
+        self.stored_plot_items[leaderboard_id].updateItems()
 
 
 class TeamTableWidget(TableWidget):
@@ -102,9 +89,12 @@ class TeamTableWidget(TableWidget):
         self.setSortingEnabled(False)
 
         self.itemSelectionChanged.connect(self.selec_changed)
+        self.cellDoubleClicked.connect(self.cell_double_clicked)
 
         self.player_data = np.zeros(
             4, dtype=[('Name', object), ('Civ', object), ('Rating', int), ('Win %', float)])
+
+        self.players = np.empty(number_of_players, dtype=BasicPlayerInfo)
 
         for x in range(0, self.numbers_of_players):
             player_name = "Player " + str(x + 1)
@@ -130,9 +120,14 @@ class TeamTableWidget(TableWidget):
         self.player_data[player_nr][1] = data.civ_name
         self.player_data[player_nr][2] = data.rating
         self.player_data[player_nr][3] = data.win_percentage
-
-        self.setData(self.player_data)
+        
+        self.players[player_nr] = data
 
     def selec_changed(self):
         row = self.currentIndex().row()
         self.parent().player_selection_changed(self.team, row)
+
+    def cell_double_clicked(self, row: int, column: int):
+        import webbrowser
+        player_id = self.players[row].profile_id
+        webbrowser.open(APIStringGenerator.get_AoE2_net_link_for_player_id(player_id), new=2)

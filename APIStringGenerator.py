@@ -1,6 +1,13 @@
 
+from os import stat
+
+
 class APIStringGenerator:
     """Basic class that can generate API Strings consistently"""
+
+    @staticmethod
+    def get_AoE2_net_link_for_player_id(player_id):
+        return "https://aoe2.net/#profile-" + str(player_id)
 
     @staticmethod
     def get_API_string_for_last_match(player_id):

@@ -1,5 +1,6 @@
 import json
 from dataclasses import dataclass
+from os import stat
 from typing import List
 
 import numpy as np
@@ -50,6 +51,13 @@ class DataParser:
     This class provides static methods for parsing json from Aoe2.net data.
     Example Data can be found in the example_data directory
     """
+    @staticmethod
+    def parse_player_data_from_rating_history_and_store(player_json: dict, player_basic_info: BasicPlayerInfo):
+        player_basic_info.rating = player_json.get("rating", player_basic_info.rating)
+        player_basic_info.wins = player_json.get("num_wins", player_basic_info.wins)
+        player_basic_info.losses = player_json.get("num_losses", player_basic_info.losses)
+
+
     @staticmethod
     def compile_ratings_history(rating_history: list) -> tuple[list, list]:
 
