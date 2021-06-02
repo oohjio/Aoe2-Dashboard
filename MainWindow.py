@@ -19,7 +19,7 @@ from PrefPanel import PrefPanel
 from Widgets import RatingPlotWidget, TeamTableWidget
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
