@@ -91,6 +91,9 @@ class DataParser:
             player_team = player.get("team", 0)
             player_color = player.get("color", 999)
             player_rating = player.get("rating", 0)
+            if player_rating is None:
+                # Wenn das Spiel länger zurückliegt wird das Rating als None zurükgegeben.
+                player_rating = 0
             player_civ_id = player.get("civ", 999)
             player_profile_id = player.get("profile_id", 0)
 

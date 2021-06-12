@@ -78,7 +78,7 @@ class TeamTableWidget(TableWidget):
     def __init__(self, team, number_of_players, parent=None, *args, **kwds):
         super().__init__(parent, *args, **kwds)
 
-        self.numbers_of_players = number_of_players
+        self.number_of_players = number_of_players
         self.team = team
 
         self.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -89,6 +89,8 @@ class TeamTableWidget(TableWidget):
         self.setSelectionMode(QAbstractItemView.SingleSelection)
         self.setSortingEnabled(False)
 
+        self.set_size_policy(self.number_of_players)
+
         self.itemSelectionChanged.connect(self.selec_changed)
         self.cellDoubleClicked.connect(self.cell_double_clicked)
 
@@ -97,14 +99,19 @@ class TeamTableWidget(TableWidget):
 
         self.players = np.empty(number_of_players, dtype=BasicPlayerInfo)
 
-        for x in range(0, self.numbers_of_players):
+        for x in range(0, self.number_of_players):
             player_name = "Player " + str(x + 1)
             self.player_data[x] = (player_name, 'Civ', 0, 0)
 
         self.setData(self.player_data)
 
+    def set_size_policy(self, number_of_players):
+        self.setMinimumSize(300, 25 + number_of_players * 30)
+        self.setMaximumSize(3000, 25 + number_of_players * 30)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
     def update_team(self, team: list[BasicPlayerInfo]):
-        self.numbers_of_players = len(team)
+        self.number_of_players = len(team)
         self.player_data = numpy.resize(self.player_data, len(team))
 
         for index, player in enumerate(team):
@@ -115,6 +122,8 @@ class TeamTableWidget(TableWidget):
 
         self.setCurrentIndex(self.model().createIndex(0, 0))
         self.setHidden(False)
+
+        self.set_size_policy(self.number_of_players)
 
     def update_player(self, player_nr: int, data: BasicPlayerInfo):
         self.player_data[player_nr][0] = data.name

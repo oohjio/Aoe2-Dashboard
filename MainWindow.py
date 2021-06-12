@@ -1,14 +1,11 @@
 import json
-from inspect import currentframe
-#from os import stat
-from threading import Thread
 import platform
+from threading import Thread
 
 import numpy as np
-import pyqtgraph as pg
 import requests
-from pyqtgraph.debug import printTrace
 from PySide6.QtCore import *
+from PySide6.QtCore import QCoreApplication
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
@@ -16,7 +13,7 @@ import keys
 from APIStringGenerator import APIStringGenerator
 from DataParser import BasicPlayerInfo, CurrentMatch, DataParser
 from PrefPanel import PrefPanel
-from Widgets import RatingPlotWidget, TeamTableWidget, LegendItem
+from Widgets import LegendItem, RatingPlotWidget, TeamTableWidget
 
 
 class MainWindow(QWidget):
@@ -49,7 +46,9 @@ class MainWindow(QWidget):
         # set the timer_count to 999 indicating that no timer has started yet
         self.timer_count = 999
         self.player_id: str
-        
+        self.has_updated_players = False
+        self.has_updated_player_data = False
+
         # Top
         top_label = QLabel("AoE 2 Dashboard")
         font: QFont = top_label.font()
@@ -57,7 +56,6 @@ class MainWindow(QWidget):
         top_label.setFont(font)
         top_label.setAlignment(Qt.AlignCenter)
         top_label.setMaximumHeight(30)
-        
 
         # Player Label Right Side
         self.player_label = QLabel("Your team")
@@ -69,9 +67,7 @@ class MainWindow(QWidget):
         # Player Stats
         players = 4
         self.player_table = TeamTableWidget(1, 4)
-        self.player_table.setMinimumSize(300, 25 + players * 30)
-        self.player_table.setMaximumSize(1000, 25 + players * 30)
-        self.player_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)        
+
 
         # Opponent Label Left Side
         self.opp_label = QLabel("Opponent's team")
@@ -79,13 +75,11 @@ class MainWindow(QWidget):
         font.setPointSize(16)
         self.opp_label.setFont(font)
         self.opp_label.setAlignment(Qt.AlignCenter)
-        
+
         # Opponent Stats
         players = 4
         self.opp_table = TeamTableWidget(2, 4)
-        self.opp_table.setMinimumSize(300, 25 + players * 30)
-        self.opp_table.setMaximumSize(1000, 25 + players * 30)
-        self.opp_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
 
         self.player_rating_histories_team = np.empty((2, 4), dtype=tuple)
         self.player_rating_histories_1v1 = np.empty((2, 4), dtype=tuple)
@@ -93,15 +87,17 @@ class MainWindow(QWidget):
         self.left_layout = QVBoxLayout()
         self.left_layout.addWidget(self.opp_label)
         self.left_layout.addWidget(self.opp_table)
-
+        self.left_layout.addSpacing(15)
 
         self.right_layout = QVBoxLayout()
         self.right_layout.addWidget(self.player_label)
         self.right_layout.addWidget(self.player_table)
+        self.right_layout.addSpacing(15)
 
         # Bar
+        # Todo: Check if Icon Path exists??
         pref_icon = QIcon.fromTheme("preferences-system")
-        if pref_icon == None or self.is_running_windows:
+        if pref_icon is None or self.is_running_windows:
             pref_icon = QIcon("ressources/settings_black_24dp.svg")
         pref_button = QToolButton()
         pref_button.setIcon(pref_icon)
@@ -116,7 +112,7 @@ class MainWindow(QWidget):
         refresh_button.setMinimumSize(35, 35)
         refresh_button.clicked.connect(self.refresh_player)
 
-        self.reload_label = QLabel("r")
+        self.reload_label = QLabel("")
 
         font_italic = self.reload_label.font()
         font_italic.setItalic(True)
@@ -135,7 +131,7 @@ class MainWindow(QWidget):
 
         # Display Legende
         legende_label = QLabel("Legend")
-        
+
         legende_label.setFont(font_bold)
 
         rating_1v1_legende_label = QLabel("1v1 Rank")
@@ -144,10 +140,9 @@ class MainWindow(QWidget):
         legend_item_team = LegendItem(None, (15, 153, 246))
         legend_item_1v1 = LegendItem(None, (255, 96, 62))
 
-
         v_legend_layout = QVBoxLayout()
         v_legend_layout.addWidget(legende_label)
-    
+
         h_item_team = QHBoxLayout()
         h_item_team.addWidget(legend_item_team)
         h_item_team.addWidget(rating_team_legende_label)
@@ -169,10 +164,10 @@ class MainWindow(QWidget):
         self.leader_board_label.setFont(font_italic)
         self.leader_board_label.setStyleSheet(style_sheet_orange)
 
-        label_cur_size = QLabel("Size: ", self)
+        label_cur_size = QLabel("Size: ")
         label_cur_size.setGeometry(250, 470, 30, 17)
 
-        self.size_label = QLabel("", self)
+        self.size_label = QLabel("")
         self.size_label.setFont(font_italic)
         self.size_label.setStyleSheet(style_sheet_orange)
 
@@ -182,78 +177,71 @@ class MainWindow(QWidget):
         self.map_label.setFont(font_italic)
         self.map_label.setStyleSheet(style_sheet_orange)
 
-        label_cur_server = QLabel("Server:", self)
+        label_cur_server = QLabel("Server:")
 
-        self.server_label = QLabel("", self)
+        self.server_label = QLabel("")
         self.server_label.setFont(font_italic)
         self.server_label.setStyleSheet(style_sheet_orange)
 
         self.h_layout_metadata = QHBoxLayout()
         self.metadata_labels = [label_cur_pl, self.leader_board_label, label_cur_size, self.size_label,
-                              label_cur_map, self.map_label, label_cur_server, self.server_label]
+                                label_cur_map, self.map_label, label_cur_server, self.server_label]
 
         for e in self.metadata_labels:
             self.h_layout_metadata.addWidget(e)
+            e.setHidden(True)
+
+        v_metadata_layout = QVBoxLayout()
+        v_metadata_layout.addSpacing(15)
+        v_metadata_layout.addLayout(self.h_layout_metadata)
+        v_metadata_layout.addSpacing(15)
 
         self.hidden_labels = self.metadata_labels
 
-
-        # Grid View
-        self.grid_layout = QGridLayout()
-        
-
-        self.grid_layout.addWidget(top_label, 0, 0, 1, 3, Qt.AlignTop)
-        self.grid_layout.addLayout(self.left_layout, 1, 0, Qt.AlignTop)
-        self.grid_layout.addLayout(self.right_layout, 1, 2, Qt.AlignTop)
-
-        self.grid_layout.addLayout(self.h_layout_metadata, 2, 0, 1, 3, Qt.AlignLeft)
-
-        self.grid_layout.addWidget(self.info_label, 3, 0, 1, 2)
-        self.grid_layout.addLayout(self.bar_layout, 3, 2, Qt.AlignRight)
-        
-        self.grid_layout.addLayout(v_legend_layout, 1, 1, Qt.AlignBottom)
-
-
-        self.setLayout(self.grid_layout)
-
-        return
-
-        # Display Legende
-        legende_label = QLabel("Legend", self)
-        legende_label.setGeometry(340, 370, 100, 17)
-        legende_label.setFont(font_bold)
-
-        rating_1v1_legende_label = QLabel("1v1 Rank", self)
-        rating_1v1_legende_label.setGeometry(385, 395, 80, 17)
-
-        rating_team_legende_label = QLabel("Team Rank", self)
-        rating_team_legende_label.setGeometry(385, 420, 80, 17)
-
         # Display Options
-        options_label = QLabel("Options", self)
-        options_label.setGeometry(340, 250, 100, 17)
+        options_label = QLabel("Options")
         options_label.setFont(font_bold)
 
-        check_box_1v1 = QCheckBox("Display 1v1", self)
-        check_box_1v1.setGeometry(340, 280, 110, 17)
+        check_box_1v1 = QCheckBox("Display 1v1")
         check_box_1v1.setChecked(
             MainWindow.get_1v1_display_option_from_settings())
 
-        check_box_team = QCheckBox("Display Team", self)
-        check_box_team.setGeometry(340, 310, 110, 17)
+        check_box_team = QCheckBox("Display Team")
         check_box_team.setChecked(
             MainWindow.get_team_display_option_from_settings())
 
         check_box_1v1.stateChanged.connect(self.check_box_1v1_changed)
         check_box_team.stateChanged.connect(self.check_box_team_changed)
 
-        # alle Metadata und Legenden Labels are added to this array to then set to be hidden
-        self.hidden_labels = [label_cur_pl, self.leader_board_label, label_cur_size, self.size_label,
-                              label_cur_map, self.map_label, label_cur_server, self.server_label, rating_team_legende_label, rating_1v1_legende_label, legende_label]
-        for e in self.hidden_labels:
-            e.setHidden(True)
+        v_display_option_layout = QVBoxLayout()
+        v_display_option_layout.addWidget(options_label)
+        v_display_option_layout.addWidget(check_box_1v1)
+        v_display_option_layout.addWidget(check_box_team)
 
-    
+        center_layout = QVBoxLayout()
+        center_layout.addLayout(v_display_option_layout)
+        center_layout.addSpacing(15)
+        center_layout.addLayout(v_legend_layout)
+
+        # Grid View
+        self.grid_layout = QGridLayout()
+
+        self.grid_layout.addWidget(top_label, 0, 0, 1, 3, Qt.AlignTop)
+        self.grid_layout.addLayout(self.left_layout, 1, 0, Qt.AlignTop)
+        self.grid_layout.addLayout(self.right_layout, 1, 2, Qt.AlignTop)
+
+        self.grid_layout.addLayout(v_metadata_layout, 2, 0, 1, 3, Qt.AlignLeft)
+
+        self.grid_layout.addWidget(self.info_label, 3, 0, 1, 2)
+        self.grid_layout.addLayout(self.bar_layout, 3, 2, Qt.AlignRight)
+
+        self.grid_layout.addLayout(center_layout, 1, 1, Qt.AlignBottom)
+
+        self.setLayout(self.grid_layout)
+
+        self.resize(self.minimumSizeHint())
+
+        self.refresh_player()
 
     def load_infos(self, player_id: int):
         url_str = APIStringGenerator.get_API_string_for_last_match(player_id)
@@ -266,7 +254,7 @@ class MainWindow(QWidget):
             players1 = [BasicPlayerInfo("1", 1000, 2, 2, 1, 1, 2, 222)] * 3
             players2 = [BasicPlayerInfo("2", 1000, 3, 3, 2, 1, 1, 2223)] * 3
             new_match = CurrentMatch("XXX", 1, 1, 6, 4, "", players1, players2)
-        
+
         # check if new match is current match
         if self.current_match is not None:
             if new_match.match_uuid == self.current_match.match_uuid:
@@ -274,6 +262,9 @@ class MainWindow(QWidget):
                 return
 
         self.current_match = new_match
+        self.has_updated_players = False
+        self.has_updated_player_data = False
+
         players_per_team = int(self.current_match.num_players / 2)
         self.player_rating_histories_team = np.empty(
             (2, players_per_team), dtype=tuple)
@@ -298,7 +289,7 @@ class MainWindow(QWidget):
             url_str = APIStringGenerator.get_API_string_for_rating_history(
                 self.current_match.leaderboard_id, player.profile_id, 1)
             response = requests.get(url_str)
-            
+
             DataParser.parse_player_data_from_rating_history_and_store(
                 json.loads(response.text)[0], player)
 
@@ -309,6 +300,8 @@ class MainWindow(QWidget):
             DataParser.parse_player_data_from_rating_history_and_store(
                 json.loads(response.text)[0], player)
 
+        self.has_updated_player_data = True
+
     def update_timer(self):
         """This is getting called every second by the timer. If timer_count == 999 that meens that its the first call since programm start"""
         if self.timer_count == 999:
@@ -316,15 +309,19 @@ class MainWindow(QWidget):
         elif self.timer_count == 0:
             self.load_infos(self.player_id)
             self.timer_count = 60
+        elif self.timer_count == 55:
+            self.timer_count -= 1
+            if self.has_updated_players is False:
+                # update Player
+                thread = Thread(target=self.update_player_profiles)
+                thread.start()
+
         elif self.timer_count == 50:
-            # update Player
-            thread = Thread(target=self.update_player_profiles)
-            thread.start()
             self.timer_count -= 1
-        elif self.timer_count == 40:
-            self.player_table.update_team(self.current_match.team_1_players)
-            self.opp_table.update_team(self.current_match.team_2_players)
-            self.timer_count -= 1
+            if self.has_updated_players is False and self.has_updated_player_data:
+                self.player_table.update_team(self.current_match.team_1_players)
+                self.opp_table.update_team(self.current_match.team_2_players)
+                self.has_updated_players = True
         else:
             self.timer_count -= 1
         self.reload_label.setText(str(self.timer_count) + " s")
@@ -377,9 +374,10 @@ class MainWindow(QWidget):
             except:
                 with open("example_data/opponent_ratinghistory.json", "r") as read_file:
                     rating_history = json.load(read_file)
-                    ratings_team, timestamps_team = DataParser.compile_ratings_history(rating_history)
-                    ratings_1v1, timestamps_1v1 = DataParser.compile_ratings_history(rating_history)
-            
+                    ratings_team, timestamps_team = DataParser.compile_ratings_history(
+                        rating_history)
+                    ratings_1v1, timestamps_1v1 = DataParser.compile_ratings_history(
+                        rating_history)
 
         plot_widget = RatingPlotWidget(parent=self, player_name=player_name)
         plot_widget.plot_rating(
