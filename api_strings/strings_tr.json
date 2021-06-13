@@ -1,0 +1,889 @@
+{
+  "language": "tr",
+  "age": [
+    {
+      "id": 0,
+      "string": "Normal"
+    },
+    {
+      "id": 2,
+      "string": "Karanl\u0131k \u00c7a\u011f"
+    },
+    {
+      "id": 3,
+      "string": "Feodal \u00c7a\u011f"
+    },
+    {
+      "id": 4,
+      "string": "Kale \u00c7a\u011f\u0131"
+    },
+    {
+      "id": 5,
+      "string": "\u0130mparatorluk \u00c7a\u011f\u0131"
+    },
+    {
+      "id": 6,
+      "string": "\u0130mparatorluk \u00d6tesi \u00c7a\u011f"
+    }
+  ],
+  "civ": [
+    {
+      "id": 0,
+      "string": "Aztekler"
+    },
+    {
+      "id": 1,
+      "string": "Berberiler"
+    },
+    {
+      "id": 2,
+      "string": "Britonlar"
+    },
+    {
+      "id": 3,
+      "string": "Bulgarlar"
+    },
+    {
+      "id": 4,
+      "string": "Burgundians"
+    },
+    {
+      "id": 5,
+      "string": "Birmanlar"
+    },
+    {
+      "id": 6,
+      "string": "Bizansl\u0131lar"
+    },
+    {
+      "id": 7,
+      "string": "Keltler"
+    },
+    {
+      "id": 8,
+      "string": "\u00c7inliler"
+    },
+    {
+      "id": 9,
+      "string": "Kumanlar"
+    },
+    {
+      "id": 10,
+      "string": "Etiyopyal\u0131lar"
+    },
+    {
+      "id": 11,
+      "string": "Franklar"
+    },
+    {
+      "id": 12,
+      "string": "Gotlar"
+    },
+    {
+      "id": 13,
+      "string": "Hunlar"
+    },
+    {
+      "id": 14,
+      "string": "\u0130nkalar"
+    },
+    {
+      "id": 15,
+      "string": "Hintler"
+    },
+    {
+      "id": 16,
+      "string": "\u0130talyanlar"
+    },
+    {
+      "id": 17,
+      "string": "Japonlar"
+    },
+    {
+      "id": 18,
+      "string": "Kmerler"
+    },
+    {
+      "id": 19,
+      "string": "Koreliler"
+    },
+    {
+      "id": 20,
+      "string": "Litvanyal\u0131lar"
+    },
+    {
+      "id": 21,
+      "string": "Macarlar"
+    },
+    {
+      "id": 22,
+      "string": "Malaylar"
+    },
+    {
+      "id": 23,
+      "string": "Malililer"
+    },
+    {
+      "id": 24,
+      "string": "Mayalar"
+    },
+    {
+      "id": 25,
+      "string": "Mo\u011follar"
+    },
+    {
+      "id": 26,
+      "string": "Persler"
+    },
+    {
+      "id": 27,
+      "string": "Portekizliler"
+    },
+    {
+      "id": 28,
+      "string": "Sarazenler"
+    },
+    {
+      "id": 29,
+      "string": "Sicilians"
+    },
+    {
+      "id": 30,
+      "string": "Slavlar"
+    },
+    {
+      "id": 31,
+      "string": "\u0130spanyollar"
+    },
+    {
+      "id": 32,
+      "string": "Tatarlar"
+    },
+    {
+      "id": 33,
+      "string": "T\u00f6tonlar"
+    },
+    {
+      "id": 34,
+      "string": "T\u00fcrkler"
+    },
+    {
+      "id": 35,
+      "string": "Vietnaml\u0131lar"
+    },
+    {
+      "id": 36,
+      "string": "Vikingler"
+    }
+  ],
+  "game_type": [
+    {
+      "id": 0,
+      "string": "Rastgele Harita"
+    },
+    {
+      "id": 1,
+      "string": "Kral Katili"
+    },
+    {
+      "id": 2,
+      "string": "\u00d6l\u00fcm Kar\u015f\u0131la\u015fmas\u0131"
+    },
+    {
+      "id": 3,
+      "string": "Senaryo"
+    },
+    {
+      "id": 6,
+      "string": "Tepenin Kral\u0131"
+    },
+    {
+      "id": 7,
+      "string": "D\u00fcnya Harikas\u0131 Yar\u0131\u015f\u0131"
+    },
+    {
+      "id": 8,
+      "string": "D\u00fcnya Harikas\u0131 Savunmas\u0131"
+    },
+    {
+      "id": 9,
+      "string": "Turbo Rastgele Harita"
+    },
+    {
+      "id": 10,
+      "string": "Kadim Eseri Ele Ge\u00e7ir"
+    },
+    {
+      "id": 11,
+      "string": "Ani \u00d6l\u00fcm"
+    },
+    {
+      "id": 12,
+      "string": "Battle Royale"
+    },
+    {
+      "id": 13,
+      "string": "\u0130mparatorluk Sava\u015flar\u0131"
+    }
+  ],
+  "leaderboard": [
+    {
+      "id": 0,
+      "string": "Sirasiz"
+    },
+    {
+      "id": 1,
+      "string": "\u00d6l\u00fcm Kar\u015f\u0131la\u015fmas\u0131"
+    },
+    {
+      "id": 2,
+      "string": "Tak\u0131m \u00d6l\u00fcm Kar\u015f\u0131la\u015fmas\u0131"
+    },
+    {
+      "id": 3,
+      "string": "Rastgele Harita"
+    },
+    {
+      "id": 4,
+      "string": "Tak\u0131m Rastgele Harita"
+    }
+  ],
+  "map_size": [
+    {
+      "id": 0,
+      "string": "Minik (2 oyuncu)"
+    },
+    {
+      "id": 1,
+      "string": "K\u00fc\u00e7\u00fck (3 oyuncu)"
+    },
+    {
+      "id": 2,
+      "string": "Orta (4 oyuncu)"
+    },
+    {
+      "id": 3,
+      "string": "Normal (6 oyuncu)"
+    },
+    {
+      "id": 4,
+      "string": "B\u00fcy\u00fck (8 oyuncu)"
+    },
+    {
+      "id": 5,
+      "string": "Dev"
+    },
+    {
+      "id": 6,
+      "string": "Muazzam"
+    }
+  ],
+  "map_type": [
+    {
+      "id": 9,
+      "string": "Arabistan"
+    },
+    {
+      "id": 10,
+      "string": "Tak\u0131mada"
+    },
+    {
+      "id": 11,
+      "string": "Balt\u0131k"
+    },
+    {
+      "id": 12,
+      "string": "Kara Orman"
+    },
+    {
+      "id": 13,
+      "string": "K\u0131y\u0131sal"
+    },
+    {
+      "id": 14,
+      "string": "K\u0131tasal"
+    },
+    {
+      "id": 15,
+      "string": "Krater G\u00f6l\u00fc"
+    },
+    {
+      "id": 16,
+      "string": "Hisar"
+    },
+    {
+      "id": 17,
+      "string": "Alt\u0131na H\u00fccum"
+    },
+    {
+      "id": 18,
+      "string": "Yayla"
+    },
+    {
+      "id": 19,
+      "string": "Adalar"
+    },
+    {
+      "id": 20,
+      "string": "Akdeniz"
+    },
+    {
+      "id": 21,
+      "string": "G\u00f6\u00e7"
+    },
+    {
+      "id": 22,
+      "string": "Nehirler"
+    },
+    {
+      "id": 23,
+      "string": "Tak\u0131m Adalar\u0131"
+    },
+    {
+      "id": 24,
+      "string": "T\u00fcm\u00fc Rastgele"
+    },
+    {
+      "id": 25,
+      "string": "\u0130skandinavya"
+    },
+    {
+      "id": 26,
+      "string": "Mo\u011folistan"
+    },
+    {
+      "id": 27,
+      "string": "Yucatan"
+    },
+    {
+      "id": 28,
+      "string": "Tuz Batakl\u0131\u011f\u0131"
+    },
+    {
+      "id": 29,
+      "string": "Arena"
+    },
+    {
+      "id": 31,
+      "string": "Vaha"
+    },
+    {
+      "id": 32,
+      "string": "Hayalet G\u00f6l"
+    },
+    {
+      "id": 33,
+      "string": "G\u00f6\u00e7ebe"
+    },
+    {
+      "id": 49,
+      "string": "\u0130berya"
+    },
+    {
+      "id": 50,
+      "string": "Britanya"
+    },
+    {
+      "id": 51,
+      "string": "Orta Do\u011fu"
+    },
+    {
+      "id": 52,
+      "string": "Teksas"
+    },
+    {
+      "id": 53,
+      "string": "\u0130talya"
+    },
+    {
+      "id": 54,
+      "string": "Orta Amerika"
+    },
+    {
+      "id": 55,
+      "string": "Fransa"
+    },
+    {
+      "id": 56,
+      "string": "\u0130skandinav Topraklar\u0131"
+    },
+    {
+      "id": 57,
+      "string": "Japon Denizi (Do\u011fu Denizi)"
+    },
+    {
+      "id": 58,
+      "string": "Bizans"
+    },
+    {
+      "id": 59,
+      "string": "\u00d6zel"
+    },
+    {
+      "id": 60,
+      "string": "Rastgele Kara Haritas\u0131"
+    },
+    {
+      "id": 62,
+      "string": "Rastgele Ger\u00e7ek D\u00fcnya Haritas\u0131"
+    },
+    {
+      "id": 63,
+      "string": "B\u00fct\u00fcn\u00fcyle Rastgele"
+    },
+    {
+      "id": 65,
+      "string": "Rastgele \u00d6zel Harita"
+    },
+    {
+      "id": 66,
+      "string": "Rastgele \u00d6zel Harita"
+    },
+    {
+      "id": 67,
+      "string": "Akropolis"
+    },
+    {
+      "id": 68,
+      "string": "Budape\u015fte"
+    },
+    {
+      "id": 69,
+      "string": "Obruklar"
+    },
+    {
+      "id": 70,
+      "string": "G\u00f6ller Y\u00f6resi"
+    },
+    {
+      "id": 71,
+      "string": "Alt\u0131n \u00c7ukuru"
+    },
+    {
+      "id": 72,
+      "string": "S\u0131\u011f\u0131nak"
+    },
+    {
+      "id": 73,
+      "string": "Y\u00fcksek Kale"
+    },
+    {
+      "id": 74,
+      "string": "Lombardiya"
+    },
+    {
+      "id": 75,
+      "string": "Bozk\u0131r"
+    },
+    {
+      "id": 76,
+      "string": "Vadi"
+    },
+    {
+      "id": 77,
+      "string": "Mega Rastgele"
+    },
+    {
+      "id": 78,
+      "string": "Hamburger"
+    },
+    {
+      "id": 79,
+      "string": "KEEG Rastgele"
+    },
+    {
+      "id": 80,
+      "string": "KEEG Muson"
+    },
+    {
+      "id": 81,
+      "string": "KEEG Piramit \u0130ni\u015fi"
+    },
+    {
+      "id": 82,
+      "string": "KEEG Spiral"
+    },
+    {
+      "id": 83,
+      "string": "Kilimanjaro"
+    },
+    {
+      "id": 84,
+      "string": "Da\u011f Ge\u00e7idi"
+    },
+    {
+      "id": 85,
+      "string": "Nil Deltas\u0131"
+    },
+    {
+      "id": 86,
+      "string": "Serengeti"
+    },
+    {
+      "id": 87,
+      "string": "Sokotra"
+    },
+    {
+      "id": 88,
+      "string": "Amazon"
+    },
+    {
+      "id": 89,
+      "string": "\u00c7in"
+    },
+    {
+      "id": 90,
+      "string": "Afrika Boynuzu"
+    },
+    {
+      "id": 91,
+      "string": "Hindistan"
+    },
+    {
+      "id": 92,
+      "string": "Madagaskar"
+    },
+    {
+      "id": 93,
+      "string": "Bat\u0131 Afrika"
+    },
+    {
+      "id": 94,
+      "string": "Bohemya"
+    },
+    {
+      "id": 95,
+      "string": "D\u00fcnya"
+    },
+    {
+      "id": 96,
+      "string": "Kanyonlar"
+    },
+    {
+      "id": 97,
+      "string": "D\u00fc\u015fman Tak\u0131mada"
+    },
+    {
+      "id": 98,
+      "string": "D\u00fc\u015fman Adalar"
+    },
+    {
+      "id": 99,
+      "string": "\u0130lgin\u00e7"
+    },
+    {
+      "id": 100,
+      "string": "Cephe Hatt\u0131"
+    },
+    {
+      "id": 101,
+      "string": "Yak\u0131n \u00c7evre"
+    },
+    {
+      "id": 102,
+      "string": "Ana Kara"
+    },
+    {
+      "id": 103,
+      "string": "A\u00e7\u0131k Ovalar"
+    },
+    {
+      "id": 104,
+      "string": "Deniz \u00c7emberi"
+    },
+    {
+      "id": 105,
+      "string": "Y\u0131lan \u00c7ukuru"
+    },
+    {
+      "id": 106,
+      "string": "G\u00f6z"
+    },
+    {
+      "id": 107,
+      "string": "Avustralya"
+    },
+    {
+      "id": 108,
+      "string": "Hindi\u00e7in"
+    },
+    {
+      "id": 109,
+      "string": "Endonezya"
+    },
+    {
+      "id": 110,
+      "string": "Malakka Bo\u011faz\u0131"
+    },
+    {
+      "id": 111,
+      "string": "Filipinler"
+    },
+    {
+      "id": 112,
+      "string": "Batakl\u0131k Adalar\u0131"
+    },
+    {
+      "id": 113,
+      "string": "Mangrov A\u011fa\u00e7l\u0131\u011f\u0131"
+    },
+    {
+      "id": 114,
+      "string": "Pasifik Adalar\u0131"
+    },
+    {
+      "id": 115,
+      "string": "Kumsal"
+    },
+    {
+      "id": 116,
+      "string": "Su G\u00f6\u00e7ebeleri"
+    },
+    {
+      "id": 117,
+      "string": "A\u011fa\u00e7l\u0131k Adalar"
+    },
+    {
+      "id": 118,
+      "string": "Kutsal Hat"
+    },
+    {
+      "id": 119,
+      "string": "S\u0131n\u0131r Ta\u015flar\u0131"
+    },
+    {
+      "id": 120,
+      "string": "Yin Yang"
+    },
+    {
+      "id": 121,
+      "string": "A\u011fa\u00e7l\u0131k Yollar"
+    },
+    {
+      "id": 122,
+      "string": "Alp G\u00f6lleri"
+    },
+    {
+      "id": 123,
+      "string": "Batakl\u0131k"
+    },
+    {
+      "id": 124,
+      "string": "Da\u011f S\u0131rt\u0131"
+    },
+    {
+      "id": 125,
+      "string": "Da\u011f Ge\u00e7itleri"
+    },
+    {
+      "id": 126,
+      "string": "Kurt Tepesi"
+    },
+    {
+      "id": 132,
+      "string": "Antarktika"
+    },
+    {
+      "id": 137,
+      "string": "\u00d6zel Harita Havuzu"
+    },
+    {
+      "id": 139,
+      "string": "Alt\u0131n Batakl\u0131k"
+    },
+    {
+      "id": 140,
+      "string": "D\u00f6rt G\u00f6l"
+    },
+    {
+      "id": 141,
+      "string": "Kara G\u00f6\u00e7ebesi"
+    },
+    {
+      "id": 142,
+      "string": "BR Battle On Ice"
+    },
+    {
+      "id": 143,
+      "string": "BR El Dorado"
+    },
+    {
+      "id": 144,
+      "string": "BR Fall of Axum"
+    },
+    {
+      "id": 145,
+      "string": "BR Fall of Rome"
+    },
+    {
+      "id": 146,
+      "string": "BR Majapahit Empire"
+    },
+    {
+      "id": 147,
+      "string": "Amazon Tunnel"
+    },
+    {
+      "id": 148,
+      "string": "Coastal Forest"
+    },
+    {
+      "id": 149,
+      "string": "African Clearing"
+    },
+    {
+      "id": 150,
+      "string": "Atacama"
+    },
+    {
+      "id": 151,
+      "string": "Seize the Mountain"
+    },
+    {
+      "id": 152,
+      "string": "Crater"
+    },
+    {
+      "id": 153,
+      "string": "Crossroads"
+    },
+    {
+      "id": 154,
+      "string": "Michi"
+    },
+    {
+      "id": 155,
+      "string": "Team Moats"
+    },
+    {
+      "id": 156,
+      "string": "Volcanic Island"
+    }
+  ],
+  "rating_type": [
+    {
+      "id": 0,
+      "string": "Sirasiz"
+    },
+    {
+      "id": 1,
+      "string": "\u00d6l\u00fcm Kar\u015f\u0131la\u015fmas\u0131"
+    },
+    {
+      "id": 2,
+      "string": "Rastgele Harita"
+    },
+    {
+      "id": 3,
+      "string": "Tak\u0131m \u00d6l\u00fcm Kar\u015f\u0131la\u015fmas\u0131"
+    },
+    {
+      "id": 4,
+      "string": "Tak\u0131m Rastgele Harita"
+    },
+    {
+      "id": 5,
+      "string": "1v1 Random Map Quick Play"
+    },
+    {
+      "id": 6,
+      "string": "Team Random Map Quick Play"
+    },
+    {
+      "id": 7,
+      "string": "1v1 Empire Wars Quick Play"
+    },
+    {
+      "id": 8,
+      "string": "Team Empire Wars Quick Play"
+    },
+    {
+      "id": 9,
+      "string": "Battle Royale Quick Play"
+    }
+  ],
+  "resources": [
+    {
+      "id": 0,
+      "string": "Normal"
+    },
+    {
+      "id": 1,
+      "string": "D\u00fc\u015f\u00fck"
+    },
+    {
+      "id": 2,
+      "string": "Orta"
+    },
+    {
+      "id": 3,
+      "string": "Y\u00fcksek"
+    },
+    {
+      "id": 4,
+      "string": "\u00c7ok Y\u00fcksek"
+    },
+    {
+      "id": 5,
+      "string": "Sonsuz"
+    },
+    {
+      "id": 6,
+      "string": "Rastgele"
+    }
+  ],
+  "speed": [
+    {
+      "id": 0,
+      "string": "Yava\u015f"
+    },
+    {
+      "id": 1,
+      "string": "S\u0131radan"
+    },
+    {
+      "id": 2,
+      "string": "Normal"
+    },
+    {
+      "id": 3,
+      "string": "H\u0131zl\u0131"
+    }
+  ],
+  "victory": [
+    {
+      "id": 1,
+      "string": "Fetih"
+    },
+    {
+      "id": 7,
+      "string": "S\u00fcre K\u0131s\u0131tlamal\u0131"
+    },
+    {
+      "id": 8,
+      "string": "Puan"
+    },
+    {
+      "id": 9,
+      "string": "Normal"
+    },
+    {
+      "id": 11,
+      "string": "Sona Kalan"
+    }
+  ],
+  "visibility": [
+    {
+      "id": 0,
+      "string": "Normal"
+    },
+    {
+      "id": 1,
+      "string": "Ke\u015ffedilmi\u015f"
+    },
+    {
+      "id": 2,
+      "string": "T\u00fcm\u00fc G\u00f6r\u00fcn\u00fcr"
+    }
+  ]
+}

@@ -1,7 +1,3 @@
-
-from os import stat
-
-
 class APIStringGenerator:
     """Basic class that can generate API Strings consistently"""
 
@@ -15,5 +11,9 @@ class APIStringGenerator:
 
     @staticmethod
     def get_API_string_for_rating_history(leaderboard_id, player_id, count):
-        return "https://aoe2.net/api/player/ratinghistory?game=aoe2de&leaderboard_id={0}&profile_id={1}&count={2}"\
+        return "https://aoe2.net/api/player/ratinghistory?game=aoe2de&leaderboard_id={0}&profile_id={1}&count={2}" \
             .format(str(leaderboard_id), str(player_id), str(count))
+
+    @staticmethod
+    def get_API_string_for_string_list(locale):
+        return "https://aoe2.net/api/strings?game=aoe2de&language={}".format(locale)

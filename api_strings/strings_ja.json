@@ -1,0 +1,889 @@
+{
+  "language": "ja",
+  "age": [
+    {
+      "id": 0,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 2,
+      "string": "\u6697\u9ed2\u306e\u6642\u4ee3"
+    },
+    {
+      "id": 3,
+      "string": "\u9818\u4e3b\u306e\u6642\u4ee3"
+    },
+    {
+      "id": 4,
+      "string": "\u57ce\u4e3b\u306e\u6642\u4ee3"
+    },
+    {
+      "id": 5,
+      "string": "\u5e1d\u738b\u306e\u6642\u4ee3"
+    },
+    {
+      "id": 6,
+      "string": "\u5e1d\u738b\u306e\u6642\u4ee3\u4ee5\u964d"
+    }
+  ],
+  "civ": [
+    {
+      "id": 0,
+      "string": "\u30a2\u30b9\u30c6\u30ab"
+    },
+    {
+      "id": 1,
+      "string": "\u30d9\u30eb\u30d9\u30eb"
+    },
+    {
+      "id": 2,
+      "string": "\u30d6\u30ea\u30c8\u30f3"
+    },
+    {
+      "id": 3,
+      "string": "\u30d6\u30eb\u30ac\u30ea\u30a2"
+    },
+    {
+      "id": 4,
+      "string": "Burgundians"
+    },
+    {
+      "id": 5,
+      "string": "\u30d3\u30eb\u30de"
+    },
+    {
+      "id": 6,
+      "string": "\u30d3\u30b6\u30f3\u30c6\u30a3\u30f3"
+    },
+    {
+      "id": 7,
+      "string": "\u30b1\u30eb\u30c8"
+    },
+    {
+      "id": 8,
+      "string": "\u4e2d\u56fd"
+    },
+    {
+      "id": 9,
+      "string": "\u30af\u30de\u30f3"
+    },
+    {
+      "id": 10,
+      "string": "\u30a8\u30c1\u30aa\u30d4\u30a2"
+    },
+    {
+      "id": 11,
+      "string": "\u30d5\u30e9\u30f3\u30af"
+    },
+    {
+      "id": 12,
+      "string": "\u30b4\u30fc\u30c8"
+    },
+    {
+      "id": 13,
+      "string": "\u30d5\u30f3"
+    },
+    {
+      "id": 14,
+      "string": "\u30a4\u30f3\u30ab"
+    },
+    {
+      "id": 15,
+      "string": "\u30a4\u30f3\u30c9"
+    },
+    {
+      "id": 16,
+      "string": "\u30a4\u30bf\u30ea\u30a2"
+    },
+    {
+      "id": 17,
+      "string": "\u65e5\u672c"
+    },
+    {
+      "id": 18,
+      "string": "\u30af\u30e1\u30fc\u30eb"
+    },
+    {
+      "id": 19,
+      "string": "\u671d\u9bae"
+    },
+    {
+      "id": 20,
+      "string": "\u30ea\u30c8\u30a2\u30cb\u30a2"
+    },
+    {
+      "id": 21,
+      "string": "\u30de\u30b8\u30e3\u30fc\u30eb"
+    },
+    {
+      "id": 22,
+      "string": "\u30de\u30ec\u30fc"
+    },
+    {
+      "id": 23,
+      "string": "\u30de\u30ea"
+    },
+    {
+      "id": 24,
+      "string": "\u30de\u30e4"
+    },
+    {
+      "id": 25,
+      "string": "\u30e2\u30f3\u30b4\u30eb"
+    },
+    {
+      "id": 26,
+      "string": "\u30da\u30eb\u30b7\u30a2"
+    },
+    {
+      "id": 27,
+      "string": "\u30dd\u30eb\u30c8\u30ac\u30eb"
+    },
+    {
+      "id": 28,
+      "string": "\u30b5\u30e9\u30bb\u30f3"
+    },
+    {
+      "id": 29,
+      "string": "Sicilians"
+    },
+    {
+      "id": 30,
+      "string": "\u30b9\u30e9\u30f4"
+    },
+    {
+      "id": 31,
+      "string": "\u30b9\u30da\u30a4\u30f3"
+    },
+    {
+      "id": 32,
+      "string": "\u30bf\u30bf\u30fc\u30eb"
+    },
+    {
+      "id": 33,
+      "string": "\u30c1\u30e5\u30fc\u30c8\u30f3"
+    },
+    {
+      "id": 34,
+      "string": "\u30aa\u30b9\u30de\u30f3\u5e1d\u56fd"
+    },
+    {
+      "id": 35,
+      "string": "\u30d9\u30c8\u30ca\u30e0"
+    },
+    {
+      "id": 36,
+      "string": "\u30d0\u30a4\u30ad\u30f3\u30b0"
+    }
+  ],
+  "game_type": [
+    {
+      "id": 0,
+      "string": "\u30e9\u30f3\u30c0\u30e0 \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 1,
+      "string": "\u30c1\u30a7\u30c3\u30af\u30e1\u30a4\u30c8"
+    },
+    {
+      "id": 2,
+      "string": "\u30c7\u30b9 \u30de\u30c3\u30c1"
+    },
+    {
+      "id": 3,
+      "string": "\u30b7\u30ca\u30ea\u30aa"
+    },
+    {
+      "id": 6,
+      "string": "\u30ad\u30f3\u30b0 \u30aa\u30d6 \u30b6 \u30d2\u30eb"
+    },
+    {
+      "id": 7,
+      "string": "\u6c11\u65cf\u306e\u8c61\u5fb4\u306e\u5efa\u9020"
+    },
+    {
+      "id": 8,
+      "string": "\u6c11\u65cf\u306e\u8c61\u5fb4\u306e\u9632\u885b"
+    },
+    {
+      "id": 9,
+      "string": "\u30bf\u30fc\u30dc \u30e9\u30f3\u30c0\u30e0 \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 10,
+      "string": "\u8056\u306a\u308b\u7bb1\u306e\u78ba\u4fdd"
+    },
+    {
+      "id": 11,
+      "string": "\u30b5\u30c9\u30f3\u30c7\u30b9"
+    },
+    {
+      "id": 12,
+      "string": "Battle Royale"
+    },
+    {
+      "id": 13,
+      "string": "\u30a8\u30f3\u30d1\u30a4\u30a2 \u30a6\u30a9\u30fc\u30ba"
+    }
+  ],
+  "leaderboard": [
+    {
+      "id": 0,
+      "string": "\u30ce\u30fc\u30ec\u30fc\u30c8"
+    },
+    {
+      "id": 1,
+      "string": "\u30c7\u30b9 \u30de\u30c3\u30c1"
+    },
+    {
+      "id": 2,
+      "string": "\u30c1\u30fc\u30e0 \u30c7\u30b9 \u30de\u30c3\u30c1"
+    },
+    {
+      "id": 3,
+      "string": "\u30e9\u30f3\u30c0\u30e0 \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 4,
+      "string": "\u30c1\u30fc\u30e0 \u30e9\u30f3\u30c0\u30e0 \u30de\u30c3\u30d7"
+    }
+  ],
+  "map_size": [
+    {
+      "id": 0,
+      "string": "\u6975\u5c0f (2 \u30d7\u30ec\u30a4\u30e4\u30fc)"
+    },
+    {
+      "id": 1,
+      "string": "\u5c0f (3 \u30d7\u30ec\u30a4\u30e4\u30fc)"
+    },
+    {
+      "id": 2,
+      "string": "\u4e2d (4 \u30d7\u30ec\u30a4\u30e4\u30fc)"
+    },
+    {
+      "id": 3,
+      "string": "\u5927 (6 \u30d7\u30ec\u30a4\u30e4\u30fc)"
+    },
+    {
+      "id": 4,
+      "string": "\u5e83\u5927 (8 \u30d7\u30ec\u30a4\u30e4\u30fc)"
+    },
+    {
+      "id": 5,
+      "string": "\u7279\u5927"
+    },
+    {
+      "id": 6,
+      "string": "\u8d85\u7279\u5927"
+    }
+  ],
+  "map_type": [
+    {
+      "id": 9,
+      "string": "\u30a2\u30e9\u30d3\u30a2"
+    },
+    {
+      "id": 10,
+      "string": "\u5217\u5cf6"
+    },
+    {
+      "id": 11,
+      "string": "\u30d0\u30eb\u30c8\u6d77"
+    },
+    {
+      "id": 12,
+      "string": "\u5927\u68ee\u6797"
+    },
+    {
+      "id": 13,
+      "string": "\u6cbf\u5cb8"
+    },
+    {
+      "id": 14,
+      "string": "\u5927\u9678"
+    },
+    {
+      "id": 15,
+      "string": "\u30ab\u30eb\u30c7\u30e9\u6e56"
+    },
+    {
+      "id": 16,
+      "string": "\u8981\u585e"
+    },
+    {
+      "id": 17,
+      "string": "\u5927\u91d1\u8108"
+    },
+    {
+      "id": 18,
+      "string": "\u9ad8\u5730"
+    },
+    {
+      "id": 19,
+      "string": "\u5cf6\u3005"
+    },
+    {
+      "id": 20,
+      "string": "\u5185\u6d77"
+    },
+    {
+      "id": 21,
+      "string": "\u79fb\u4f4f"
+    },
+    {
+      "id": 22,
+      "string": "\u6d41\u57df"
+    },
+    {
+      "id": 23,
+      "string": "\u30c1\u30fc\u30e0\u3054\u3068\u306e\u5cf6"
+    },
+    {
+      "id": 24,
+      "string": "\u30d5\u30eb \u30e9\u30f3\u30c0\u30e0"
+    },
+    {
+      "id": 25,
+      "string": "\u30b9\u30ab\u30f3\u30c7\u30a3\u30ca\u30d3\u30a2"
+    },
+    {
+      "id": 26,
+      "string": "\u30e2\u30f3\u30b4\u30ea\u30a2"
+    },
+    {
+      "id": 27,
+      "string": "\u30e6\u30ab\u30bf\u30f3"
+    },
+    {
+      "id": 28,
+      "string": "\u6d77\u8fba\u306e\u6cbc\u5730"
+    },
+    {
+      "id": 29,
+      "string": "\u30a2\u30ea\u30fc\u30ca"
+    },
+    {
+      "id": 31,
+      "string": "\u30aa\u30a2\u30b7\u30b9"
+    },
+    {
+      "id": 32,
+      "string": "\u51cd\u7d50\u6e56"
+    },
+    {
+      "id": 33,
+      "string": "\u904a\u7267"
+    },
+    {
+      "id": 49,
+      "string": "\u30a4\u30d9\u30ea\u30a2"
+    },
+    {
+      "id": 50,
+      "string": "\u30a4\u30ae\u30ea\u30b9"
+    },
+    {
+      "id": 51,
+      "string": "\u4e2d\u6771"
+    },
+    {
+      "id": 52,
+      "string": "\u30c6\u30ad\u30b5\u30b9"
+    },
+    {
+      "id": 53,
+      "string": "\u30a4\u30bf\u30ea\u30a2"
+    },
+    {
+      "id": 54,
+      "string": "\u4e2d\u592e\u30a2\u30e1\u30ea\u30ab"
+    },
+    {
+      "id": 55,
+      "string": "\u30d5\u30e9\u30f3\u30b9"
+    },
+    {
+      "id": 56,
+      "string": "\u5317\u6b27"
+    },
+    {
+      "id": 57,
+      "string": "\u65e5\u672c\u6d77"
+    },
+    {
+      "id": 58,
+      "string": "\u30d3\u30b6\u30f3\u30c6\u30a3\u30f3"
+    },
+    {
+      "id": 59,
+      "string": "\u30ab\u30b9\u30bf\u30e0"
+    },
+    {
+      "id": 60,
+      "string": "\u30e9\u30f3\u30c0\u30e0\u306a\u9678\u5730\u30de\u30c3\u30d7"
+    },
+    {
+      "id": 62,
+      "string": "\u30e9\u30f3\u30c0\u30e0 \u30ea\u30a2\u30eb \u30ef\u30fc\u30eb\u30c9 \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 63,
+      "string": "\u30d6\u30e9\u30a4\u30f3\u30c9 \u30e9\u30f3\u30c0\u30e0"
+    },
+    {
+      "id": 65,
+      "string": "\u30e9\u30f3\u30c0\u30e0 \u30b9\u30da\u30b7\u30e3\u30eb \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 66,
+      "string": "\u30e9\u30f3\u30c0\u30e0 \u30b9\u30da\u30b7\u30e3\u30eb \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 67,
+      "string": "\u30a2\u30af\u30ed\u30dd\u30ea\u30b9"
+    },
+    {
+      "id": 68,
+      "string": "\u30d6\u30c0\u30da\u30b9\u30c8"
+    },
+    {
+      "id": 69,
+      "string": "\u30bb\u30ce\u30fc\u30c6"
+    },
+    {
+      "id": 70,
+      "string": "\u6e56\u306e\u8857"
+    },
+    {
+      "id": 71,
+      "string": "\u91d1\u9271"
+    },
+    {
+      "id": 72,
+      "string": "\u96a0\u308c\u5bb6"
+    },
+    {
+      "id": 73,
+      "string": "\u4e18\u306e\u7826"
+    },
+    {
+      "id": 74,
+      "string": "\u30ed\u30f3\u30d0\u30eb\u30c7\u30a3\u30a2"
+    },
+    {
+      "id": 75,
+      "string": "\u5927\u8349\u539f"
+    },
+    {
+      "id": 76,
+      "string": "\u76c6\u5730"
+    },
+    {
+      "id": 77,
+      "string": "\u30e1\u30ac\u30e9\u30f3\u30c0\u30e0"
+    },
+    {
+      "id": 78,
+      "string": "\u30cf\u30f3\u30d0\u30fc\u30ac\u30fc"
+    },
+    {
+      "id": 79,
+      "string": "CtR \u30e9\u30f3\u30c0\u30e0"
+    },
+    {
+      "id": 80,
+      "string": "CtR \u30e2\u30f3\u30b9\u30fc\u30f3"
+    },
+    {
+      "id": 81,
+      "string": "CtR \u30d4\u30e9\u30df\u30c3\u30c9"
+    },
+    {
+      "id": 82,
+      "string": "CtR \u30b9\u30d1\u30a4\u30e9\u30eb"
+    },
+    {
+      "id": 83,
+      "string": "\u30ad\u30ea\u30de\u30f3\u30b8\u30e3\u30ed"
+    },
+    {
+      "id": 84,
+      "string": "\u5ce0"
+    },
+    {
+      "id": 85,
+      "string": "\u30ca\u30a4\u30eb \u30c7\u30eb\u30bf"
+    },
+    {
+      "id": 86,
+      "string": "\u30bb\u30ec\u30f3\u30b2\u30c6\u30a3"
+    },
+    {
+      "id": 87,
+      "string": "\u30bd\u30b3\u30c8\u30e9\u5cf6"
+    },
+    {
+      "id": 88,
+      "string": "\u30a2\u30de\u30be\u30f3"
+    },
+    {
+      "id": 89,
+      "string": "\u4e2d\u56fd"
+    },
+    {
+      "id": 90,
+      "string": "\u30a2\u30d5\u30ea\u30ab\u306e\u89d2"
+    },
+    {
+      "id": 91,
+      "string": "\u30a4\u30f3\u30c9"
+    },
+    {
+      "id": 92,
+      "string": "\u30de\u30c0\u30ac\u30b9\u30ab\u30eb"
+    },
+    {
+      "id": 93,
+      "string": "\u897f\u30a2\u30d5\u30ea\u30ab"
+    },
+    {
+      "id": 94,
+      "string": "\u30dc\u30d8\u30df\u30a2"
+    },
+    {
+      "id": 95,
+      "string": "\u30a2\u30fc\u30b9"
+    },
+    {
+      "id": 96,
+      "string": "\u8c37\u9593"
+    },
+    {
+      "id": 97,
+      "string": "\u7fa4\u5cf6"
+    },
+    {
+      "id": 98,
+      "string": "\u30b5\u30d0\u30a4\u30d0\u30eb \u30a2\u30a4\u30e9\u30f3\u30c9"
+    },
+    {
+      "id": 99,
+      "string": "\u30d5\u30a1\u30fc \u30a2\u30a6\u30c8"
+    },
+    {
+      "id": 100,
+      "string": "\u6700\u524d\u7dda"
+    },
+    {
+      "id": 101,
+      "string": "\u5185\u8f2a"
+    },
+    {
+      "id": 102,
+      "string": "\u6bcd\u306a\u308b\u5730"
+    },
+    {
+      "id": 103,
+      "string": "\u5927\u5e73\u539f"
+    },
+    {
+      "id": 104,
+      "string": "\u6c34\u306e\u8f2a"
+    },
+    {
+      "id": 105,
+      "string": "\u86c7\u306e\u7a74"
+    },
+    {
+      "id": 106,
+      "string": "\u773c"
+    },
+    {
+      "id": 107,
+      "string": "\u30aa\u30fc\u30b9\u30c8\u30e9\u30ea\u30a2"
+    },
+    {
+      "id": 108,
+      "string": "\u30a4\u30f3\u30c9\u30b7\u30ca"
+    },
+    {
+      "id": 109,
+      "string": "\u30a4\u30f3\u30c9\u30cd\u30b7\u30a2"
+    },
+    {
+      "id": 110,
+      "string": "\u30de\u30e9\u30c3\u30ab\u6d77\u5ce1"
+    },
+    {
+      "id": 111,
+      "string": "\u30d5\u30a3\u30ea\u30d4\u30f3"
+    },
+    {
+      "id": 112,
+      "string": "\u6cbc\u5730\u306e\u5cf6"
+    },
+    {
+      "id": 113,
+      "string": "\u30de\u30f3\u30b0\u30ed\u30fc\u30d6\u306e\u30b8\u30e3\u30f3\u30b0\u30eb"
+    },
+    {
+      "id": 114,
+      "string": "\u592a\u5e73\u6d0b\u306e\u5cf6\u3005"
+    },
+    {
+      "id": 115,
+      "string": "\u4e2d\u5dde"
+    },
+    {
+      "id": 116,
+      "string": "\u6d77\u306e\u6c11"
+    },
+    {
+      "id": 117,
+      "string": "\u30b8\u30e3\u30f3\u30b0\u30eb\u306e\u5cf6"
+    },
+    {
+      "id": 118,
+      "string": "\u8056\u306a\u308b\u7dda"
+    },
+    {
+      "id": 119,
+      "string": "\u77f3\u306e\u56fd\u5883"
+    },
+    {
+      "id": 120,
+      "string": "\u9670\u967d"
+    },
+    {
+      "id": 121,
+      "string": "\u30b8\u30e3\u30f3\u30b0\u30eb\u306e\u5c0f\u9053"
+    },
+    {
+      "id": 122,
+      "string": "\u5c71\u5cb3\u6e56"
+    },
+    {
+      "id": 123,
+      "string": "\u6cbc\u6ca2\u5730"
+    },
+    {
+      "id": 124,
+      "string": "\u5c3e\u6839"
+    },
+    {
+      "id": 125,
+      "string": "\u5c71\u5ce1"
+    },
+    {
+      "id": 126,
+      "string": "\u72fc\u5c71"
+    },
+    {
+      "id": 132,
+      "string": "\u6700\u679c\u3066\u306e\u5730"
+    },
+    {
+      "id": 137,
+      "string": "\u30ab\u30b9\u30bf\u30e0 \u30de\u30c3\u30d7 \u30d7\u30fc\u30eb"
+    },
+    {
+      "id": 139,
+      "string": "\u9ec4\u91d1\u306e\u6cbc"
+    },
+    {
+      "id": 140,
+      "string": "4 \u3064\u306e\u6e56"
+    },
+    {
+      "id": 141,
+      "string": "\u571f\u5730\u904a\u7267\u6c11"
+    },
+    {
+      "id": 142,
+      "string": "BR Battle On Ice"
+    },
+    {
+      "id": 143,
+      "string": "BR El Dorado"
+    },
+    {
+      "id": 144,
+      "string": "BR Fall of Axum"
+    },
+    {
+      "id": 145,
+      "string": "BR Fall of Rome"
+    },
+    {
+      "id": 146,
+      "string": "BR Majapahit Empire"
+    },
+    {
+      "id": 147,
+      "string": "Amazon Tunnel"
+    },
+    {
+      "id": 148,
+      "string": "Coastal Forest"
+    },
+    {
+      "id": 149,
+      "string": "African Clearing"
+    },
+    {
+      "id": 150,
+      "string": "Atacama"
+    },
+    {
+      "id": 151,
+      "string": "Seize the Mountain"
+    },
+    {
+      "id": 152,
+      "string": "Crater"
+    },
+    {
+      "id": 153,
+      "string": "Crossroads"
+    },
+    {
+      "id": 154,
+      "string": "Michi"
+    },
+    {
+      "id": 155,
+      "string": "Team Moats"
+    },
+    {
+      "id": 156,
+      "string": "Volcanic Island"
+    }
+  ],
+  "rating_type": [
+    {
+      "id": 0,
+      "string": "\u30ce\u30fc\u30ec\u30fc\u30c8"
+    },
+    {
+      "id": 1,
+      "string": "\u30c7\u30b9 \u30de\u30c3\u30c1"
+    },
+    {
+      "id": 2,
+      "string": "\u30e9\u30f3\u30c0\u30e0 \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 3,
+      "string": "\u30c1\u30fc\u30e0 \u30c7\u30b9 \u30de\u30c3\u30c1"
+    },
+    {
+      "id": 4,
+      "string": "\u30c1\u30fc\u30e0 \u30e9\u30f3\u30c0\u30e0 \u30de\u30c3\u30d7"
+    },
+    {
+      "id": 5,
+      "string": "1v1 Random Map Quick Play"
+    },
+    {
+      "id": 6,
+      "string": "Team Random Map Quick Play"
+    },
+    {
+      "id": 7,
+      "string": "1v1 Empire Wars Quick Play"
+    },
+    {
+      "id": 8,
+      "string": "Team Empire Wars Quick Play"
+    },
+    {
+      "id": 9,
+      "string": "Battle Royale Quick Play"
+    }
+  ],
+  "resources": [
+    {
+      "id": 0,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 1,
+      "string": "\u4f4e"
+    },
+    {
+      "id": 2,
+      "string": "\u4e2d"
+    },
+    {
+      "id": 3,
+      "string": "\u9ad8"
+    },
+    {
+      "id": 4,
+      "string": "\u8d85\u9ad8"
+    },
+    {
+      "id": 5,
+      "string": "\u7121\u9650"
+    },
+    {
+      "id": 6,
+      "string": "\u30e9\u30f3\u30c0\u30e0"
+    }
+  ],
+  "speed": [
+    {
+      "id": 0,
+      "string": "\u9045\u3044"
+    },
+    {
+      "id": 1,
+      "string": "\u30ab\u30b8\u30e5\u30a2\u30eb"
+    },
+    {
+      "id": 2,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 3,
+      "string": "\u901f\u3044"
+    }
+  ],
+  "victory": [
+    {
+      "id": 1,
+      "string": "\u5f81\u670d"
+    },
+    {
+      "id": 7,
+      "string": "\u5236\u9650\u6642\u9593"
+    },
+    {
+      "id": 8,
+      "string": "\u5f97\u70b9"
+    },
+    {
+      "id": 9,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 11,
+      "string": "\u30b5\u30d0\u30a4\u30d0\u30eb"
+    }
+  ],
+  "visibility": [
+    {
+      "id": 0,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 1,
+      "string": "\u958b\u62d3\u6e08"
+    },
+    {
+      "id": 2,
+      "string": "\u3059\u3079\u3066\u8868\u793a"
+    }
+  ]
+}

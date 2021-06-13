@@ -1,0 +1,889 @@
+{
+  "language": "zh-TW",
+  "age": [
+    {
+      "id": 0,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 2,
+      "string": "\u9ed1\u6697\u6642\u4ee3"
+    },
+    {
+      "id": 3,
+      "string": "\u5c01\u5efa\u6642\u4ee3"
+    },
+    {
+      "id": 4,
+      "string": "\u57ce\u5821\u6642\u4ee3"
+    },
+    {
+      "id": 5,
+      "string": "\u5e1d\u738b\u6642\u4ee3"
+    },
+    {
+      "id": 6,
+      "string": "\u5f8c\u5e1d\u738b\u6642\u4ee3"
+    }
+  ],
+  "civ": [
+    {
+      "id": 0,
+      "string": "\u963f\u8332\u7279\u514b\u4eba"
+    },
+    {
+      "id": 1,
+      "string": "\u67cf\u67cf\u4eba"
+    },
+    {
+      "id": 2,
+      "string": "\u4e0d\u5217\u985b\u4eba"
+    },
+    {
+      "id": 3,
+      "string": "\u4fdd\u52a0\u5229\u4e9e\u4eba"
+    },
+    {
+      "id": 4,
+      "string": "Burgundians"
+    },
+    {
+      "id": 5,
+      "string": "\u7dec\u7538\u4eba"
+    },
+    {
+      "id": 6,
+      "string": "\u62dc\u5360\u5ead\u4eba"
+    },
+    {
+      "id": 7,
+      "string": "\u585e\u723e\u7279\u4eba"
+    },
+    {
+      "id": 8,
+      "string": "\u4e2d\u570b\u4eba"
+    },
+    {
+      "id": 9,
+      "string": "\u5eab\u66fc\u4eba"
+    },
+    {
+      "id": 10,
+      "string": "\u8863\u7d22\u6bd4\u4e9e\u4eba"
+    },
+    {
+      "id": 11,
+      "string": "\u6cd5\u862d\u514b\u4eba"
+    },
+    {
+      "id": 12,
+      "string": "\u54e5\u5fb7\u4eba"
+    },
+    {
+      "id": 13,
+      "string": "\u5308\u4eba"
+    },
+    {
+      "id": 14,
+      "string": "\u5370\u52a0\u4eba"
+    },
+    {
+      "id": 15,
+      "string": "\u5370\u5ea6\u4eba"
+    },
+    {
+      "id": 16,
+      "string": "\u7fa9\u5927\u5229\u4eba"
+    },
+    {
+      "id": 17,
+      "string": "\u65e5\u672c\u4eba"
+    },
+    {
+      "id": 18,
+      "string": "\u9ad8\u68c9\u4eba"
+    },
+    {
+      "id": 19,
+      "string": "\u671d\u9bae\u4eba"
+    },
+    {
+      "id": 20,
+      "string": "\u7acb\u9676\u5b9b\u4eba"
+    },
+    {
+      "id": 21,
+      "string": "\u99ac\u672d\u723e\u4eba"
+    },
+    {
+      "id": 22,
+      "string": "\u99ac\u4f86\u4eba"
+    },
+    {
+      "id": 23,
+      "string": "\u99ac\u5229\u4eba"
+    },
+    {
+      "id": 24,
+      "string": "\u99ac\u96c5\u4eba"
+    },
+    {
+      "id": 25,
+      "string": "\u8499\u53e4\u4eba"
+    },
+    {
+      "id": 26,
+      "string": "\u6ce2\u65af\u4eba"
+    },
+    {
+      "id": 27,
+      "string": "\u8461\u8404\u7259\u4eba"
+    },
+    {
+      "id": 28,
+      "string": "\u85a9\u62c9\u68ee\u4eba"
+    },
+    {
+      "id": 29,
+      "string": "Sicilians"
+    },
+    {
+      "id": 30,
+      "string": "\u65af\u62c9\u592b\u4eba"
+    },
+    {
+      "id": 31,
+      "string": "\u897f\u73ed\u7259\u4eba"
+    },
+    {
+      "id": 32,
+      "string": "\u97c3\u977c\u4eba"
+    },
+    {
+      "id": 33,
+      "string": "\u689d\u9813\u4eba"
+    },
+    {
+      "id": 34,
+      "string": "\u571f\u8033\u5176\u4eba"
+    },
+    {
+      "id": 35,
+      "string": "\u8d8a\u5357\u4eba"
+    },
+    {
+      "id": 36,
+      "string": "\u7dad\u4eac\u4eba"
+    }
+  ],
+  "game_type": [
+    {
+      "id": 0,
+      "string": "\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 1,
+      "string": "\u5f12\u541b\u6a21\u5f0f"
+    },
+    {
+      "id": 2,
+      "string": "\u6b7b\u4ea1\u7af6\u8cfd"
+    },
+    {
+      "id": 3,
+      "string": "\u5287\u672c"
+    },
+    {
+      "id": 6,
+      "string": "\u4f54\u5c71\u70ba\u738b"
+    },
+    {
+      "id": 7,
+      "string": "\u4e16\u754c\u5947\u89c0\u7af6\u8cfd"
+    },
+    {
+      "id": 8,
+      "string": "\u4fdd\u8b77\u4e16\u754c\u5947\u89c0"
+    },
+    {
+      "id": 9,
+      "string": "\u52a0\u901f\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 10,
+      "string": "\u722d\u596a\u8056\u7269"
+    },
+    {
+      "id": 11,
+      "string": "\u4e3b\u57ce\u4fdd\u885b\u6230"
+    },
+    {
+      "id": 12,
+      "string": "Battle Royale"
+    },
+    {
+      "id": 13,
+      "string": "\u5e1d\u570b\u6230\u722d"
+    }
+  ],
+  "leaderboard": [
+    {
+      "id": 0,
+      "string": "\u672a\u6392\u540d"
+    },
+    {
+      "id": 1,
+      "string": "\u6b7b\u4ea1\u7af6\u8cfd"
+    },
+    {
+      "id": 2,
+      "string": "\u968a\u4f0d\u6b7b\u4ea1\u7af6\u8cfd"
+    },
+    {
+      "id": 3,
+      "string": "\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 4,
+      "string": "\u968a\u4f0d\u96a8\u6a5f\u5730\u5716"
+    }
+  ],
+  "map_size": [
+    {
+      "id": 0,
+      "string": "\u5fae\u578b (2 \u4f4d\u73a9\u5bb6)"
+    },
+    {
+      "id": 1,
+      "string": "\u5c0f\u578b (3 \u4f4d\u73a9\u5bb6)"
+    },
+    {
+      "id": 2,
+      "string": "\u4e2d\u578b (4 \u4f4d\u73a9\u5bb6)"
+    },
+    {
+      "id": 3,
+      "string": "\u6b63\u5e38 (6 \u4f4d\u73a9\u5bb6)"
+    },
+    {
+      "id": 4,
+      "string": "\u5927\u578b (8 \u4f4d\u73a9\u5bb6)"
+    },
+    {
+      "id": 5,
+      "string": "\u5de8\u578b"
+    },
+    {
+      "id": 6,
+      "string": "\u8d85\u5927"
+    }
+  ],
+  "map_type": [
+    {
+      "id": 9,
+      "string": "\u963f\u62c9\u4f2f"
+    },
+    {
+      "id": 10,
+      "string": "\u7fa4\u5cf6"
+    },
+    {
+      "id": 11,
+      "string": "\u6ce2\u7f85\u7684\u6d77"
+    },
+    {
+      "id": 12,
+      "string": "\u9ed1\u68ee\u6797"
+    },
+    {
+      "id": 13,
+      "string": "\u6cbf\u6d77"
+    },
+    {
+      "id": 14,
+      "string": "\u6b50\u9678"
+    },
+    {
+      "id": 15,
+      "string": "\u706b\u5c71\u6e56"
+    },
+    {
+      "id": 16,
+      "string": "\u8981\u585e"
+    },
+    {
+      "id": 17,
+      "string": "\u6dd8\u91d1\u6f6e"
+    },
+    {
+      "id": 18,
+      "string": "\u9ad8\u539f"
+    },
+    {
+      "id": 19,
+      "string": "\u5cf6\u5dbc"
+    },
+    {
+      "id": 20,
+      "string": "\u5730\u4e2d\u6d77"
+    },
+    {
+      "id": 21,
+      "string": "\u9077\u79fb"
+    },
+    {
+      "id": 22,
+      "string": "\u6cb3\u6d41"
+    },
+    {
+      "id": 23,
+      "string": "\u5718\u968a\u5cf6\u5dbc"
+    },
+    {
+      "id": 24,
+      "string": "\u5b8c\u5168\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 25,
+      "string": "\u65af\u582a\u7684\u7d0d\u7dad\u4e9e"
+    },
+    {
+      "id": 26,
+      "string": "\u8499\u53e4"
+    },
+    {
+      "id": 27,
+      "string": "\u7336\u52a0\u6566"
+    },
+    {
+      "id": 28,
+      "string": "\u9e7d\u9e7c\u6cbc\u6fa4"
+    },
+    {
+      "id": 29,
+      "string": "\u7af6\u6280\u5834"
+    },
+    {
+      "id": 31,
+      "string": "\u7da0\u6d32"
+    },
+    {
+      "id": 32,
+      "string": "\u5e7d\u9748\u6e56"
+    },
+    {
+      "id": 33,
+      "string": "\u6e38\u7267"
+    },
+    {
+      "id": 49,
+      "string": "\u4f0a\u6bd4\u5229\u4e9e"
+    },
+    {
+      "id": 50,
+      "string": "\u4e0d\u5217\u985b"
+    },
+    {
+      "id": 51,
+      "string": "\u4e2d\u6771"
+    },
+    {
+      "id": 52,
+      "string": "\u5fb7\u514b\u85a9\u65af"
+    },
+    {
+      "id": 53,
+      "string": "\u7fa9\u5927\u5229"
+    },
+    {
+      "id": 54,
+      "string": "\u4e2d\u7f8e\u6d32"
+    },
+    {
+      "id": 55,
+      "string": "\u6cd5\u862d\u897f"
+    },
+    {
+      "id": 56,
+      "string": "\u5317\u6b50"
+    },
+    {
+      "id": 57,
+      "string": "\u65e5\u672c\u6d77 (\u6771\u6d77)"
+    },
+    {
+      "id": 58,
+      "string": "\u62dc\u5360\u5ead"
+    },
+    {
+      "id": 59,
+      "string": "\u81ea\u8a02"
+    },
+    {
+      "id": 60,
+      "string": "\u96a8\u6a5f\u9678\u5730\u5730\u5716"
+    },
+    {
+      "id": 62,
+      "string": "\u96a8\u6a5f\u771f\u5be6\u4e16\u754c\u5730\u5716"
+    },
+    {
+      "id": 63,
+      "string": "\u7d55\u5c0d\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 65,
+      "string": "\u96a8\u6a5f\u7279\u6b8a\u5730\u5716"
+    },
+    {
+      "id": 66,
+      "string": "\u96a8\u6a5f\u7279\u6b8a\u5730\u5716"
+    },
+    {
+      "id": 67,
+      "string": "\u885b\u57ce"
+    },
+    {
+      "id": 68,
+      "string": "\u5e03\u9054\u4f69\u65af"
+    },
+    {
+      "id": 69,
+      "string": "\u5dd6\u5751\u6c60\u5730"
+    },
+    {
+      "id": 70,
+      "string": "\u767e\u6e56\u4e4b\u57ce"
+    },
+    {
+      "id": 71,
+      "string": "\u9ec3\u91d1\u8c37"
+    },
+    {
+      "id": 72,
+      "string": "\u85cf\u8eab\u4e4b\u8655"
+    },
+    {
+      "id": 73,
+      "string": "\u5c71\u5be8"
+    },
+    {
+      "id": 74,
+      "string": "\u502b\u5df4\u5e95"
+    },
+    {
+      "id": 75,
+      "string": "\u5927\u8349\u539f"
+    },
+    {
+      "id": 76,
+      "string": "\u5cfd\u8c37"
+    },
+    {
+      "id": 77,
+      "string": "\u8d85\u7d1a\u96a8\u6a5f"
+    },
+    {
+      "id": 78,
+      "string": "\u6f22\u5821"
+    },
+    {
+      "id": 79,
+      "string": "\u722d\u596a\u8056\u7269\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 80,
+      "string": "\u722d\u596a\u8056\u7269\u96e8\u5b63\u6cbc\u6fa4"
+    },
+    {
+      "id": 81,
+      "string": "\u722d\u596a\u8056\u7269\u6c7a\u6230\u91d1\u5b57\u5854\u4e4b\u5dd4"
+    },
+    {
+      "id": 82,
+      "string": "\u722d\u596a\u8056\u7269\u6f29\u6e26\u8ff7\u822a"
+    },
+    {
+      "id": 83,
+      "string": "\u4e5e\u529b\u99ac\u624e\u7f85\u5c71"
+    },
+    {
+      "id": 84,
+      "string": "\u96ea\u5c71\u5730"
+    },
+    {
+      "id": 85,
+      "string": "\u5c3c\u7f85\u6cb3\u4e09\u89d2\u6d32"
+    },
+    {
+      "id": 86,
+      "string": "\u585e\u502b\u84cb\u8482\u5e73\u539f"
+    },
+    {
+      "id": 87,
+      "string": "\u7d22\u79d1\u7279\u62c9\u5cf6"
+    },
+    {
+      "id": 88,
+      "string": "\u4e9e\u99ac\u905c\u6d41\u57df"
+    },
+    {
+      "id": 89,
+      "string": "\u83ef\u590f"
+    },
+    {
+      "id": 90,
+      "string": "\u975e\u6d32\u4e4b\u89d2"
+    },
+    {
+      "id": 91,
+      "string": "\u5370\u5ea6"
+    },
+    {
+      "id": 92,
+      "string": "\u99ac\u9054\u52a0\u65af\u52a0\u5cf6"
+    },
+    {
+      "id": 93,
+      "string": "\u897f\u975e"
+    },
+    {
+      "id": 94,
+      "string": "\u6ce2\u5e0c\u7c73\u4e9e"
+    },
+    {
+      "id": 95,
+      "string": "\u4e16\u754c"
+    },
+    {
+      "id": 96,
+      "string": "\u5927\u5cfd\u8c37"
+    },
+    {
+      "id": 97,
+      "string": "\u6575\u968a\u7fa4\u5cf6"
+    },
+    {
+      "id": 98,
+      "string": "\u6575\u968a\u5927\u5cf6"
+    },
+    {
+      "id": 99,
+      "string": "\u585e\u5916"
+    },
+    {
+      "id": 100,
+      "string": "\u524d\u7dda"
+    },
+    {
+      "id": 101,
+      "string": "\u5167\u5708"
+    },
+    {
+      "id": 102,
+      "string": "\u6545\u571f"
+    },
+    {
+      "id": 103,
+      "string": "\u958b\u95ca\u8349\u539f"
+    },
+    {
+      "id": 104,
+      "string": "\u6c34\u74b0"
+    },
+    {
+      "id": 105,
+      "string": "\u7f8a\u8178\u5c0f\u9053"
+    },
+    {
+      "id": 106,
+      "string": "\u773c\u775b"
+    },
+    {
+      "id": 107,
+      "string": "\u6fb3\u6d32"
+    },
+    {
+      "id": 108,
+      "string": "\u4e2d\u5357\u534a\u5cf6"
+    },
+    {
+      "id": 109,
+      "string": "\u5370\u5c3c"
+    },
+    {
+      "id": 110,
+      "string": "\u99ac\u516d\u7532\u6d77\u5cfd"
+    },
+    {
+      "id": 111,
+      "string": "\u83f2\u5f8b\u8cd3"
+    },
+    {
+      "id": 112,
+      "string": "\u7981\u9589\u5cf6"
+    },
+    {
+      "id": 113,
+      "string": "\u7d05\u6a39\u6797"
+    },
+    {
+      "id": 114,
+      "string": "\u592a\u5e73\u6d0b\u5cf6\u5dbc"
+    },
+    {
+      "id": 115,
+      "string": "\u6c99\u58e9"
+    },
+    {
+      "id": 116,
+      "string": "\u6c34\u4e0a\u6e38\u7267"
+    },
+    {
+      "id": 117,
+      "string": "\u53e2\u6797\u5cf6\u5dbc"
+    },
+    {
+      "id": 118,
+      "string": "\u8056\u754c"
+    },
+    {
+      "id": 119,
+      "string": "\u77f3\u754c"
+    },
+    {
+      "id": 120,
+      "string": "\u9670\u967d"
+    },
+    {
+      "id": 121,
+      "string": "\u53e2\u6797\u5c0f\u9053"
+    },
+    {
+      "id": 122,
+      "string": "\u9ad8\u5c71\u6e56\u6cca"
+    },
+    {
+      "id": 123,
+      "string": "\u6cbc\u6fa4"
+    },
+    {
+      "id": 124,
+      "string": "\u5c71\u810a"
+    },
+    {
+      "id": 125,
+      "string": "\u5c71\u6f97"
+    },
+    {
+      "id": 126,
+      "string": "\u72fc\u5c71"
+    },
+    {
+      "id": 132,
+      "string": "\u5357\u6975"
+    },
+    {
+      "id": 137,
+      "string": "\u81ea\u8a02\u5730\u5716\u6c60"
+    },
+    {
+      "id": 139,
+      "string": "\u91d1\u6cbc\u6fa4"
+    },
+    {
+      "id": 140,
+      "string": "\u56db\u5ea7\u6e56\u6cca"
+    },
+    {
+      "id": 141,
+      "string": "\u9678\u5730\u6e38\u7267"
+    },
+    {
+      "id": 142,
+      "string": "BR Battle On Ice"
+    },
+    {
+      "id": 143,
+      "string": "BR El Dorado"
+    },
+    {
+      "id": 144,
+      "string": "BR Fall of Axum"
+    },
+    {
+      "id": 145,
+      "string": "BR Fall of Rome"
+    },
+    {
+      "id": 146,
+      "string": "BR Majapahit Empire"
+    },
+    {
+      "id": 147,
+      "string": "Amazon Tunnel"
+    },
+    {
+      "id": 148,
+      "string": "Coastal Forest"
+    },
+    {
+      "id": 149,
+      "string": "African Clearing"
+    },
+    {
+      "id": 150,
+      "string": "Atacama"
+    },
+    {
+      "id": 151,
+      "string": "Seize the Mountain"
+    },
+    {
+      "id": 152,
+      "string": "Crater"
+    },
+    {
+      "id": 153,
+      "string": "Crossroads"
+    },
+    {
+      "id": 154,
+      "string": "Michi"
+    },
+    {
+      "id": 155,
+      "string": "Team Moats"
+    },
+    {
+      "id": 156,
+      "string": "Volcanic Island"
+    }
+  ],
+  "rating_type": [
+    {
+      "id": 0,
+      "string": "\u672a\u6392\u540d"
+    },
+    {
+      "id": 1,
+      "string": "\u6b7b\u4ea1\u7af6\u8cfd"
+    },
+    {
+      "id": 2,
+      "string": "\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 3,
+      "string": "\u968a\u4f0d\u6b7b\u4ea1\u7af6\u8cfd"
+    },
+    {
+      "id": 4,
+      "string": "\u968a\u4f0d\u96a8\u6a5f\u5730\u5716"
+    },
+    {
+      "id": 5,
+      "string": "1v1 Random Map Quick Play"
+    },
+    {
+      "id": 6,
+      "string": "Team Random Map Quick Play"
+    },
+    {
+      "id": 7,
+      "string": "1v1 Empire Wars Quick Play"
+    },
+    {
+      "id": 8,
+      "string": "Team Empire Wars Quick Play"
+    },
+    {
+      "id": 9,
+      "string": "Battle Royale Quick Play"
+    }
+  ],
+  "resources": [
+    {
+      "id": 0,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 1,
+      "string": "\u4f4e"
+    },
+    {
+      "id": 2,
+      "string": "\u4e2d"
+    },
+    {
+      "id": 3,
+      "string": "\u9ad8"
+    },
+    {
+      "id": 4,
+      "string": "\u8d85\u9ad8"
+    },
+    {
+      "id": 5,
+      "string": "\u7121\u9650"
+    },
+    {
+      "id": 6,
+      "string": "\u96a8\u6a5f"
+    }
+  ],
+  "speed": [
+    {
+      "id": 0,
+      "string": "\u6162"
+    },
+    {
+      "id": 1,
+      "string": "\u96a8\u610f"
+    },
+    {
+      "id": 2,
+      "string": "\u666e\u901a"
+    },
+    {
+      "id": 3,
+      "string": "\u5feb"
+    }
+  ],
+  "victory": [
+    {
+      "id": 1,
+      "string": "\u5f81\u670d"
+    },
+    {
+      "id": 7,
+      "string": "\u6642\u9593\u9650\u5236"
+    },
+    {
+      "id": 8,
+      "string": "\u5f97\u5206"
+    },
+    {
+      "id": 9,
+      "string": "\u6a19\u6e96"
+    },
+    {
+      "id": 11,
+      "string": "\u6700\u5f8c\u751f\u5b58\u8005"
+    }
+  ],
+  "visibility": [
+    {
+      "id": 0,
+      "string": "\u666e\u901a"
+    },
+    {
+      "id": 1,
+      "string": "\u5df2\u63a2\u7d22"
+    },
+    {
+      "id": 2,
+      "string": "\u5168\u90e8\u53ef\u898b"
+    }
+  ]
+}

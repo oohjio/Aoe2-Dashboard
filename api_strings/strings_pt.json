@@ -1,0 +1,889 @@
+{
+  "language": "pt",
+  "age": [
+    {
+      "id": 0,
+      "string": "Padr\u00e3o"
+    },
+    {
+      "id": 2,
+      "string": "Idade das Trevas"
+    },
+    {
+      "id": 3,
+      "string": "Idade Feudal"
+    },
+    {
+      "id": 4,
+      "string": "Idade dos Castelos"
+    },
+    {
+      "id": 5,
+      "string": "Idade Imperial"
+    },
+    {
+      "id": 6,
+      "string": "Idade P\u00f3s-Imperial"
+    }
+  ],
+  "civ": [
+    {
+      "id": 0,
+      "string": "Astecas"
+    },
+    {
+      "id": 1,
+      "string": "Berberes"
+    },
+    {
+      "id": 2,
+      "string": "Bret\u00f5es"
+    },
+    {
+      "id": 3,
+      "string": "B\u00falgaros"
+    },
+    {
+      "id": 4,
+      "string": "Burgundians"
+    },
+    {
+      "id": 5,
+      "string": "Birmaneses"
+    },
+    {
+      "id": 6,
+      "string": "Bizantinos"
+    },
+    {
+      "id": 7,
+      "string": "Celtas"
+    },
+    {
+      "id": 8,
+      "string": "Chineses"
+    },
+    {
+      "id": 9,
+      "string": "Cumanos"
+    },
+    {
+      "id": 10,
+      "string": "Et\u00edopes"
+    },
+    {
+      "id": 11,
+      "string": "Francos"
+    },
+    {
+      "id": 12,
+      "string": "Godos"
+    },
+    {
+      "id": 13,
+      "string": "Hunos"
+    },
+    {
+      "id": 14,
+      "string": "Incas"
+    },
+    {
+      "id": 15,
+      "string": "Indianos"
+    },
+    {
+      "id": 16,
+      "string": "Italianos"
+    },
+    {
+      "id": 17,
+      "string": "Japoneses"
+    },
+    {
+      "id": 18,
+      "string": "Khmers"
+    },
+    {
+      "id": 19,
+      "string": "Coreanos"
+    },
+    {
+      "id": 20,
+      "string": "Lituanos"
+    },
+    {
+      "id": 21,
+      "string": "Magiares"
+    },
+    {
+      "id": 22,
+      "string": "Malaios"
+    },
+    {
+      "id": 23,
+      "string": "Malineses"
+    },
+    {
+      "id": 24,
+      "string": "Maias"
+    },
+    {
+      "id": 25,
+      "string": "Mong\u00f3is"
+    },
+    {
+      "id": 26,
+      "string": "Persas"
+    },
+    {
+      "id": 27,
+      "string": "Portugueses"
+    },
+    {
+      "id": 28,
+      "string": "Sarracenos"
+    },
+    {
+      "id": 29,
+      "string": "Sicilians"
+    },
+    {
+      "id": 30,
+      "string": "Eslavos"
+    },
+    {
+      "id": 31,
+      "string": "Espanh\u00f3is"
+    },
+    {
+      "id": 32,
+      "string": "T\u00e1rtaros"
+    },
+    {
+      "id": 33,
+      "string": "Teut\u00f5es"
+    },
+    {
+      "id": 34,
+      "string": "Turcos"
+    },
+    {
+      "id": 35,
+      "string": "Vietnamitas"
+    },
+    {
+      "id": 36,
+      "string": "Vikings"
+    }
+  ],
+  "game_type": [
+    {
+      "id": 0,
+      "string": "Mapa Aleat\u00f3rio"
+    },
+    {
+      "id": 1,
+      "string": "Regic\u00eddio"
+    },
+    {
+      "id": 2,
+      "string": "Duelo Mortal"
+    },
+    {
+      "id": 3,
+      "string": "Cen\u00e1rio"
+    },
+    {
+      "id": 6,
+      "string": "Rei da Colina"
+    },
+    {
+      "id": 7,
+      "string": "Corrida pela Maravilha"
+    },
+    {
+      "id": 8,
+      "string": "Defenda a Maravilha"
+    },
+    {
+      "id": 9,
+      "string": "Mapa Aleat\u00f3rio Turbo"
+    },
+    {
+      "id": 10,
+      "string": "Capturar a Rel\u00edquia"
+    },
+    {
+      "id": 11,
+      "string": "Morte S\u00fabita"
+    },
+    {
+      "id": 12,
+      "string": "Battle Royale"
+    },
+    {
+      "id": 13,
+      "string": "Guerras Imperiais"
+    }
+  ],
+  "leaderboard": [
+    {
+      "id": 0,
+      "string": "N\u00e3o pontuado"
+    },
+    {
+      "id": 1,
+      "string": "Duelo Mortal"
+    },
+    {
+      "id": 2,
+      "string": "Duelo Mortal de Equipe"
+    },
+    {
+      "id": 3,
+      "string": "Mapa Aleat\u00f3rio"
+    },
+    {
+      "id": 4,
+      "string": "Mapa Aleat\u00f3rio de Equipe"
+    }
+  ],
+  "map_size": [
+    {
+      "id": 0,
+      "string": "Min\u00fasculo (2 Jogadores)"
+    },
+    {
+      "id": 1,
+      "string": "Pequeno (3 Jogadores)"
+    },
+    {
+      "id": 2,
+      "string": "M\u00e9dio (4 Jogadores)"
+    },
+    {
+      "id": 3,
+      "string": "Normal (6 Jogadores)"
+    },
+    {
+      "id": 4,
+      "string": "Grande (8 Jogadores)"
+    },
+    {
+      "id": 5,
+      "string": "Gigante"
+    },
+    {
+      "id": 6,
+      "string": "Colossal"
+    }
+  ],
+  "map_type": [
+    {
+      "id": 9,
+      "string": "Ar\u00e1bia"
+    },
+    {
+      "id": 10,
+      "string": "Arquip\u00e9lago"
+    },
+    {
+      "id": 11,
+      "string": "B\u00e1ltico"
+    },
+    {
+      "id": 12,
+      "string": "Floresta Negra"
+    },
+    {
+      "id": 13,
+      "string": "Litor\u00e2neo"
+    },
+    {
+      "id": 14,
+      "string": "Continental"
+    },
+    {
+      "id": 15,
+      "string": "Lago da Cratera"
+    },
+    {
+      "id": 16,
+      "string": "Fortaleza"
+    },
+    {
+      "id": 17,
+      "string": "Febre do Ouro"
+    },
+    {
+      "id": 18,
+      "string": "Terras Altas"
+    },
+    {
+      "id": 19,
+      "string": "Ilhas"
+    },
+    {
+      "id": 20,
+      "string": "Mediterr\u00e2neo"
+    },
+    {
+      "id": 21,
+      "string": "Migra\u00e7\u00e3o"
+    },
+    {
+      "id": 22,
+      "string": "Rios"
+    },
+    {
+      "id": 23,
+      "string": "Ilhas de Equipe"
+    },
+    {
+      "id": 24,
+      "string": "Aleat\u00f3rio Completo"
+    },
+    {
+      "id": 25,
+      "string": "Escandin\u00e1via"
+    },
+    {
+      "id": 26,
+      "string": "Mong\u00f3lia"
+    },
+    {
+      "id": 27,
+      "string": "Iucat\u00e3"
+    },
+    {
+      "id": 28,
+      "string": "P\u00e2ntano Salgado"
+    },
+    {
+      "id": 29,
+      "string": "Arena"
+    },
+    {
+      "id": 31,
+      "string": "O\u00e1sis"
+    },
+    {
+      "id": 32,
+      "string": "Lago Fantasma"
+    },
+    {
+      "id": 33,
+      "string": "N\u00f4made"
+    },
+    {
+      "id": 49,
+      "string": "Ib\u00e9ria"
+    },
+    {
+      "id": 50,
+      "string": "Bretanha"
+    },
+    {
+      "id": 51,
+      "string": "Oriente M\u00e9dio"
+    },
+    {
+      "id": 52,
+      "string": "Texas"
+    },
+    {
+      "id": 53,
+      "string": "It\u00e1lia"
+    },
+    {
+      "id": 54,
+      "string": "Am\u00e9rica Central"
+    },
+    {
+      "id": 55,
+      "string": "Fran\u00e7a"
+    },
+    {
+      "id": 56,
+      "string": "Terras N\u00f3rdicas"
+    },
+    {
+      "id": 57,
+      "string": "Mar do Jap\u00e3o (Mar do Leste)"
+    },
+    {
+      "id": 58,
+      "string": "Biz\u00e2ncio"
+    },
+    {
+      "id": 59,
+      "string": "Personalizado"
+    },
+    {
+      "id": 60,
+      "string": "Mapa de Terra Aleat\u00f3rio"
+    },
+    {
+      "id": 62,
+      "string": "Mapa de Mundo Real Aleat\u00f3rio"
+    },
+    {
+      "id": 63,
+      "string": "Aleat\u00f3rio Cego"
+    },
+    {
+      "id": 65,
+      "string": "Mapa Especial Aleat\u00f3rio"
+    },
+    {
+      "id": 66,
+      "string": "Mapa Especial Aleat\u00f3rio"
+    },
+    {
+      "id": 67,
+      "string": "Acr\u00f3pole"
+    },
+    {
+      "id": 68,
+      "string": "Budapeste"
+    },
+    {
+      "id": 69,
+      "string": "Cenotes"
+    },
+    {
+      "id": 70,
+      "string": "Cidade dos Lagos"
+    },
+    {
+      "id": 71,
+      "string": "Buraco de Ouro"
+    },
+    {
+      "id": 72,
+      "string": "Esconderijo"
+    },
+    {
+      "id": 73,
+      "string": "Forte de Colina"
+    },
+    {
+      "id": 74,
+      "string": "Lombardia"
+    },
+    {
+      "id": 75,
+      "string": "Estepe"
+    },
+    {
+      "id": 76,
+      "string": "Vale"
+    },
+    {
+      "id": 77,
+      "string": "MegaRandom"
+    },
+    {
+      "id": 78,
+      "string": "Hamburger"
+    },
+    {
+      "id": 79,
+      "string": "CtR Aleat\u00f3rio"
+    },
+    {
+      "id": 80,
+      "string": "CtR Mon\u00e7\u00e3o"
+    },
+    {
+      "id": 81,
+      "string": "CtR Descida de Pir\u00e2mide"
+    },
+    {
+      "id": 82,
+      "string": "CtR Espiral"
+    },
+    {
+      "id": 83,
+      "string": "Quilimanjaro"
+    },
+    {
+      "id": 84,
+      "string": "Passo de Montanha"
+    },
+    {
+      "id": 85,
+      "string": "Delta do Nilo"
+    },
+    {
+      "id": 86,
+      "string": "Serengeti"
+    },
+    {
+      "id": 87,
+      "string": "Socotra"
+    },
+    {
+      "id": 88,
+      "string": "Amaz\u00f4nia"
+    },
+    {
+      "id": 89,
+      "string": "China"
+    },
+    {
+      "id": 90,
+      "string": "Chifre da \u00c1frica"
+    },
+    {
+      "id": 91,
+      "string": "\u00cdndia"
+    },
+    {
+      "id": 92,
+      "string": "Madag\u00e1scar"
+    },
+    {
+      "id": 93,
+      "string": "\u00c1frica Ocidental"
+    },
+    {
+      "id": 94,
+      "string": "Bo\u00eamia"
+    },
+    {
+      "id": 95,
+      "string": "Terra"
+    },
+    {
+      "id": 96,
+      "string": "C\u00e2nions"
+    },
+    {
+      "id": 97,
+      "string": "Arquip\u00e9lago Inimigo"
+    },
+    {
+      "id": 98,
+      "string": "Ilhas Inimigas"
+    },
+    {
+      "id": 99,
+      "string": "Distante"
+    },
+    {
+      "id": 100,
+      "string": "Linha de Frente"
+    },
+    {
+      "id": 101,
+      "string": "C\u00edrculo Interior"
+    },
+    {
+      "id": 102,
+      "string": "Terra-m\u00e3e"
+    },
+    {
+      "id": 103,
+      "string": "Plan\u00edcies Abertas"
+    },
+    {
+      "id": 104,
+      "string": "Anel d\u00c1gua"
+    },
+    {
+      "id": 105,
+      "string": "Ninho de Cobras"
+    },
+    {
+      "id": 106,
+      "string": "O Olho"
+    },
+    {
+      "id": 107,
+      "string": "Austr\u00e1lia"
+    },
+    {
+      "id": 108,
+      "string": "Indochina"
+    },
+    {
+      "id": 109,
+      "string": "Indon\u00e9sia"
+    },
+    {
+      "id": 110,
+      "string": "Estreito de Malaca"
+    },
+    {
+      "id": 111,
+      "string": "Filipinas"
+    },
+    {
+      "id": 112,
+      "string": "Ilhas de P\u00e2ntano"
+    },
+    {
+      "id": 113,
+      "string": "Manguezal"
+    },
+    {
+      "id": 114,
+      "string": "Ilhas do Pac\u00edfico"
+    },
+    {
+      "id": 115,
+      "string": "Barra"
+    },
+    {
+      "id": 116,
+      "string": "N\u00f4made de \u00c1gua"
+    },
+    {
+      "id": 117,
+      "string": "Ilhas de Selva"
+    },
+    {
+      "id": 118,
+      "string": "Linha Sagrada"
+    },
+    {
+      "id": 119,
+      "string": "Fronteira de Pedra"
+    },
+    {
+      "id": 120,
+      "string": "Yin-Yang"
+    },
+    {
+      "id": 121,
+      "string": "Travessias Silvestres"
+    },
+    {
+      "id": 122,
+      "string": "Lagos Alpinos"
+    },
+    {
+      "id": 123,
+      "string": "Brejo"
+    },
+    {
+      "id": 124,
+      "string": "Cordilheira"
+    },
+    {
+      "id": 125,
+      "string": "Ravinas"
+    },
+    {
+      "id": 126,
+      "string": "Langshan"
+    },
+    {
+      "id": 132,
+      "string": "Ant\u00e1rtida"
+    },
+    {
+      "id": 137,
+      "string": "Mapas Personalizados"
+    },
+    {
+      "id": 139,
+      "string": "P\u00e2ntano Dourado"
+    },
+    {
+      "id": 140,
+      "string": "Quatro Lagos"
+    },
+    {
+      "id": 141,
+      "string": "N\u00f4made de Terra"
+    },
+    {
+      "id": 142,
+      "string": "BR Battle On Ice"
+    },
+    {
+      "id": 143,
+      "string": "BR El Dorado"
+    },
+    {
+      "id": 144,
+      "string": "BR Fall of Axum"
+    },
+    {
+      "id": 145,
+      "string": "BR Fall of Rome"
+    },
+    {
+      "id": 146,
+      "string": "BR Majapahit Empire"
+    },
+    {
+      "id": 147,
+      "string": "Amazon Tunnel"
+    },
+    {
+      "id": 148,
+      "string": "Coastal Forest"
+    },
+    {
+      "id": 149,
+      "string": "African Clearing"
+    },
+    {
+      "id": 150,
+      "string": "Atacama"
+    },
+    {
+      "id": 151,
+      "string": "Seize the Mountain"
+    },
+    {
+      "id": 152,
+      "string": "Crater"
+    },
+    {
+      "id": 153,
+      "string": "Crossroads"
+    },
+    {
+      "id": 154,
+      "string": "Michi"
+    },
+    {
+      "id": 155,
+      "string": "Team Moats"
+    },
+    {
+      "id": 156,
+      "string": "Volcanic Island"
+    }
+  ],
+  "rating_type": [
+    {
+      "id": 0,
+      "string": "N\u00e3o pontuado"
+    },
+    {
+      "id": 1,
+      "string": "Duelo Mortal"
+    },
+    {
+      "id": 2,
+      "string": "Mapa Aleat\u00f3rio"
+    },
+    {
+      "id": 3,
+      "string": "Duelo Mortal de Equipe"
+    },
+    {
+      "id": 4,
+      "string": "Mapa Aleat\u00f3rio de Equipe"
+    },
+    {
+      "id": 5,
+      "string": "1v1 Random Map Quick Play"
+    },
+    {
+      "id": 6,
+      "string": "Team Random Map Quick Play"
+    },
+    {
+      "id": 7,
+      "string": "1v1 Empire Wars Quick Play"
+    },
+    {
+      "id": 8,
+      "string": "Team Empire Wars Quick Play"
+    },
+    {
+      "id": 9,
+      "string": "Battle Royale Quick Play"
+    }
+  ],
+  "resources": [
+    {
+      "id": 0,
+      "string": "Padr\u00e3o"
+    },
+    {
+      "id": 1,
+      "string": "Baixo"
+    },
+    {
+      "id": 2,
+      "string": "M\u00e9dio"
+    },
+    {
+      "id": 3,
+      "string": "Alta"
+    },
+    {
+      "id": 4,
+      "string": "Ultra-Alto"
+    },
+    {
+      "id": 5,
+      "string": "Infinito"
+    },
+    {
+      "id": 6,
+      "string": "Aleat\u00f3rio"
+    }
+  ],
+  "speed": [
+    {
+      "id": 0,
+      "string": "Lenta"
+    },
+    {
+      "id": 1,
+      "string": "Casual"
+    },
+    {
+      "id": 2,
+      "string": "Normal"
+    },
+    {
+      "id": 3,
+      "string": "R\u00e1pida"
+    }
+  ],
+  "victory": [
+    {
+      "id": 1,
+      "string": "Conquista"
+    },
+    {
+      "id": 7,
+      "string": "Limite de Tempo"
+    },
+    {
+      "id": 8,
+      "string": "Pontua\u00e7\u00e3o"
+    },
+    {
+      "id": 9,
+      "string": "Padr\u00e3o"
+    },
+    {
+      "id": 11,
+      "string": "O \u00daltimo de P\u00e9"
+    }
+  ],
+  "visibility": [
+    {
+      "id": 0,
+      "string": "Normal"
+    },
+    {
+      "id": 1,
+      "string": "Explorado"
+    },
+    {
+      "id": 2,
+      "string": "Tudo Vis\u00edvel"
+    }
+  ]
+}

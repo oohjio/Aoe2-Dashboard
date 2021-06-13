@@ -1,24 +1,23 @@
-from APIStringGenerator import APIStringGenerator
-from datetime import tzinfo
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
-
-from pyqtgraph import *
-import numpy as np
-import time
-from DataParser import BasicPlayerInfo
 import typing
 
+import numpy as np
+import pyqtgraph as pg
+from PySide6.QtCore import QLineF
+from PySide6.QtGui import QPainter
+from PySide6.QtWidgets import QHeaderView, QAbstractItemView, QSizePolicy, QWidget
 
-class RatingPlotWidget(PlotWidget):
+from APIStringGenerator import APIStringGenerator
+from DataParser import BasicPlayerInfo
+
+
+class RatingPlotWidget(pg.PlotWidget):
     """
-    Plot Widget inherited by pyqtgraph's PlotWidget for displaying Ratings in a timeframe
+    Plot Widget inherited by pg's PlotWidget for displaying Ratings in a timeframe
     """
 
     def __init__(self, player_name: str, parent=None, background='default', plotItem=None, **kargs):
         super().__init__(parent, background, plotItem,
-                         axisItems={'bottom': DateAxisItem()}, **kargs)
+                         axisItems={'bottom': pg.DateAxisItem()}, **kargs)
 
         self.player_name = player_name
         self.setBackground(None)
@@ -26,10 +25,10 @@ class RatingPlotWidget(PlotWidget):
 
         self.setMouseEnabled(x=False, y=False)
 
-        left_axis: AxisItem = self.getAxis("left")
+        left_axis: pg.AxisItem = self.getAxis("left")
         left_axis.setGrid(10)
 
-        bottom_axis: AxisItem = self.getAxis("bottom")
+        bottom_axis: pg.AxisItem = self.getAxis("bottom")
         bottom_axis.setGrid(10)
 
         self.data_team_ranking = None
@@ -39,21 +38,21 @@ class RatingPlotWidget(PlotWidget):
         self.setLabel("left", left_label_str)
 
         self.stored_leaderboard_ratings = np.empty(6, dtype=tuple)
-        self.stored_plot_items = np.empty(6, dtype=PlotDataItem)
+        self.stored_plot_items = np.empty(6, dtype=pg.PlotDataItem)
 
     def plot_rating(self, ratingdata, leaderboard_id):
-        pen = mkPen((0, 0, 0), width=2)
+        pen = pg.mkPen((0, 0, 0), width=2)
         if leaderboard_id == 3:
             self.data_1v1_ranking = ratingdata
-            pen = mkPen((255, 96, 62), width=2)
+            pen = pg.mkPen((255, 96, 62), width=2)
         elif leaderboard_id == 4:
             self.data_team_ranking = ratingdata
-            pen = mkPen((15, 153, 246), width=2)
+            pen = pg.mkPen((15, 153, 246), width=2)
 
         ratings = ratingdata[0]
         timestamps = ratingdata[1]
 
-        plot: PlotDataItem = self.plot()
+        plot: pg.PlotDataItem = self.plot()
 
         plot.setPen(pen)
         plot.setData(y=ratings, x=timestamps)
@@ -62,7 +61,7 @@ class RatingPlotWidget(PlotWidget):
         self.stored_plot_items[leaderboard_id] = plot
 
     def update_displayed_plots(self, leaderboard_id, checked):
-        if checked == True:
+        if checked:
             ratings, timestamps = self.stored_leaderboard_ratings[leaderboard_id]
             self.stored_plot_items[leaderboard_id].setData(
                 y=ratings, x=timestamps)
@@ -72,14 +71,18 @@ class RatingPlotWidget(PlotWidget):
         self.stored_plot_items[leaderboard_id].updateItems()
 
 
-class TeamTableWidget(TableWidget):
-    """Widget for displaying player infos. Inherits from pygtgraphs's TableWidget. Mostly has functions of a QtTableWidget except for the setData function"""
+class TeamTableWidget(pg.TableWidget):
+    """
+    Widget for displaying player infos. Inherits from pygtgraphs's TableWidget. Mostly has functions of a
+    QtTableWidget except for the setData function
+    """
 
     def __init__(self, team, number_of_players, parent=None, *args, **kwds):
         super().__init__(parent, *args, **kwds)
 
         self.number_of_players = number_of_players
         self.team = team
+        self.team_data = []
 
         self.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -112,7 +115,8 @@ class TeamTableWidget(TableWidget):
 
     def update_team(self, team: list[BasicPlayerInfo]):
         self.number_of_players = len(team)
-        self.player_data = numpy.resize(self.player_data, len(team))
+        self.player_data = np.resize(self.player_data, len(team))
+        self.team_data = team
 
         for index, player in enumerate(team):
             self.update_player(index, player)
@@ -130,23 +134,29 @@ class TeamTableWidget(TableWidget):
         self.player_data[player_nr][1] = data.civ_name
         self.player_data[player_nr][2] = data.rating
         self.player_data[player_nr][3] = data.win_percentage
-        
+
         self.players[player_nr] = data
 
     def selec_changed(self):
         row = self.currentIndex().row()
         self.parent().player_selection_changed(self.team, row)
 
-    def cell_double_clicked(self, row: int, column: int):
+    def cell_double_clicked(self, row: int):
         import webbrowser
         player_id = self.players[row].profile_id
         webbrowser.open(APIStringGenerator.get_AoE2_net_link_for_player_id(player_id), new=2)
 
+    def update_civ_names(self):
+        if len(self.team_data) > 0:
+            self.update_team(self.team_data)
+
 
 class LegendItem(QWidget):
+    """Only draws a line to display as legend item in Main Menu"""
+
     def __init__(self, parent: typing.Optional[QWidget], color) -> None:
         super().__init__(parent=parent)
-        
+
         self.setMinimumSize(30, 10)
         self.color = color
 
@@ -154,7 +164,8 @@ class LegendItem(QWidget):
         painter = QPainter(self)
 
         # Team Rating Line
-        pen_team = mkPen(self.color, width=2)
+        pen_team = pg.mkPen(self.color, width=2)
         painter.setPen(pen_team)
-        painter.drawLine(0, self.height()/2, self.width() - self.width() / 10, self.height()/2)
-        painter.end()    
+        line = QLineF(0, self.height() / 2, self.width() - self.width() / 10, self.height() / 2)
+        painter.drawLine(line)
+        painter.end()

@@ -1,0 +1,889 @@
+{
+  "language": "vi",
+  "age": [
+    {
+      "id": 0,
+      "string": "Ti\u00eau chu\u1ea9n"
+    },
+    {
+      "id": 2,
+      "string": "Th\u1eddi t\u0103m t\u1ed1i"
+    },
+    {
+      "id": 3,
+      "string": "Th\u1eddi phong ki\u1ebfn"
+    },
+    {
+      "id": 4,
+      "string": "Th\u1eddi l\u00e2u \u0111\u00e0i"
+    },
+    {
+      "id": 5,
+      "string": "Th\u1eddi \u0111\u1ebf qu\u1ed1c"
+    },
+    {
+      "id": 6,
+      "string": "Th\u1eddi h\u1eadu \u0111\u1ebf qu\u1ed1c"
+    }
+  ],
+  "civ": [
+    {
+      "id": 0,
+      "string": "Aztec"
+    },
+    {
+      "id": 1,
+      "string": "Berber"
+    },
+    {
+      "id": 2,
+      "string": "Briton"
+    },
+    {
+      "id": 3,
+      "string": "Bulgaria"
+    },
+    {
+      "id": 4,
+      "string": "Burgundians"
+    },
+    {
+      "id": 5,
+      "string": "Mi\u1ebfn \u0110i\u1ec7n"
+    },
+    {
+      "id": 6,
+      "string": "\u0110\u00f4ng La M\u00e3"
+    },
+    {
+      "id": 7,
+      "string": "Celt"
+    },
+    {
+      "id": 8,
+      "string": "Trung Qu\u1ed1c"
+    },
+    {
+      "id": 9,
+      "string": "Cuman"
+    },
+    {
+      "id": 10,
+      "string": "Ethiopia"
+    },
+    {
+      "id": 11,
+      "string": "Frank"
+    },
+    {
+      "id": 12,
+      "string": "Goth"
+    },
+    {
+      "id": 13,
+      "string": "Hung"
+    },
+    {
+      "id": 14,
+      "string": "Inca"
+    },
+    {
+      "id": 15,
+      "string": "\u1ea4n \u0110\u1ed9"
+    },
+    {
+      "id": 16,
+      "string": "Italy"
+    },
+    {
+      "id": 17,
+      "string": "Nh\u1eadt B\u1ea3n"
+    },
+    {
+      "id": 18,
+      "string": "Khmer"
+    },
+    {
+      "id": 19,
+      "string": "Tri\u1ec1u Ti\u00ean"
+    },
+    {
+      "id": 20,
+      "string": "Litva"
+    },
+    {
+      "id": 21,
+      "string": "Magyar"
+    },
+    {
+      "id": 22,
+      "string": "M\u00e3 Lai"
+    },
+    {
+      "id": 23,
+      "string": "Mali"
+    },
+    {
+      "id": 24,
+      "string": "Maya"
+    },
+    {
+      "id": 25,
+      "string": "M\u00f4ng C\u1ed5"
+    },
+    {
+      "id": 26,
+      "string": "Ba T\u01b0"
+    },
+    {
+      "id": 27,
+      "string": "B\u1ed3 \u0110\u00e0o Nha"
+    },
+    {
+      "id": 28,
+      "string": "Saracen"
+    },
+    {
+      "id": 29,
+      "string": "Sicilians"
+    },
+    {
+      "id": 30,
+      "string": "Slav"
+    },
+    {
+      "id": 31,
+      "string": "T\u00e2y Ban Nha"
+    },
+    {
+      "id": 32,
+      "string": "Tatar"
+    },
+    {
+      "id": 33,
+      "string": "Teuton"
+    },
+    {
+      "id": 34,
+      "string": "\u0110\u1ed9t Quy\u1ebft"
+    },
+    {
+      "id": 35,
+      "string": "\u0110\u1ea1i Vi\u1ec7t"
+    },
+    {
+      "id": 36,
+      "string": "Viking"
+    }
+  ],
+  "game_type": [
+    {
+      "id": 0,
+      "string": "B\u1ea3n \u0111\u1ed3 ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 1,
+      "string": "H\u00e0nh th\u00edch"
+    },
+    {
+      "id": 2,
+      "string": "T\u1eed chi\u1ebfn"
+    },
+    {
+      "id": 3,
+      "string": "B\u1ed1i c\u1ea3nh"
+    },
+    {
+      "id": 6,
+      "string": "B\u00e1 ch\u1ee7 n\u00fai \u0111\u1ed3i"
+    },
+    {
+      "id": 7,
+      "string": "Cu\u1ed9c \u0111ua k\u1ef3 quan"
+    },
+    {
+      "id": 8,
+      "string": "B\u1ea3o v\u1ec7 k\u1ef3 quan"
+    },
+    {
+      "id": 9,
+      "string": "B\u1ea3n \u0111\u1ed3 ng\u1eabu nhi\u00ean si\u00eau t\u1ed1c"
+    },
+    {
+      "id": 10,
+      "string": "Chi\u1ebfm di v\u1eadt"
+    },
+    {
+      "id": 11,
+      "string": "C\u00e1i ch\u1ebft b\u1ea5t ng\u1edd"
+    },
+    {
+      "id": 12,
+      "string": "Battle Royale"
+    },
+    {
+      "id": 13,
+      "string": "Chi\u1ebfn tranh \u0111\u1ebf qu\u1ed1c"
+    }
+  ],
+  "leaderboard": [
+    {
+      "id": 0,
+      "string": "Kh\u00f4ng x\u1ebfp h\u1ea1ng"
+    },
+    {
+      "id": 1,
+      "string": "T\u1eed chi\u1ebfn"
+    },
+    {
+      "id": 2,
+      "string": "Death Match \u0111\u1ed9i"
+    },
+    {
+      "id": 3,
+      "string": "B\u1ea3n \u0111\u1ed3 ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 4,
+      "string": "B\u1ea3n \u0111\u1ed3 ng\u1eabu nhi\u00ean \u0111\u1ed9i"
+    }
+  ],
+  "map_size": [
+    {
+      "id": 0,
+      "string": "R\u1ea5t nh\u1ecf (2 ng\u01b0\u1eddi ch\u01a1i)"
+    },
+    {
+      "id": 1,
+      "string": "Nh\u1ecf (3 ng\u01b0\u1eddi ch\u01a1i)"
+    },
+    {
+      "id": 2,
+      "string": "Trung b\u00ecnh (4 ng\u01b0\u1eddi ch\u01a1i)"
+    },
+    {
+      "id": 3,
+      "string": "B\u00ecnh th\u01b0\u1eddng (6 ng\u01b0\u1eddi ch\u01a1i)"
+    },
+    {
+      "id": 4,
+      "string": "L\u1edbn (8 ng\u01b0\u1eddi ch\u01a1i)"
+    },
+    {
+      "id": 5,
+      "string": "Kh\u1ed5ng l\u1ed3"
+    },
+    {
+      "id": 6,
+      "string": "C\u1ef1c \u0111\u1ea1i"
+    }
+  ],
+  "map_type": [
+    {
+      "id": 9,
+      "string": "\u1ea2-r\u1eadp"
+    },
+    {
+      "id": 10,
+      "string": "Qu\u1ea7n \u0111\u1ea3o"
+    },
+    {
+      "id": 11,
+      "string": "Baltic"
+    },
+    {
+      "id": 12,
+      "string": "R\u1eebng t\u1ed1i t\u0103m"
+    },
+    {
+      "id": 13,
+      "string": "B\u1edd bi\u1ec3n"
+    },
+    {
+      "id": 14,
+      "string": "L\u1ee5c \u0111\u1ecba"
+    },
+    {
+      "id": 15,
+      "string": "H\u1ed3 n\u00fai l\u1eeda"
+    },
+    {
+      "id": 16,
+      "string": "Ph\u00e1o \u0111\u00e0i"
+    },
+    {
+      "id": 17,
+      "string": "C\u01a1n s\u1ed1t v\u00e0ng"
+    },
+    {
+      "id": 18,
+      "string": "Cao nguy\u00ean"
+    },
+    {
+      "id": 19,
+      "string": "\u0110\u1ea3o"
+    },
+    {
+      "id": 20,
+      "string": "\u0110\u1ecba Trung H\u1ea3i"
+    },
+    {
+      "id": 21,
+      "string": "Di tr\u00fa"
+    },
+    {
+      "id": 22,
+      "string": "S\u00f4ng"
+    },
+    {
+      "id": 23,
+      "string": "\u0110\u1ea3o \u0111\u1ed9i"
+    },
+    {
+      "id": 24,
+      "string": "Ng\u1eabu nhi\u00ean \u0111\u1ea7y \u0111\u1ee7"
+    },
+    {
+      "id": 25,
+      "string": "Scandinavia"
+    },
+    {
+      "id": 26,
+      "string": "M\u00f4ng C\u1ed5"
+    },
+    {
+      "id": 27,
+      "string": "Yucatan"
+    },
+    {
+      "id": 28,
+      "string": "V\u00f9ng ng\u1eadp m\u1eb7n"
+    },
+    {
+      "id": 29,
+      "string": "\u0110\u1ea5u tr\u01b0\u1eddng"
+    },
+    {
+      "id": 31,
+      "string": "\u1ed0c \u0111\u1ea3o"
+    },
+    {
+      "id": 32,
+      "string": "H\u1ed3 ma"
+    },
+    {
+      "id": 33,
+      "string": "D\u00e2n du m\u1ee5c"
+    },
+    {
+      "id": 49,
+      "string": "Iberia"
+    },
+    {
+      "id": 50,
+      "string": "Anh qu\u1ed1c"
+    },
+    {
+      "id": 51,
+      "string": "Trung \u0110\u00f4ng"
+    },
+    {
+      "id": 52,
+      "string": "Texas"
+    },
+    {
+      "id": 53,
+      "string": "Italy"
+    },
+    {
+      "id": 54,
+      "string": "Trung M\u1ef9"
+    },
+    {
+      "id": 55,
+      "string": "Ph\u00e1p"
+    },
+    {
+      "id": 56,
+      "string": "L\u00e3nh th\u1ed5 B\u1eafc \u00c2u"
+    },
+    {
+      "id": 57,
+      "string": "Bi\u1ec3n Nh\u1eadt B\u1ea3n (Bi\u1ec3n \u0110\u00f4ng Tri\u1ec1u Ti\u00ean)"
+    },
+    {
+      "id": 58,
+      "string": "Byzantium"
+    },
+    {
+      "id": 59,
+      "string": "T\u00f9y ch\u1ec9nh"
+    },
+    {
+      "id": 60,
+      "string": "B\u1ea3n \u0111\u1ed3 v\u00f9ng \u0111\u1ea5t ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 62,
+      "string": "B\u1ea3n \u0111\u1ed3 th\u1ebf gi\u1edbi th\u1ef1c ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 63,
+      "string": "Ng\u1eabu nhi\u00ean m\u1edd m\u1ecbt"
+    },
+    {
+      "id": 65,
+      "string": "B\u1ea3n \u0111\u1ed3 \u0111\u1eb7c bi\u1ec7t ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 66,
+      "string": "B\u1ea3n \u0111\u1ed3 \u0111\u1eb7c bi\u1ec7t ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 67,
+      "string": "V\u1ec7 th\u00e0nh"
+    },
+    {
+      "id": 68,
+      "string": "Budapest"
+    },
+    {
+      "id": 69,
+      "string": "H\u1ed1 s\u1ee5t"
+    },
+    {
+      "id": 70,
+      "string": "Th\u00e0nh ph\u1ed1 h\u1ed3"
+    },
+    {
+      "id": 71,
+      "string": "H\u1ea7m v\u00e0ng"
+    },
+    {
+      "id": 72,
+      "string": "Ch\u1ed7 tr\u00fa \u1ea9n"
+    },
+    {
+      "id": 73,
+      "string": "H\u00e0o l\u0169y tr\u00ean \u0111\u1ed3i"
+    },
+    {
+      "id": 74,
+      "string": "Lombardia"
+    },
+    {
+      "id": 75,
+      "string": "Th\u1ea3o nguy\u00ean"
+    },
+    {
+      "id": 76,
+      "string": "Thung l\u0169ng"
+    },
+    {
+      "id": 77,
+      "string": "C\u1ef1c k\u1ef3 ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 78,
+      "string": "Hamburger"
+    },
+    {
+      "id": 79,
+      "string": "Chi\u1ebfm di v\u1eadt \u2013 Ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 80,
+      "string": "Chi\u1ebfm di v\u1eadt \u2013 Gi\u00f3 m\u00f9a"
+    },
+    {
+      "id": 81,
+      "string": "Chi\u1ebfm di v\u1eadt \u2013 Leo xu\u1ed1ng Kim t\u1ef1 th\u00e1p"
+    },
+    {
+      "id": 82,
+      "string": "Chi\u1ebfm di v\u1eadt \u2013 \u0110\u01b0\u1eddng xo\u1eafn \u1ed1c"
+    },
+    {
+      "id": 83,
+      "string": "Kilimanjaro"
+    },
+    {
+      "id": 84,
+      "string": "S\u01a1n \u0111\u1ea1o"
+    },
+    {
+      "id": 85,
+      "string": "\u0110\u1ed3ng b\u1eb1ng s\u00f4ng Nile"
+    },
+    {
+      "id": 86,
+      "string": "Serengeti"
+    },
+    {
+      "id": 87,
+      "string": "Socotra"
+    },
+    {
+      "id": 88,
+      "string": "Amazon"
+    },
+    {
+      "id": 89,
+      "string": "Trung Hoa"
+    },
+    {
+      "id": 90,
+      "string": "S\u1eebng ch\u00e2u Phi"
+    },
+    {
+      "id": 91,
+      "string": "\u1ea4n \u0110\u1ed9"
+    },
+    {
+      "id": 92,
+      "string": "Madagascar"
+    },
+    {
+      "id": 93,
+      "string": "T\u00e2y Phi"
+    },
+    {
+      "id": 94,
+      "string": "Bohemia"
+    },
+    {
+      "id": 95,
+      "string": "Tr\u00e1i \u0110\u1ea5t"
+    },
+    {
+      "id": 96,
+      "string": "H\u1ebbm n\u00fai"
+    },
+    {
+      "id": 97,
+      "string": "Qu\u1ea7n \u0111\u1ea3o c\u1ee7a k\u1ebb th\u00f9"
+    },
+    {
+      "id": 98,
+      "string": "\u0110\u1ea3o c\u1ee7a k\u1ebb th\u00f9"
+    },
+    {
+      "id": 99,
+      "string": "D\u00e0n tr\u1ea3i"
+    },
+    {
+      "id": 100,
+      "string": "Ti\u1ec1n tuy\u1ebfn"
+    },
+    {
+      "id": 101,
+      "string": "V\u00f2ng tr\u00f2n b\u00ean trong"
+    },
+    {
+      "id": 102,
+      "string": "\u0110\u1ea5t m\u1eb9"
+    },
+    {
+      "id": 103,
+      "string": "\u0110\u1ed3ng b\u1eb1ng tr\u1ed1ng tr\u1ea3i"
+    },
+    {
+      "id": 104,
+      "string": "V\u00e0nh \u0111ai n\u01b0\u1edbc"
+    },
+    {
+      "id": 105,
+      "string": "Hang r\u1eafn"
+    },
+    {
+      "id": 106,
+      "string": "Con m\u1eaft"
+    },
+    {
+      "id": 107,
+      "string": "Australia"
+    },
+    {
+      "id": 108,
+      "string": "\u0110\u00f4ng D\u01b0\u01a1ng"
+    },
+    {
+      "id": 109,
+      "string": "Indonesia"
+    },
+    {
+      "id": 110,
+      "string": "Eo bi\u1ec3n Malacca"
+    },
+    {
+      "id": 111,
+      "string": "Philippines"
+    },
+    {
+      "id": 112,
+      "string": "\u0110\u1ea3o \u0111\u1ea7m l\u1ea7y"
+    },
+    {
+      "id": 113,
+      "string": "R\u1eebng \u0111\u01b0\u1edbc"
+    },
+    {
+      "id": 114,
+      "string": "\u0110\u1ea3o Th\u00e1i B\u00ecnh D\u01b0\u01a1ng"
+    },
+    {
+      "id": 115,
+      "string": "B\u00e3i c\u00e1t"
+    },
+    {
+      "id": 116,
+      "string": "Th\u1eddi ti\u1ec1n s\u1eed tr\u00ean m\u1eb7t n\u01b0\u1edbc"
+    },
+    {
+      "id": 117,
+      "string": "\u0110\u1ea3o r\u1eebng r\u1eadm"
+    },
+    {
+      "id": 118,
+      "string": "Ranh gi\u1edbi linh thi\u00eang"
+    },
+    {
+      "id": 119,
+      "string": "Bi\u00ean gi\u1edbi \u0111\u00e1"
+    },
+    {
+      "id": 120,
+      "string": "\u00c2m d\u01b0\u01a1ng"
+    },
+    {
+      "id": 121,
+      "string": "\u0110\u01b0\u1eddng r\u1eebng"
+    },
+    {
+      "id": 122,
+      "string": "H\u1ed3 tr\u00ean n\u00fai"
+    },
+    {
+      "id": 123,
+      "string": "B\u00e3i l\u1ea7y"
+    },
+    {
+      "id": 124,
+      "string": "\u0110\u1ec9nh n\u00fai"
+    },
+    {
+      "id": 125,
+      "string": "H\u1ebbm n\u00fai"
+    },
+    {
+      "id": 126,
+      "string": "Lang S\u01a1n"
+    },
+    {
+      "id": 132,
+      "string": "Nam C\u1ef1c"
+    },
+    {
+      "id": 137,
+      "string": "Nh\u00f3m b\u1ea3n \u0111\u1ed3 t\u00f9y ch\u1ec9nh"
+    },
+    {
+      "id": 139,
+      "string": "\u0110\u1ea7m v\u00e0ng"
+    },
+    {
+      "id": 140,
+      "string": "B\u1ed1n h\u1ed3"
+    },
+    {
+      "id": 141,
+      "string": "D\u00e2n du m\u1ee5c tr\u00ean b\u1ed9"
+    },
+    {
+      "id": 142,
+      "string": "BR Battle On Ice"
+    },
+    {
+      "id": 143,
+      "string": "BR El Dorado"
+    },
+    {
+      "id": 144,
+      "string": "BR Fall of Axum"
+    },
+    {
+      "id": 145,
+      "string": "BR Fall of Rome"
+    },
+    {
+      "id": 146,
+      "string": "BR Majapahit Empire"
+    },
+    {
+      "id": 147,
+      "string": "Amazon Tunnel"
+    },
+    {
+      "id": 148,
+      "string": "Coastal Forest"
+    },
+    {
+      "id": 149,
+      "string": "African Clearing"
+    },
+    {
+      "id": 150,
+      "string": "Atacama"
+    },
+    {
+      "id": 151,
+      "string": "Seize the Mountain"
+    },
+    {
+      "id": 152,
+      "string": "Crater"
+    },
+    {
+      "id": 153,
+      "string": "Crossroads"
+    },
+    {
+      "id": 154,
+      "string": "Michi"
+    },
+    {
+      "id": 155,
+      "string": "Team Moats"
+    },
+    {
+      "id": 156,
+      "string": "Volcanic Island"
+    }
+  ],
+  "rating_type": [
+    {
+      "id": 0,
+      "string": "Kh\u00f4ng x\u1ebfp h\u1ea1ng"
+    },
+    {
+      "id": 1,
+      "string": "T\u1eed chi\u1ebfn"
+    },
+    {
+      "id": 2,
+      "string": "B\u1ea3n \u0111\u1ed3 ng\u1eabu nhi\u00ean"
+    },
+    {
+      "id": 3,
+      "string": "Death Match \u0111\u1ed9i"
+    },
+    {
+      "id": 4,
+      "string": "B\u1ea3n \u0111\u1ed3 ng\u1eabu nhi\u00ean \u0111\u1ed9i"
+    },
+    {
+      "id": 5,
+      "string": "1v1 Random Map Quick Play"
+    },
+    {
+      "id": 6,
+      "string": "Team Random Map Quick Play"
+    },
+    {
+      "id": 7,
+      "string": "1v1 Empire Wars Quick Play"
+    },
+    {
+      "id": 8,
+      "string": "Team Empire Wars Quick Play"
+    },
+    {
+      "id": 9,
+      "string": "Battle Royale Quick Play"
+    }
+  ],
+  "resources": [
+    {
+      "id": 0,
+      "string": "Ti\u00eau chu\u1ea9n"
+    },
+    {
+      "id": 1,
+      "string": "Th\u1ea5p"
+    },
+    {
+      "id": 2,
+      "string": "Trung b\u00ecnh"
+    },
+    {
+      "id": 3,
+      "string": "Cao"
+    },
+    {
+      "id": 4,
+      "string": "Ultra High"
+    },
+    {
+      "id": 5,
+      "string": "Infinite"
+    },
+    {
+      "id": 6,
+      "string": "Ng\u1eabu nhi\u00ean"
+    }
+  ],
+  "speed": [
+    {
+      "id": 0,
+      "string": "Ch\u1eadm"
+    },
+    {
+      "id": 1,
+      "string": "Th\u00f4ng th\u01b0\u1eddng"
+    },
+    {
+      "id": 2,
+      "string": "B\u00ecnh th\u01b0\u1eddng"
+    },
+    {
+      "id": 3,
+      "string": "Nhanh"
+    }
+  ],
+  "victory": [
+    {
+      "id": 1,
+      "string": "Chinh ph\u1ee5c"
+    },
+    {
+      "id": 7,
+      "string": "Th\u1eddi gian gi\u1edbi h\u1ea1n"
+    },
+    {
+      "id": 8,
+      "string": "\u0110i\u1ec3m s\u1ed1"
+    },
+    {
+      "id": 9,
+      "string": "Ti\u00eau chu\u1ea9n"
+    },
+    {
+      "id": 11,
+      "string": "K\u1ebb cu\u1ed1i c\u00f9ng tr\u1ee5 l\u1ea1i"
+    }
+  ],
+  "visibility": [
+    {
+      "id": 0,
+      "string": "B\u00ecnh th\u01b0\u1eddng"
+    },
+    {
+      "id": 1,
+      "string": "\u0110\u00e3 th\u0103m d\u00f2"
+    },
+    {
+      "id": 2,
+      "string": "Nh\u00ecn th\u1ea5y t\u1ea5t c\u1ea3"
+    }
+  ]
+}

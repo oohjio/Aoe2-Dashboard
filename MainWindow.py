@@ -4,25 +4,25 @@ from threading import Thread
 
 import numpy as np
 import requests
-from PySide6.QtCore import *
-from PySide6.QtCore import QCoreApplication
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
+from PySide6.QtCore import QCoreApplication, QTimer, SIGNAL, QSettings, Qt
+from PySide6.QtGui import QFont, QIcon
+from PySide6.QtWidgets import QLabel, QToolButton, QVBoxLayout, QHBoxLayout, QGridLayout, QCheckBox, \
+    QWidget, QMessageBox
 
 import keys
 from APIStringGenerator import APIStringGenerator
-from DataParser import BasicPlayerInfo, CurrentMatch, DataParser
+from DataParser import BasicPlayerInfo, CurrentMatch, DataParser, LocalizedAPIStrings
 from PrefPanel import PrefPanel
 from Widgets import LegendItem, RatingPlotWidget, TeamTableWidget
 
 
 class MainWindow(QWidget):
+    QCoreApplication.setOrganizationName("Aoe2Helper")
+    QCoreApplication.setApplicationName("Aoe2Dashboard")
+    localized_api_strings = LocalizedAPIStrings()
 
     def __init__(self):
         super().__init__()
-
-        QCoreApplication.setOrganizationName("Aoe2Helper")
-        QCoreApplication.setApplicationName("Aoe2Dashboard")
 
         system = platform.system()
         if system == "Windows":
@@ -32,7 +32,7 @@ class MainWindow(QWidget):
 
         self.setWindowTitle("AoE 2 Dashboard")
         self.setGeometry(500, 500, 800, 550)
-        # self.setMinimumSize(self.size())
+        self.active_windows = [self]
 
         self.player_basic_data: BasicPlayerInfo
         self.opp_basic_data: BasicPlayerInfo
@@ -41,11 +41,11 @@ class MainWindow(QWidget):
         self.opp_rating_plot: RatingPlotWidget = None
         self.player_rating_plot: RatingPlotWidget = None
 
-        self.pref_panel: PrefPanel
-        self.timer: QTimer
         # set the timer_count to 999 indicating that no timer has started yet
         self.timer_count = 999
-        self.player_id: str
+        self.timer = QTimer()
+
+        self.player_id = ""
         self.has_updated_players = False
         self.has_updated_player_data = False
 
@@ -65,9 +65,7 @@ class MainWindow(QWidget):
         self.player_label.setAlignment(Qt.AlignCenter)
 
         # Player Stats
-        players = 4
         self.player_table = TeamTableWidget(1, 4)
-
 
         # Opponent Label Left Side
         self.opp_label = QLabel("Opponent's team")
@@ -77,9 +75,7 @@ class MainWindow(QWidget):
         self.opp_label.setAlignment(Qt.AlignCenter)
 
         # Opponent Stats
-        players = 4
         self.opp_table = TeamTableWidget(2, 4)
-
 
         self.player_rating_histories_team = np.empty((2, 4), dtype=tuple)
         self.player_rating_histories_1v1 = np.empty((2, 4), dtype=tuple)
@@ -98,15 +94,15 @@ class MainWindow(QWidget):
         # Todo: Check if Icon Path exists??
         pref_icon = QIcon.fromTheme("preferences-system")
         if pref_icon is None or self.is_running_windows:
-            pref_icon = QIcon("ressources/settings_black_24dp.svg")
+            pref_icon = QIcon("resources/settings_black_24dp.svg")
         pref_button = QToolButton()
         pref_button.setIcon(pref_icon)
         pref_button.setMinimumSize(35, 35)
         pref_button.clicked.connect(self.open_pref_panel)
 
         refresh_icon = QIcon.fromTheme("system-software-update")
-        if refresh_icon == None or self.is_running_windows:
-            refresh_icon = QIcon("ressources/cached_black_24dp.svg")
+        if refresh_icon is None or self.is_running_windows:
+            refresh_icon = QIcon("resources/cached_black_24dp.svg")
         refresh_button = QToolButton()
         refresh_button.setIcon(refresh_icon)
         refresh_button.setMinimumSize(35, 35)
@@ -129,27 +125,27 @@ class MainWindow(QWidget):
         self.bar_layout.addWidget(refresh_button)
         self.bar_layout.addWidget(pref_button)
 
-        # Display Legende
-        legende_label = QLabel("Legend")
+        # Display Legend
+        legend_label = QLabel("Legend")
 
-        legende_label.setFont(font_bold)
+        legend_label.setFont(font_bold)
 
-        rating_1v1_legende_label = QLabel("1v1 Rank")
-        rating_team_legende_label = QLabel("Team Rank")
+        rating_1v1_legend_label = QLabel("1v1 Rank")
+        rating_team_legend_label = QLabel("Team Rank")
 
         legend_item_team = LegendItem(None, (15, 153, 246))
         legend_item_1v1 = LegendItem(None, (255, 96, 62))
 
         v_legend_layout = QVBoxLayout()
-        v_legend_layout.addWidget(legende_label)
+        v_legend_layout.addWidget(legend_label)
 
         h_item_team = QHBoxLayout()
         h_item_team.addWidget(legend_item_team)
-        h_item_team.addWidget(rating_team_legende_label)
+        h_item_team.addWidget(rating_team_legend_label)
 
         h_item_1v1 = QHBoxLayout()
         h_item_1v1.addWidget(legend_item_1v1)
-        h_item_1v1.addWidget(rating_1v1_legende_label)
+        h_item_1v1.addWidget(rating_1v1_legend_label)
 
         v_legend_layout.addLayout(h_item_1v1)
         v_legend_layout.addLayout(h_item_team)
@@ -243,17 +239,21 @@ class MainWindow(QWidget):
 
         self.refresh_player()
 
-    def load_infos(self, player_id: int):
+    def start_load_player_data_thread(self, player_id: int):
+        #thread = Thread(target=self.load_player_data, kwargs={"player_id" : player_id})
+        #thread.start()
+        self.load_player_data(player_id)
+
+    def load_player_data(self, player_id: int):
         url_str = APIStringGenerator.get_API_string_for_last_match(player_id)
-        response = requests.get(url_str)
-        new_match = None
+
         try:
+            response = requests.get(url_str)
             last_match = json.loads(response.text)
             new_match = DataParser.parse_current_match(last_match)
         except:
-            players1 = [BasicPlayerInfo("1", 1000, 2, 2, 1, 1, 2, 222)] * 3
-            players2 = [BasicPlayerInfo("2", 1000, 3, 3, 2, 1, 1, 2223)] * 3
-            new_match = CurrentMatch("XXX", 1, 1, 6, 4, "", players1, players2)
+            self.display_network_error()
+            return
 
         # check if new match is current match
         if self.current_match is not None:
@@ -280,7 +280,6 @@ class MainWindow(QWidget):
         self.update()
 
         if self.timer_count == 999:
-            self.timer = QTimer()
             self.connect(self.timer, SIGNAL("timeout()"), self.update_timer)
             self.timer.start(1000)
 
@@ -303,11 +302,14 @@ class MainWindow(QWidget):
         self.has_updated_player_data = True
 
     def update_timer(self):
-        """This is getting called every second by the timer. If timer_count == 999 that meens that its the first call since programm start"""
+        """
+        This is getting called every second by the timer. If timer_count == 999 that means that its the first call
+        since program start
+        """
         if self.timer_count == 999:
             self.timer_count = 60
         elif self.timer_count == 0:
-            self.load_infos(self.player_id)
+            self.start_load_player_data_thread(self.player_id)
             self.timer_count = 60
         elif self.timer_count == 55:
             self.timer_count -= 1
@@ -327,8 +329,10 @@ class MainWindow(QWidget):
         self.reload_label.setText(str(self.timer_count) + " s")
 
     def player_selection_changed(self, team: int, player: int):
-        """This method gets caled by the Team Table Widget that indicates that selection has changed and the Rating Plot needs to display the rating of another player. 
-            :params team is either 1 or 2, player is zero indexed"""
+        """
+        This method gets called by the Team Table Widget that indicates that selection has changed and the Rating
+        Plot needs to display the rating of another player. :params team is either 1 or 2, player is zero indexed
+        """
 
         player_id = 0
         player_name = "Unknown"
@@ -344,8 +348,12 @@ class MainWindow(QWidget):
         ratings_team = None
         timestamps_team = None
 
-        # for sparring network ressources the rating history can be reused
-        # in player_rating_histories is an array that cointains for each player in a matrix a tuple with ratings and timestamps
+        """
+        for saving network resources the rating history can be reused
+        in player_rating_histories is an array that contains for each player in a matrix a 
+        tuple with ratings and timestamps
+        """
+
         item = self.player_rating_histories_team[team - 1][player]
         if item is not None:
             ratings_team, timestamps_team = self.player_rating_histories_team[team - 1][player]
@@ -372,12 +380,8 @@ class MainWindow(QWidget):
                 ratings_1v1, timestamps_1v1 = DataParser.compile_ratings_history(
                     data_1v1_ranking)
             except:
-                with open("example_data/opponent_ratinghistory.json", "r") as read_file:
-                    rating_history = json.load(read_file)
-                    ratings_team, timestamps_team = DataParser.compile_ratings_history(
-                        rating_history)
-                    ratings_1v1, timestamps_1v1 = DataParser.compile_ratings_history(
-                        rating_history)
+                self.display_network_error()
+                return
 
         plot_widget = RatingPlotWidget(parent=self, player_name=player_name)
         plot_widget.plot_rating(
@@ -416,27 +420,24 @@ class MainWindow(QWidget):
             e.setHidden(False)
 
         self.leader_board_label.setText(
-            DataParser.get_key_for_leaderboard(self.current_match.leaderboard_id))
+            self.localized_api_strings.get_key_for_leaderboard(self.current_match.leaderboard_id))
         self.map_label.setText(
-            DataParser.get_key_for_map(self.current_match.map_type))
+            self.localized_api_strings.get_key_for_map(self.current_match.map_type))
         self.server_label.setText(self.current_match.server)
         num_pl_per_team = str(int(self.current_match.num_players / 2))
         self.size_label.setText(num_pl_per_team + "v" + num_pl_per_team)
 
-    def open_pref_panel(self):
-        self.pref_panel = PrefPanel()
-        self.pref_panel.setGeometry(500, 500, 300, 150)
-        self.pref_panel.show()
+
 
     def refresh_player(self):
         """Loads a player_id from QSettings if none was yet set in the runtime"""
         current_player_id = self.get_player_id_from_settings()
         if current_player_id != 0:
-            self.load_infos(current_player_id)
+            self.start_load_player_data_thread(current_player_id)
             self.player_id = current_player_id
 
     def update_display_options(self, leaderboard_id, checked):
-        if self.player_rating_plot == None:
+        if self.player_rating_plot is None:
             return
         self.player_rating_plot.update_displayed_plots(leaderboard_id, checked)
         self.opp_rating_plot.update_displayed_plots(leaderboard_id, checked)
@@ -459,8 +460,8 @@ class MainWindow(QWidget):
     def get_player_id_from_settings() -> int:
         """This is returning the player_id saved via QSettings"""
         settings = QSettings()
-        if settings.contains(keys._k_player_id_key):
-            player_id = int(settings.value(keys._k_player_id_key))
+        if settings.contains(keys.k_player_id_key):
+            player_id = int(settings.value(keys.k_player_id_key))
             return player_id
         else:
             return 0
@@ -468,9 +469,8 @@ class MainWindow(QWidget):
     @staticmethod
     def get_1v1_display_option_from_settings() -> bool:
         settings = QSettings()
-        if settings.contains(keys._k_1v1_display_option):
-            checked = settings.value(keys._k_1v1_display_option)
-            print("1v1", checked)
+        if settings.contains(keys.k_1v1_display_option):
+            checked = settings.value(keys.k_1v1_display_option)
             if checked == "false":
                 return False
             else:
@@ -481,9 +481,8 @@ class MainWindow(QWidget):
     @staticmethod
     def get_team_display_option_from_settings() -> bool:
         settings = QSettings()
-        if settings.contains(keys._k_team_display_option):
-            checked = settings.value(keys._k_team_display_option)
-            print("team", checked)
+        if settings.contains(keys.k_team_display_option):
+            checked = settings.value(keys.k_team_display_option)
             if checked == "false":
                 return False
             else:
@@ -494,9 +493,34 @@ class MainWindow(QWidget):
     @staticmethod
     def set_1v1_display_option_in_settings(checked: bool):
         settings = QSettings()
-        settings.setValue(keys._k_1v1_display_option, checked)
+        settings.setValue(keys.k_1v1_display_option, checked)
 
     @staticmethod
     def set_team_display_option_in_settings(checked: bool):
         settings = QSettings()
-        settings.setValue(keys._k_team_display_option, checked)
+        settings.setValue(keys.k_team_display_option, checked)
+
+    @staticmethod
+    def display_network_error():
+        message_box = QMessageBox()
+        message_box.setText("There might be a networking error")
+        message_box.setInformativeText("Check your internet connection or check if Aoe2.net is down")
+        message_box.setStandardButtons(QMessageBox.Ok)
+
+        message_box.exec()
+
+    # Pref Panel
+    def open_pref_panel(self):
+        pref_panel = PrefPanel(main_window=self)
+        pref_panel.setGeometry(500, 500, 300, 150)
+        pref_panel.show()
+        self.active_windows.append(pref_panel)
+
+    def pref_panel_closed(self, pref_panel: PrefPanel):
+        self.active_windows.remove(pref_panel)
+
+    def update_api_locale(self):
+        MainWindow.localized_api_strings = LocalizedAPIStrings()
+        self.populate_metadata()
+        self.player_table.update_civ_names()
+        self.opp_table.update_civ_names()
