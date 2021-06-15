@@ -4,8 +4,8 @@ from dataclasses import dataclass
 import numpy as np
 from PySide6.QtCore import QSettings
 
-import keys
-
+import keys as keys
+import os.path
 
 @dataclass
 class BasicPlayerInfo:
@@ -132,7 +132,7 @@ class LocalizedAPIStrings:
         settings = QSettings()
         if settings.contains(keys.k_set_api_locale):
             index = int(settings.value(keys.k_set_api_locale))
-        with open("api_strings/locals.csv", "r") as read_file:
+        with open(os.path.dirname(__file__) + "/../data/api_strings/locals.csv", "r") as read_file:
             locales = read_file.read().split(",")
             self.locale = locales[index]
 
@@ -164,4 +164,4 @@ class LocalizedAPIStrings:
         return "Unknown"
 
     def get_api_string_file(self):
-        return "api_strings/strings_{}.json".format(self.locale)
+        return "{}/../data/api_strings/strings_{}.json".format(os.path.dirname(__file__), self.locale)

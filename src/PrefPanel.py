@@ -6,9 +6,9 @@ import requests
 from PySide6.QtCore import Qt, QSettings
 from PySide6.QtWidgets import QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QComboBox, QLineEdit, QProgressBar
 from PySide6.QtGui import QCloseEvent
-import keys
+import keys as keys
 from APIStringGenerator import APIStringGenerator
-
+import os.path
 
 class PrefPanel(QWidget):
     """Panel that displays a field for setting a new player_id, has functions to determine if a player_id is valid"""
@@ -33,7 +33,7 @@ class PrefPanel(QWidget):
         locale_opt_label = QLabel("Set the API Locale")
         self.api_locale_combo_box = QComboBox()
         self.api_locale_combo_box.setMinimumSize(260, 25)
-        with open("api_strings/locals.csv", "r") as read_file:
+        with open(os.path.dirname(__file__) + "/../data/api_strings/locals.csv", "r") as read_file:
             self.locals = read_file.read().split(",")
             self.api_locale_combo_box.insertItems(0, self.locals)
         self.api_locale_combo_box.setCurrentIndex(self.get_saved_locale_from_settings())

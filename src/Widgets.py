@@ -125,7 +125,6 @@ class TeamTableWidget(pg.TableWidget):
         self.resize(300, 20 + len(team) * 25)
 
         self.setCurrentIndex(self.model().createIndex(0, 0))
-        self.setHidden(False)
 
         self.set_size_policy(self.number_of_players)
 

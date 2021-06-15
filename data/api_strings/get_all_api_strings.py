@@ -1,4 +1,4 @@
-from APIStringGenerator import *
+from src.APIStringGenerator import *
 import json
 import requests
 
