@@ -1,23 +1,37 @@
 import json
-from queue import Queue
+import os.path
 from threading import Thread
 
 import requests
-from PySide6.QtCore import Qt, QSettings
-from PySide6.QtWidgets import QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QComboBox, QLineEdit, QProgressBar
+from PySide6.QtCore import Qt, QSettings, Signal
 from PySide6.QtGui import QCloseEvent
+from PySide6.QtWidgets import *
+
 import keys as keys
 from APIStringGenerator import APIStringGenerator
-import os.path
 
+
+# noinspection PyUnresolvedReferences
 class PrefPanel(QWidget):
-    """Panel that displays a field for setting a new player_id, has functions to determine if a player_id is valid"""
+    """Panel that displays a field for setting a new profile_id, has functions to determine if a profile_id is valid"""
+
+    # tuple should return an int for leaderboard_id and a return status as a bool (True = success), and the profile_id
+    sig_leaderboard_checked = Signal(tuple)
+    # tuple with a int indicator (1 for general options, 2 for profile_id, and a bool for success
+    sig_save_successfully = Signal(tuple)
 
     def __init__(self, main_window):
         super().__init__()
 
         self.setWindowTitle("Preferences")
         self.main_window = main_window
+
+        # SIGNAL
+        self.sig_leaderboard_checked.connect(self.leaderboard_checked)
+        self.sig_save_successfully.connect(self.saved_successfully_to_settings)
+
+        self.player_found_on_leaderboard = False
+        self.player_leaderboard_feedback_count = 0
 
         label_profile_id = QLabel("Set here your Aoe2.net Profile ID")
 
@@ -47,7 +61,7 @@ class PrefPanel(QWidget):
 
         save_profile_id_push_button = QPushButton("Search and Save")
         save_profile_id_push_button.setMinimumSize(260, 34)
-        save_profile_id_push_button.clicked.connect(self.save_player_id)
+        save_profile_id_push_button.clicked.connect(self.save_profile_id_button_pressed)
 
         self.profile_id_line_edit = QLineEdit()
         self.profile_id_line_edit.setMinimumSize(260, 25)
@@ -58,7 +72,7 @@ class PrefPanel(QWidget):
         self.busy_indicator = QProgressBar()
         self.busy_indicator.setMinimumSize(260, 10)
         self.busy_indicator.setTextVisible(False)
-        self.busy_indicator.setMaximum(2)
+        self.busy_indicator.setMaximum(0)
         self.busy_indicator.setMinimum(0)
         self.busy_indicator.setHidden(True)
 
@@ -92,7 +106,52 @@ class PrefPanel(QWidget):
     def closeEvent(self, event: QCloseEvent) -> None:
         self.main_window.pref_panel_closed(self)
 
+    def save_profile_id_button_pressed(self):
+        try:
+            new_profile_id = int(self.profile_id_line_edit.text())
+        except ValueError:
+            self.feedback_label.setText("You have to type a number")
+        else:
+            self.check_profile_id(new_profile_id, self.sig_leaderboard_checked)
+            self.busy_indicator.setHidden(False)
+            self.player_found_on_leaderboard = False
+            self.player_leaderboard_feedback_count = 0
 
+    def leaderboard_checked(self, data):
+        print(data)
+        if data[1] == True:
+            print("Player found")
+            self.player_found_on_leaderboard = True
+            self.busy_indicator.setHidden(True)
+            self.feedback_label.setText("Player found on Leaderboard {}".format(data[0]))
+            save_thread = Thread(target=self.save_profile_id_to_settings, args=(data[2], self.sig_save_successfully))
+            save_thread.start()
+        else:
+            if self.player_found_on_leaderboard:
+                return
+            else:
+                self.feedback_label.setText("Player not yet found")
+                self.player_leaderboard_feedback_count += 1
+                if self.player_leaderboard_feedback_count == 4:
+                    self.feedback_label.setText("Player not fond at all")
+                    PrefPanel.display_player_not_found_nessage()
+                    self.busy_indicator.setHidden(True)
+
+    def saved_successfully_to_settings(self, data):
+        if data[0] == 2 and data[1] == True:
+            self.feedback_label.setText("Profile ID successfully saved")
+
+    @staticmethod
+    def save_profile_id_to_settings(profile_id: int, feedback_signal: Signal):
+        try:
+            settings = QSettings()
+        except:
+            return_value = (2, True)
+            feedback_signal.emit(return_value)
+        else:
+            settings.setValue(keys.k_profile_id_key, profile_id)
+            return_value = (2, True)
+            feedback_signal.emit(return_value)
 
     @staticmethod
     def get_saved_locale_from_settings():
@@ -107,81 +166,42 @@ class PrefPanel(QWidget):
         settings = QSettings()
         settings.setValue(keys.k_set_api_locale, locale)
 
-    def save_player_id(self):
-        new_player_id = 0
-        try:
-            new_player_id = int(self.profile_id_line_edit.text())
-            print(new_player_id)
-        except ValueError:
-            print("You have to type a number")
-
-        if new_player_id != 0:
-            self.busy_indicator.setHidden(False)
-            self.busy_indicator.setValue(0)
-
-            q = Queue()
-            _sentinel = object()
-
-            find_thread = Thread(target=self.does_player_exist, args=(new_player_id, q, _sentinel))
-            find_thread.start()
-
-            while True:
-                data = q.get()
-
-                if data is _sentinel:
-                    # Terminate
-                    q.put(_sentinel)
-                    self.busy_indicator.setHidden(True)
-                    break
-                elif type(data) is str:
-                    self.feedback_label.setText(data)
-                    self.busy_indicator.setValue(1)
-                elif type(data) is bool:
-                    if data is True:
-                        settings = QSettings()
-                        print("settings set")
-                        settings.setValue(keys.k_player_id_key, new_player_id)
-                        self.busy_indicator.setValue(2)
+    @staticmethod
+    def check_profile_id(profile_id: int, feedback_signal: Signal):
+        """
+        This function checks whether a profile_id exists on the 4 existing leaderboards
+        Therefore 4 threads were simultaneously created to search for the player
+        Player needs to be found on one of those leaderboards in order to be a valid profile_id
+        """
+        for n in range(1, 5):
+            thread = Thread(target=PrefPanel.check_player_on_leaderboard, args=(profile_id, n, feedback_signal))
+            thread.start()
 
     @staticmethod
-    def does_player_exist(player_id: int, q: Queue, _sentinel):
-        """
-        This function checks whether a player_id exists on the RM 1v1 Leaderboard and then on the Team RM Leaderboard.
-        DM / EW ladder atm not supported
-        Player needs to be found on one of those leaderboards in order to be a valid player_id
-        Needs to be called with a Queue item and a _sentinel that returns the state of the current process
-        """
-
-        player_found = False
-
-        # first 1v1 Leaderboard
-        url_str = APIStringGenerator.get_API_string_for_rating_history(3, player_id, 1)
+    def check_player_on_leaderboard(profile_id: int, leaderboard_id: int, feedback_signal: Signal):
+        api_str = APIStringGenerator.get_API_string_for_rating_history(leaderboard_id, profile_id, 1)
         try:
-            response = requests.get(url_str)
+            response = requests.get(api_str)
             data = json.loads(response.text)
-            if len(data) > 0:
-                player_found = True
-                q.put("Player found on 1v1 Leaderboard")
-            else:
-                q.put("No Player found on 1v1 Leaderboard")
         except:
-            q.put("Some Error occurred")
+            # from MainWindow import MainWindow
+            # MainWindow.display_network_error()
+            return_value = (leaderboard_id, False, profile_id)
+            feedback_signal.emit(return_value)
+        else:
+            if len(data) > 0:
+                return_value = (leaderboard_id, True, profile_id)
+                feedback_signal.emit(return_value)
+            else:
+                return_value = (leaderboard_id, False, profile_id)
+                feedback_signal.emit(return_value)
 
-        if not player_found:
-            # check Team Leaderboard
-            url_str = APIStringGenerator.get_API_string_for_rating_history(4, player_id, 1)
-            try:
-                response = requests.get(url_str)
-                data = json.loads(response.text)
-                if len(data) > 0:
-                    player_found = True
-                    q.put("Player found on Team Leaderboard")
-                else:
-                    q.put("No Player found on Team Leaderboard")
-            except:
-                q.put("Some Error occurred")
-        if not player_found:
-            q.put("No Player found")
+    @staticmethod
+    def display_player_not_found_nessage():
+        message_box = QMessageBox()
+        message_box.setText("Your Player ID was not on found on one of the leaderboards.")
+        message_box.setInformativeText(
+            "This is either due to networking problems or you not having at least 10 matches on of the ladders.")
+        message_box.setStandardButtons(QMessageBox.Ok)
 
-        q.put(player_found)
-        q.put(_sentinel)
+        message_box.exec()

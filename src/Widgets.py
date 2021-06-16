@@ -142,8 +142,8 @@ class TeamTableWidget(pg.TableWidget):
 
     def cell_double_clicked(self, row: int):
         import webbrowser
-        player_id = self.players[row].profile_id
-        webbrowser.open(APIStringGenerator.get_AoE2_net_link_for_player_id(player_id), new=2)
+        profile_id = self.players[row].profile_id
+        webbrowser.open(APIStringGenerator.get_AoE2_net_link_for_profile_id(profile_id), new=2)
 
     def update_civ_names(self):
         if len(self.team_data) > 0:

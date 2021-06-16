@@ -69,7 +69,7 @@ class MainWindow(QWidget):
         self.timer_count = 999
         self.timer = QTimer()
 
-        self.player_id = ""
+        self.profile_id = ""
         self.has_updated_players = False
 
         # Top
@@ -269,15 +269,15 @@ class MainWindow(QWidget):
 
         self.resize(self.minimumSizeHint())
 
-        self.refresh_player()
+        #self.refresh_player()
 
-    def start_load_player_data_thread(self, player_id: int):
-        thread = Thread(target=self.load_player_data, kwargs={"player_id": player_id})
+    def start_load_player_data_thread(self, profile_id: int):
+        thread = Thread(target=self.load_player_data, kwargs={"profile_id": profile_id})
         thread.start()
-        # self.load_player_data(player_id)
+        # self.load_player_data(profile_id)
 
-    def load_player_data(self, player_id: int):
-        url_str = APIStringGenerator.get_API_string_for_last_match(player_id)
+    def load_player_data(self, profile_id: int):
+        url_str = APIStringGenerator.get_API_string_for_last_match(profile_id)
 
         try:
             response = requests.get(url_str)
@@ -347,7 +347,7 @@ class MainWindow(QWidget):
         if self.timer_count == 999:
             self.timer_count = 60
         elif self.timer_count == 0:
-            self.start_load_player_data_thread(self.player_id)
+            self.start_load_player_data_thread(self.profile_id)
             self.timer_count = 60
         elif self.timer_count == 59:
             self.timer_count -= 1
@@ -359,15 +359,15 @@ class MainWindow(QWidget):
             self.timer_count -= 1
         self.reload_label.setText(str(self.timer_count) + " s")
 
-    def load_player_rating_history(self, team, player, player_id, player_name):
+    def load_player_rating_history(self, team, player, profile_id, player_name):
         count = 50
         leaderboard_id_1v1 = 3  # 1v1 RM
         leaderboard_id_team = 4  # Team RM
 
         url_str_1v1 = APIStringGenerator.get_API_string_for_rating_history(
-            leaderboard_id_1v1, player_id, count)
+            leaderboard_id_1v1, profile_id, count)
         url_str_team = APIStringGenerator.get_API_string_for_rating_history(
-            leaderboard_id_team, player_id, count)
+            leaderboard_id_team, profile_id, count)
         try:
             response_team = requests.get(url_str_team)
             data_team_ranking = json.loads(response_team.text)
@@ -382,18 +382,18 @@ class MainWindow(QWidget):
         except:
             self.display_network_error()
             return
-        data = (team, player, player_id, player_name, ratings_1v1, timestamps_1v1, ratings_team, timestamps_team)
+        data = (team, player, profile_id, player_name, ratings_1v1, timestamps_1v1, ratings_team, timestamps_team)
         self.sig_rating_history_loaded.emit(data)
 
     def player_rating_history_loaded(self, data: tuple):
         """
 
-        :param data: Tuple(team, player, player_id, player_name, ratings_1v1,
+        :param data: Tuple(team, player, profile_id, player_name, ratings_1v1,
                             timestamps_1v1, ratings_team, timestamps_team
         :return:
         """
         team, player = data[0], data[1]
-        player_id, player_name = data[2], data[3]
+        profile_id, player_name = data[2], data[3]
         ratings_1v1, timestamps_1v1, ratings_team, timestamps_team = data[4:8]
 
         plot_widget = RatingPlotWidget(parent=self, player_name=player_name)
@@ -433,15 +433,15 @@ class MainWindow(QWidget):
         Plot needs to display the rating of another player. :params team is either 1 or 2, player is zero indexed
         """
 
-        player_id = 0
+        profile_id = 0
         player_name = "Unknown"
         if team == 1:
             player_info = self.current_match.team_1_players[player]
-            player_id = player_info.profile_id
+            profile_id = player_info.profile_id
             player_name = player_info.name
         if team == 2:
             player_info = self.current_match.team_2_players[player]
-            player_id = player_info.profile_id
+            profile_id = player_info.profile_id
             player_name = player_info.name
 
         """
@@ -455,11 +455,11 @@ class MainWindow(QWidget):
         if item is not None:
             ratings_team, timestamps_team = self.player_rating_histories_team[team - 1][player]
             ratings_1v1, timestamps_1v1 = self.player_rating_histories_1v1[team - 1][player]
-            data = (team, player, player_id, player_name, ratings_1v1, timestamps_1v1, ratings_team, timestamps_team)
+            data = (team, player, profile_id, player_name, ratings_1v1, timestamps_1v1, ratings_team, timestamps_team)
             self.sig_rating_history_loaded.emit(data)
 
         if ratings_team is None:
-            thread = Thread(target=self.load_player_rating_history, args=(team, player, player_id, player_name))
+            thread = Thread(target=self.load_player_rating_history, args=(team, player, profile_id, player_name))
             thread.start()
 
     def populate_metadata(self):
@@ -476,11 +476,11 @@ class MainWindow(QWidget):
         self.size_label.setText(num_pl_per_team + "v" + num_pl_per_team)
 
     def refresh_player(self):
-        """Loads a player_id from QSettings if none was yet set in the runtime"""
-        current_player_id = self.get_player_id_from_settings()
-        if current_player_id != 0:
-            self.start_load_player_data_thread(current_player_id)
-            self.player_id = current_player_id
+        """Loads a profile_id from QSettings if none was yet set in the runtime"""
+        current_profile_id = self.get_profile_id_from_settings()
+        if current_profile_id != 0:
+            self.start_load_player_data_thread(current_profile_id)
+            self.profile_id = current_profile_id
 
     def update_display_options(self, leaderboard_id, checked):
         if self.player_rating_plot is None:
@@ -503,12 +503,12 @@ class MainWindow(QWidget):
         self.update_display_options(4, checked)
 
     @staticmethod
-    def get_player_id_from_settings() -> int:
-        """This is returning the player_id saved via QSettings"""
+    def get_profile_id_from_settings() -> int:
+        """This is returning the profile_id saved via QSettings"""
         settings = QSettings()
-        if settings.contains(keys.k_player_id_key):
-            player_id = int(settings.value(keys.k_player_id_key))
-            return player_id
+        if settings.contains(keys.k_profile_id_key):
+            profile_id = int(settings.value(keys.k_profile_id_key))
+            return profile_id
         else:
             return 0
 
@@ -566,6 +566,8 @@ class MainWindow(QWidget):
         self.active_windows.remove(pref_panel)
 
     def update_api_locale(self):
+        if self.current_match is None:
+            return
         MainWindow.localized_api_strings = LocalizedAPIStrings()
         self.populate_metadata()
         self.player_table.update_civ_names()

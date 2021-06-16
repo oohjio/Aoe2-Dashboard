@@ -108,10 +108,10 @@ class DataParser:
 
         # check if team 1 has player, else switch
         settings = QSettings()
-        player_id = int(settings.value(keys.k_player_id_key))
+        profile_id = int(settings.value(keys.k_profile_id_key))
         player_found = False
         for player in team_1:
-            if player.profile_id == player_id:
+            if player.profile_id == profile_id:
                 player_found = True
         if not player_found:
             team_2_temp = list(team_2)
