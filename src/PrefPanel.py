@@ -9,6 +9,7 @@ from PySide6.QtWidgets import *
 
 import keys as keys
 from APIStringGenerator import APIStringGenerator
+from SettingsHandler import SettingsHandler
 
 
 # noinspection PyUnresolvedReferences
@@ -26,7 +27,7 @@ class PrefPanel(QWidget):
         self.setWindowTitle("Preferences")
         self.main_window = main_window
 
-        # SIGNAL
+        # SIGNALS
         self.sig_leaderboard_checked.connect(self.leaderboard_checked)
         self.sig_save_successfully.connect(self.saved_successfully_to_settings)
 
@@ -44,17 +45,20 @@ class PrefPanel(QWidget):
         options_label = QLabel("App Options")
         options_label.setFont(font_bold)
 
+        humanized_time_check_box = QCheckBox("Display Humanized Times")
+        humanized_time_check_box.setChecked(SettingsHandler.get_saved_option_for_humanized_time())
+        humanized_time_check_box.stateChanged.connect(self.humanized_time_check_box_state_changed)
+
         locale_opt_label = QLabel("Set the API Locale")
-        self.api_locale_combo_box = QComboBox()
-        self.api_locale_combo_box.setMinimumSize(260, 25)
+        api_locale_combo_box = QComboBox()
+        api_locale_combo_box.setMinimumSize(260, 25)
         with open(os.path.dirname(__file__) + "/../data/api_strings/locals.csv", "r") as read_file:
             self.locals = read_file.read().split(",")
-            self.api_locale_combo_box.insertItems(0, self.locals)
-        self.api_locale_combo_box.setCurrentIndex(self.get_saved_locale_from_settings())
+            api_locale_combo_box.insertItems(0, self.locals)
+        api_locale_combo_box.setCurrentIndex(SettingsHandler.get_saved_locale_from_settings())
+        api_locale_combo_box.currentIndexChanged.connect(self.api_locale__combo_box_index_changed)
 
-        save_options_push_button = QPushButton("Save Options")
-        save_options_push_button.setMinimumSize(260, 34)
-        save_options_push_button.clicked.connect(self.save_options)
+
 
         profile_id_label = QLabel("Profile ID")
         profile_id_label.setFont(font_bold)
@@ -79,9 +83,10 @@ class PrefPanel(QWidget):
         v_layout_left = QVBoxLayout()
 
         v_layout_left.addWidget(options_label, alignment=Qt.AlignTop)
-        v_layout_left.addWidget(locale_opt_label, alignment=Qt.AlignTop)
-        v_layout_left.addWidget(self.api_locale_combo_box, alignment=Qt.AlignTop)
-        v_layout_left.addWidget(save_options_push_button, alignment=Qt.AlignBottom)
+        v_layout_left.addWidget(humanized_time_check_box, alignment=Qt.AlignTop)
+        v_layout_left.addSpacing(10)
+        v_layout_left.addWidget(locale_opt_label, alignment=Qt.AlignBottom)
+        v_layout_left.addWidget(api_locale_combo_box, alignment=Qt.AlignBottom)
 
         v_layout_right = QVBoxLayout()
 
@@ -98,10 +103,13 @@ class PrefPanel(QWidget):
         h_layout.addLayout(v_layout_right)
         self.setLayout(h_layout)
 
+        self.resize(self.minimumSizeHint())
+        self.setMaximumSize(self.minimumSizeHint())
+
     def save_options(self):
         # Save Locale
-        self.save_player_locale_to_settings(self.api_locale_combo_box.currentIndex())
-        self.main_window.update_api_locale()
+        print("save options is deprecated")
+
 
     def closeEvent(self, event: QCloseEvent) -> None:
         self.main_window.pref_panel_closed(self)
@@ -118,13 +126,19 @@ class PrefPanel(QWidget):
             self.player_leaderboard_feedback_count = 0
 
     def leaderboard_checked(self, data):
+        """
+        This signal is emitted when a check if a player is on a leaderboard has finished
+        It counts to 4, when 4 unsuccessful tries have happened, the player was not found and a message is box opens
+        :param data:    tuple with an int for leaderboard_id and a return status as a bool (True = success),
+                        and the profile_id
+        """
         print(data)
-        if data[1] == True:
+        if data[1] is True:
             print("Player found")
             self.player_found_on_leaderboard = True
             self.busy_indicator.setHidden(True)
             self.feedback_label.setText("Player found on Leaderboard {}".format(data[0]))
-            save_thread = Thread(target=self.save_profile_id_to_settings, args=(data[2], self.sig_save_successfully))
+            save_thread = Thread(target=SettingsHandler.save_profile_id_to_settings, args=(data[2], self.sig_save_successfully))
             save_thread.start()
         else:
             if self.player_found_on_leaderboard:
@@ -134,37 +148,14 @@ class PrefPanel(QWidget):
                 self.player_leaderboard_feedback_count += 1
                 if self.player_leaderboard_feedback_count == 4:
                     self.feedback_label.setText("Player not fond at all")
-                    PrefPanel.display_player_not_found_nessage()
+                    PrefPanel.display_player_not_found_message()
                     self.busy_indicator.setHidden(True)
 
     def saved_successfully_to_settings(self, data):
-        if data[0] == 2 and data[1] == True:
+        if data[0] == 2 and data[1] is True:
             self.feedback_label.setText("Profile ID successfully saved")
 
-    @staticmethod
-    def save_profile_id_to_settings(profile_id: int, feedback_signal: Signal):
-        try:
-            settings = QSettings()
-        except:
-            return_value = (2, True)
-            feedback_signal.emit(return_value)
-        else:
-            settings.setValue(keys.k_profile_id_key, profile_id)
-            return_value = (2, True)
-            feedback_signal.emit(return_value)
 
-    @staticmethod
-    def get_saved_locale_from_settings():
-        settings = QSettings()
-        if settings.contains(keys.k_set_api_locale):
-            return int(settings.value(keys.k_set_api_locale))
-        else:
-            return 0
-
-    @staticmethod
-    def save_player_locale_to_settings(locale: int):
-        settings = QSettings()
-        settings.setValue(keys.k_set_api_locale, locale)
 
     @staticmethod
     def check_profile_id(profile_id: int, feedback_signal: Signal):
@@ -197,7 +188,7 @@ class PrefPanel(QWidget):
                 feedback_signal.emit(return_value)
 
     @staticmethod
-    def display_player_not_found_nessage():
+    def display_player_not_found_message():
         message_box = QMessageBox()
         message_box.setText("Your Player ID was not on found on one of the leaderboards.")
         message_box.setInformativeText(
@@ -205,3 +196,20 @@ class PrefPanel(QWidget):
         message_box.setStandardButtons(QMessageBox.Ok)
 
         message_box.exec()
+
+    # Methods for UI Signals
+    def api_locale__combo_box_index_changed(self, index: int):
+        SettingsHandler.save_player_locale_to_settings(index)
+        self.main_window.update_display_due_to_options_changes()
+
+    def humanized_time_check_box_state_changed(self, state: int):
+        # 2 == checked
+        if state == 0:
+            SettingsHandler.set_option_humanized_time_in_settings(False)
+        else:
+            SettingsHandler.set_option_humanized_time_in_settings(True)
+
+        self.main_window.update_display_due_to_options_changes()
+
+
+

@@ -6,6 +6,8 @@ from PySide6.QtCore import QSettings
 
 import keys as keys
 import os.path
+import arrow
+
 
 @dataclass
 class BasicPlayerInfo:
@@ -43,9 +45,22 @@ class CurrentMatch:
     num_players: int
     leaderboard_id: int
     server: str
+    time_str: str
 
     team_1_players: list[BasicPlayerInfo]
     team_2_players: list[BasicPlayerInfo]
+
+    @property
+    def time_started_humanized(self) -> str:
+        time = arrow.get(self.time_str)
+
+        return time.humanize()
+
+    @property
+    def time_started_plain(self) -> str:
+        time = arrow.get(self.time_str)
+
+        return time.format()
 
 
 class DataParser:
@@ -76,12 +91,13 @@ class DataParser:
     def parse_current_match(last_match: dict) -> CurrentMatch:
         match_info: dict = last_match.get("last_match", {})
         # Match MetaData
-        match_uuid = match_info.get("match_uuid", "XXXX")
+        match_uuid = match_info.get("match_uuid", "_")
         match_num_players = match_info.get("num_players")
         match_map_type = match_info.get("map_type", 999)
         match_is_ranked = match_info.get("ranked", False)
         match_leaderboard_id = match_info.get("leaderboard_id", 999)
         match_server = match_info.get("server", "Unknown")
+        match_time = match_info.get("started", "0")
 
         team_1: list[BasicPlayerInfo] = []
         team_2: list[BasicPlayerInfo] = []
@@ -119,7 +135,7 @@ class DataParser:
             team_1 = team_2_temp
 
         new_match = CurrentMatch(match_uuid, match_map_type, match_is_ranked, match_num_players, match_leaderboard_id,
-                                 match_server, team_1, team_2)
+                                 match_server, match_time, team_1, team_2)
         return new_match
 
 
@@ -130,8 +146,8 @@ class LocalizedAPIStrings:
     def __init__(self):
         index = 0
         settings = QSettings()
-        if settings.contains(keys.k_set_api_locale):
-            index = int(settings.value(keys.k_set_api_locale))
+        if settings.contains(keys.k_opt_api_locale):
+            index = int(settings.value(keys.k_opt_api_locale))
         with open(os.path.dirname(__file__) + "/../data/api_strings/locals.csv", "r") as read_file:
             locales = read_file.read().split(",")
             self.locale = locales[index]

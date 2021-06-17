@@ -16,6 +16,7 @@ from DataParser import BasicPlayerInfo, CurrentMatch, DataParser, LocalizedAPISt
 from PrefPanel import PrefPanel
 from Widgets import LegendItem, RatingPlotWidget, TeamTableWidget
 
+from SettingsHandler import SettingsHandler
 
 # noinspection PyUnresolvedReferences
 class MainWindow(QWidget):
@@ -206,6 +207,13 @@ class MainWindow(QWidget):
         self.server_label.setStyleSheet(accented_style_sheet)
 
         self.h_layout_metadata = QHBoxLayout()
+
+        label_cur_time = QLabel("Match Started:")
+        self.time_match_started_label = QLabel("")
+        self.time_match_started_label.setFont(font_italic)
+        self.time_match_started_label.setStyleSheet(accented_style_sheet)
+
+
         self.metadata_labels = [label_cur_pl, self.leader_board_label, label_cur_size, self.size_label,
                                 label_cur_map, self.map_label, label_cur_server, self.server_label]
 
@@ -213,12 +221,23 @@ class MainWindow(QWidget):
             self.h_layout_metadata.addWidget(e)
             e.setHidden(True)
 
+
+        h_layout_match_time = QHBoxLayout()
+        self.time_labels = [label_cur_time, self.time_match_started_label]
+
+        for e in self.time_labels:
+            h_layout_match_time.addWidget(e)
+            e.setHidden(True)
+
         v_metadata_layout = QVBoxLayout()
         v_metadata_layout.addSpacing(15)
         v_metadata_layout.addLayout(self.h_layout_metadata)
+        v_metadata_layout.addLayout(h_layout_match_time)
         v_metadata_layout.addSpacing(15)
 
-        self.hidden_labels = self.metadata_labels
+        self.hidden_labels = []
+        self.hidden_labels.extend(self.metadata_labels)
+        self.hidden_labels.extend(self.time_labels)
 
         # Display Options
         options_label = QLabel("Options")
@@ -226,11 +245,11 @@ class MainWindow(QWidget):
 
         check_box_1v1 = QCheckBox("Display 1v1")
         check_box_1v1.setChecked(
-            MainWindow.get_1v1_display_option_from_settings())
+            SettingsHandler.get_1v1_display_option_from_settings())
 
         check_box_team = QCheckBox("Display Team")
         check_box_team.setChecked(
-            MainWindow.get_team_display_option_from_settings())
+            SettingsHandler.get_team_display_option_from_settings())
 
         check_box_1v1.stateChanged.connect(self.check_box_1v1_changed)
         check_box_team.stateChanged.connect(self.check_box_team_changed)
@@ -269,7 +288,7 @@ class MainWindow(QWidget):
 
         self.resize(self.minimumSizeHint())
 
-        #self.refresh_player()
+        # self.refresh_player()
 
     def start_load_player_data_thread(self, profile_id: int):
         thread = Thread(target=self.load_player_data, kwargs={"profile_id": profile_id})
@@ -398,9 +417,9 @@ class MainWindow(QWidget):
 
         plot_widget = RatingPlotWidget(parent=self, player_name=player_name)
         plot_widget.plot_rating(
-            ratingdata=[ratings_team, timestamps_team], leaderboard_id=4)
+            rating_data=[ratings_team, timestamps_team], leaderboard_id=4)
         plot_widget.plot_rating(
-            ratingdata=[ratings_1v1, timestamps_1v1], leaderboard_id=3)
+            rating_data=[ratings_1v1, timestamps_1v1], leaderboard_id=3)
 
         plot_widget.setMinimumSize(300, 200)
 
@@ -423,9 +442,9 @@ class MainWindow(QWidget):
                                          1][player] = (ratings_1v1, timestamps_1v1)
 
         plot_widget.update_displayed_plots(
-            3, MainWindow.get_1v1_display_option_from_settings())
+            3, SettingsHandler.get_1v1_display_option_from_settings())
         plot_widget.update_displayed_plots(
-            4, MainWindow.get_team_display_option_from_settings())
+            4, SettingsHandler.get_team_display_option_from_settings())
 
     def player_selection_changed(self, team: int, player: int):
         """
@@ -466,7 +485,6 @@ class MainWindow(QWidget):
         """Displays interesting data from the current match like server, Leaderboard etc."""
         for e in self.hidden_labels:
             e.setHidden(False)
-
         self.leader_board_label.setText(
             self.localized_api_strings.get_key_for_leaderboard(self.current_match.leaderboard_id))
         self.map_label.setText(
@@ -475,9 +493,16 @@ class MainWindow(QWidget):
         num_pl_per_team = str(int(self.current_match.num_players / 2))
         self.size_label.setText(num_pl_per_team + "v" + num_pl_per_team)
 
+        # Time
+        if SettingsHandler.get_saved_option_for_humanized_time():
+            self.time_match_started_label.setText(self.current_match.time_started_humanized)
+        else:
+            self.time_match_started_label.setText(self.current_match.time_started_plain)
+
+
     def refresh_player(self):
         """Loads a profile_id from QSettings if none was yet set in the runtime"""
-        current_profile_id = self.get_profile_id_from_settings()
+        current_profile_id = SettingsHandler.get_profile_id_from_settings()
         if current_profile_id != 0:
             self.start_load_player_data_thread(current_profile_id)
             self.profile_id = current_profile_id
@@ -491,60 +516,18 @@ class MainWindow(QWidget):
     def check_box_1v1_changed(self, state: int):
         # 0: not checked, 2: checked
         checked = True if state == 2 else False
-        MainWindow.set_1v1_display_option_in_settings(checked)
+        SettingsHandler.set_1v1_display_option_in_settings(checked)
 
         self.update_display_options(3, checked)
 
     def check_box_team_changed(self, state: int):
         # 0: not checked, 2: checked
         checked = True if state == 2 else False
-        MainWindow.set_team_display_option_in_settings(checked)
+        SettingsHandler.set_team_display_option_in_settings(checked)
 
         self.update_display_options(4, checked)
 
-    @staticmethod
-    def get_profile_id_from_settings() -> int:
-        """This is returning the profile_id saved via QSettings"""
-        settings = QSettings()
-        if settings.contains(keys.k_profile_id_key):
-            profile_id = int(settings.value(keys.k_profile_id_key))
-            return profile_id
-        else:
-            return 0
-
-    @staticmethod
-    def get_1v1_display_option_from_settings() -> bool:
-        settings = QSettings()
-        if settings.contains(keys.k_1v1_display_option):
-            checked = settings.value(keys.k_1v1_display_option)
-            if checked == "false":
-                return False
-            else:
-                return True
-        else:
-            return True
-
-    @staticmethod
-    def get_team_display_option_from_settings() -> bool:
-        settings = QSettings()
-        if settings.contains(keys.k_team_display_option):
-            checked = settings.value(keys.k_team_display_option)
-            if checked == "false":
-                return False
-            else:
-                return True
-        else:
-            return True
-
-    @staticmethod
-    def set_1v1_display_option_in_settings(checked: bool):
-        settings = QSettings()
-        settings.setValue(keys.k_1v1_display_option, checked)
-
-    @staticmethod
-    def set_team_display_option_in_settings(checked: bool):
-        settings = QSettings()
-        settings.setValue(keys.k_team_display_option, checked)
+    
 
     @staticmethod
     def display_network_error():
@@ -565,10 +548,11 @@ class MainWindow(QWidget):
     def pref_panel_closed(self, pref_panel: PrefPanel):
         self.active_windows.remove(pref_panel)
 
-    def update_api_locale(self):
+    def update_display_due_to_options_changes(self):
         if self.current_match is None:
             return
         MainWindow.localized_api_strings = LocalizedAPIStrings()
         self.populate_metadata()
         self.player_table.update_civ_names()
         self.opp_table.update_civ_names()
+

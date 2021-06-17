@@ -21,7 +21,6 @@ class RatingPlotWidget(pg.PlotWidget):
 
         self.player_name = player_name
         self.setBackground(None)
-        # self.setLabel("bottom", "Time")
 
         self.setMouseEnabled(x=False, y=False)
 
@@ -40,24 +39,24 @@ class RatingPlotWidget(pg.PlotWidget):
         self.stored_leaderboard_ratings = np.empty(6, dtype=tuple)
         self.stored_plot_items = np.empty(6, dtype=pg.PlotDataItem)
 
-    def plot_rating(self, ratingdata, leaderboard_id):
+    def plot_rating(self, rating_data, leaderboard_id):
         pen = pg.mkPen((0, 0, 0), width=2)
         if leaderboard_id == 3:
-            self.data_1v1_ranking = ratingdata
+            self.data_1v1_ranking = rating_data
             pen = pg.mkPen((255, 96, 62), width=2)
         elif leaderboard_id == 4:
-            self.data_team_ranking = ratingdata
+            self.data_team_ranking = rating_data
             pen = pg.mkPen((15, 153, 246), width=2)
 
-        ratings = ratingdata[0]
-        timestamps = ratingdata[1]
+        ratings = rating_data[0]
+        timestamps = rating_data[1]
 
         plot: pg.PlotDataItem = self.plot()
 
         plot.setPen(pen)
         plot.setData(y=ratings, x=timestamps)
 
-        self.stored_leaderboard_ratings[leaderboard_id] = ratingdata
+        self.stored_leaderboard_ratings[leaderboard_id] = rating_data
         self.stored_plot_items[leaderboard_id] = plot
 
     def update_displayed_plots(self, leaderboard_id, checked):
