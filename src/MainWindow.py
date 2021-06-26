@@ -5,18 +5,18 @@ from threading import Thread
 
 import numpy as np
 import requests
-from PySide6.QtCore import QCoreApplication, QTimer, SIGNAL, QSettings, Qt, Signal
+from PySide6.QtCore import QCoreApplication, QTimer, SIGNAL, Qt, Signal
 from PySide6.QtGui import QFont, QIcon
 from PySide6.QtWidgets import QLabel, QToolButton, QVBoxLayout, QHBoxLayout, QGridLayout, QCheckBox, \
     QWidget, QMessageBox
 
-import keys
 from APIStringGenerator import APIStringGenerator
-from DataParser import BasicPlayerInfo, CurrentMatch, DataParser, LocalizedAPIStrings
+from AnalyticsWindow import AnalyticsWindow
+from DataParser import BasicPlayerInfo, Match, DataParser, LocalizedAPIStrings
 from PrefPanel import PrefPanel
+from SettingsHandler import SettingsHandler
 from Widgets import LegendItem, RatingPlotWidget, TeamTableWidget
 
-from SettingsHandler import SettingsHandler
 
 # noinspection PyUnresolvedReferences
 class MainWindow(QWidget):
@@ -31,28 +31,21 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.dark_theme = False
+        self.dark_theme = True
 
         system = platform.system()
         if system == "Windows":
             self.is_running_windows = True
-            import darkdetect
-            if darkdetect.isDark():
-                self.dark_theme = True
         elif system == "Darwin":
             self.is_running_windows = False
-            import darkdetect
-            if darkdetect.isDark():
-                self.dark_theme = True
         else:
             self.is_running_windows = False
-            # Assume Linux is run as Dark Theme, Linux Users like to sit in the dark
-            self.dark_theme = True
 
         # SIGNALS
         self.sig_player_data_updated.connect(self.player_profiles_updated)
         self.sig_player_data_loaded.connect(self.player_data_loaded)
         self.sig_rating_history_loaded.connect(self.player_rating_history_loaded)
+
         # UI
 
         self.setWindowTitle("AoE 2 Dashboard")
@@ -61,7 +54,7 @@ class MainWindow(QWidget):
 
         self.player_basic_data: BasicPlayerInfo
         self.opp_basic_data: BasicPlayerInfo
-        self.current_match: CurrentMatch = None
+        self.current_match: Match = None
 
         self.opp_rating_plot: RatingPlotWidget = None
         self.player_rating_plot: RatingPlotWidget = None
@@ -116,21 +109,25 @@ class MainWindow(QWidget):
 
         # Bar
         # Todo: Check if Icon Path exists??
-        pref_icon = QIcon.fromTheme("preferences-system")
-        if pref_icon is None or self.is_running_windows:
-            pref_icon = QIcon(os.path.dirname(__file__) + "/../data/resources/settings_black_24dp.svg")
+        # pref_icon = QIcon.fromTheme("preferences-system")
+        pref_icon = QIcon(os.path.dirname(__file__) + "/../img/resources/settings_white_24dp.svg")
         pref_button = QToolButton()
         pref_button.setIcon(pref_icon)
         pref_button.setMinimumSize(35, 35)
         pref_button.clicked.connect(self.open_pref_panel)
 
-        refresh_icon = QIcon.fromTheme("system-software-update")
-        if refresh_icon is None or self.is_running_windows:
-            refresh_icon = QIcon(os.path.dirname(__file__) + "/../data/resources/cached_black_24dp.svg")
+        # refresh_icon = QIcon.fromTheme("system-software-update")
+        refresh_icon = QIcon(os.path.dirname(__file__) + "/../img/resources/cached_white_24dp.svg")
         refresh_button = QToolButton()
         refresh_button.setIcon(refresh_icon)
         refresh_button.setMinimumSize(35, 35)
         refresh_button.clicked.connect(self.refresh_player)
+
+        show_analytics_button = QToolButton()
+        show_analytics_button.setMinimumSize(35, 35)
+        analytics_icon = QIcon(QIcon(os.path.dirname(__file__) + "/../img/resources/insights_white_24dp.svg"))
+        show_analytics_button.setIcon(analytics_icon)
+        show_analytics_button.clicked.connect(self.show_analytics)
 
         self.reload_label = QLabel("")
 
@@ -148,6 +145,7 @@ class MainWindow(QWidget):
         self.bar_layout.addWidget(self.reload_label)
         self.bar_layout.addWidget(refresh_button)
         self.bar_layout.addWidget(pref_button)
+        self.bar_layout.addWidget(show_analytics_button)
 
         # Display Legend
         legend_label = QLabel("Legend")
@@ -213,14 +211,12 @@ class MainWindow(QWidget):
         self.time_match_started_label.setFont(font_italic)
         self.time_match_started_label.setStyleSheet(accented_style_sheet)
 
-
         self.metadata_labels = [label_cur_pl, self.leader_board_label, label_cur_size, self.size_label,
                                 label_cur_map, self.map_label, label_cur_server, self.server_label]
 
         for e in self.metadata_labels:
             self.h_layout_metadata.addWidget(e)
             e.setHidden(True)
-
 
         h_layout_match_time = QHBoxLayout()
         self.time_labels = [label_cur_time, self.time_match_started_label]
@@ -499,7 +495,6 @@ class MainWindow(QWidget):
         else:
             self.time_match_started_label.setText(self.current_match.time_started_plain)
 
-
     def refresh_player(self):
         """Loads a profile_id from QSettings if none was yet set in the runtime"""
         current_profile_id = SettingsHandler.get_profile_id_from_settings()
@@ -526,8 +521,6 @@ class MainWindow(QWidget):
         SettingsHandler.set_team_display_option_in_settings(checked)
 
         self.update_display_options(4, checked)
-
-    
 
     @staticmethod
     def display_network_error():
@@ -556,3 +549,12 @@ class MainWindow(QWidget):
         self.player_table.update_civ_names()
         self.opp_table.update_civ_names()
 
+    # Show Analytics
+    def show_analytics(self):
+        analytics_window = AnalyticsWindow(main_window=self, profile_id=SettingsHandler.get_profile_id_from_settings())
+        analytics_window.show()
+
+        self.active_windows.append(analytics_window)
+
+    def analytics_window_closed(self, analytics_window: AnalyticsWindow):
+        self.active_windows.remove(analytics_window)

@@ -2,9 +2,9 @@ import typing
 
 import numpy as np
 import pyqtgraph as pg
-from PySide6.QtCore import QLineF
-from PySide6.QtGui import QPainter
-from PySide6.QtWidgets import QHeaderView, QAbstractItemView, QSizePolicy, QWidget
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
 
 from APIStringGenerator import APIStringGenerator
 from DataParser import BasicPlayerInfo

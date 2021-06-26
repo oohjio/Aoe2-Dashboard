@@ -3,11 +3,10 @@ import os.path
 from threading import Thread
 
 import requests
-from PySide6.QtCore import Qt, QSettings, Signal
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import *
 
-import keys as keys
 from APIStringGenerator import APIStringGenerator
 from SettingsHandler import SettingsHandler
 
@@ -57,8 +56,6 @@ class PrefPanel(QWidget):
             api_locale_combo_box.insertItems(0, self.locals)
         api_locale_combo_box.setCurrentIndex(SettingsHandler.get_saved_locale_from_settings())
         api_locale_combo_box.currentIndexChanged.connect(self.api_locale__combo_box_index_changed)
-
-
 
         profile_id_label = QLabel("Profile ID")
         profile_id_label.setFont(font_bold)
@@ -110,7 +107,6 @@ class PrefPanel(QWidget):
         # Save Locale
         print("save options is deprecated")
 
-
     def closeEvent(self, event: QCloseEvent) -> None:
         self.main_window.pref_panel_closed(self)
 
@@ -138,7 +134,8 @@ class PrefPanel(QWidget):
             self.player_found_on_leaderboard = True
             self.busy_indicator.setHidden(True)
             self.feedback_label.setText("Player found on Leaderboard {}".format(data[0]))
-            save_thread = Thread(target=SettingsHandler.save_profile_id_to_settings, args=(data[2], self.sig_save_successfully))
+            save_thread = Thread(target=SettingsHandler.save_profile_id_to_settings,
+                                 args=(data[2], self.sig_save_successfully))
             save_thread.start()
         else:
             if self.player_found_on_leaderboard:
@@ -154,8 +151,6 @@ class PrefPanel(QWidget):
     def saved_successfully_to_settings(self, data):
         if data[0] == 2 and data[1] is True:
             self.feedback_label.setText("Profile ID successfully saved")
-
-
 
     @staticmethod
     def check_profile_id(profile_id: int, feedback_signal: Signal):
@@ -210,6 +205,3 @@ class PrefPanel(QWidget):
             SettingsHandler.set_option_humanized_time_in_settings(True)
 
         self.main_window.update_display_due_to_options_changes()
-
-
-

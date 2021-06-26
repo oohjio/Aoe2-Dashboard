@@ -1,12 +1,12 @@
 import json
+import os.path
 from dataclasses import dataclass
 
+import arrow
 import numpy as np
 from PySide6.QtCore import QSettings
 
 import keys as keys
-import os.path
-import arrow
 
 
 @dataclass
@@ -29,6 +29,12 @@ class BasicPlayerInfo:
         return self.wins / (self.wins + self.losses) * 100
 
     @property
+    def win_percentage_str(self) -> str:
+        if self.losses == 0:
+            return "0"
+        return "{:10.2f} %".format(self.wins / (self.wins + self.losses) * 100)
+
+    @property
     def civ_name(self) -> str:
         if self.civ_id == 999:
             return "Unknown"
@@ -38,7 +44,7 @@ class BasicPlayerInfo:
 
 
 @dataclass
-class CurrentMatch:
+class Match:
     match_uuid: str
     map_type: int  # map name
     is_ranked: bool
@@ -70,6 +76,16 @@ class DataParser:
     """
 
     @staticmethod
+    def parse_player_data_from_rating_history_object(rating_json: dict) -> BasicPlayerInfo:
+        name = ""
+        rating = rating_json.get("rating", 0)
+        wins = rating_json.get("num_wins", 0)
+        losses = rating_json.get("num_losses", 0)
+
+        player_data = BasicPlayerInfo(name, rating, wins, losses, 0, 0, 0, 0)
+        return player_data
+
+    @staticmethod
     def parse_player_data_from_rating_history_and_store(player_json: dict, player_basic_info: BasicPlayerInfo):
         player_basic_info.rating = player_json.get("rating", player_basic_info.rating)
         player_basic_info.wins = player_json.get("num_wins", player_basic_info.wins)
@@ -88,21 +104,33 @@ class DataParser:
         return ratings, timestamps
 
     @staticmethod
-    def parse_current_match(last_match: dict) -> CurrentMatch:
+    def parse_multiple_matches(matches: list) -> []:
+        return_list = []
+        for match in matches:
+            return_list.append(DataParser.parse_match(match))
+
+        return return_list
+
+    @staticmethod
+    def parse_current_match(last_match: dict) -> Match:
         match_info: dict = last_match.get("last_match", {})
+        return DataParser.parse_match(match_info)
+
+    @staticmethod
+    def parse_match(match: dict) -> Match:
         # Match MetaData
-        match_uuid = match_info.get("match_uuid", "_")
-        match_num_players = match_info.get("num_players")
-        match_map_type = match_info.get("map_type", 999)
-        match_is_ranked = match_info.get("ranked", False)
-        match_leaderboard_id = match_info.get("leaderboard_id", 999)
-        match_server = match_info.get("server", "Unknown")
-        match_time = match_info.get("started", "0")
+        match_uuid = match.get("match_uuid", "_")
+        match_num_players = match.get("num_players")
+        match_map_type = match.get("map_type", 999)
+        match_is_ranked = match.get("ranked", False)
+        match_leaderboard_id = match.get("leaderboard_id", 999)
+        match_server = match.get("server", "Unknown")
+        match_time = match.get("started", "0")
 
         team_1: list[BasicPlayerInfo] = []
         team_2: list[BasicPlayerInfo] = []
 
-        players = match_info.get("players", [])
+        players = match.get("players", [])
 
         for player in players:
             player_name = player.get("name", "NN")
@@ -134,8 +162,8 @@ class DataParser:
             team_2 = team_1
             team_1 = team_2_temp
 
-        new_match = CurrentMatch(match_uuid, match_map_type, match_is_ranked, match_num_players, match_leaderboard_id,
-                                 match_server, match_time, team_1, team_2)
+        new_match = Match(match_uuid, match_map_type, match_is_ranked, match_num_players, match_leaderboard_id,
+                          match_server, match_time, team_1, team_2)
         return new_match
 
 

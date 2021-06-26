@@ -2,6 +2,7 @@ from PySide6.QtCore import QSettings, Signal
 
 import keys
 
+
 class SettingsHandler:
 
     @staticmethod
@@ -34,7 +35,7 @@ class SettingsHandler:
         settings = QSettings()
         if settings.contains(keys.k_opt_humanized_time):
             checked = settings.value(keys.k_opt_humanized_time)
-            if checked == "false" or checked ==False:
+            if checked == "false" or checked == False:
                 return False
             else:
                 return True

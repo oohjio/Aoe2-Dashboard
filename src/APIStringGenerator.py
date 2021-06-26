@@ -10,6 +10,10 @@ class APIStringGenerator:
         return "https://aoe2.net/api/player/lastmatch?game=aoe2de&profile_id=" + str(profile_id)
 
     @staticmethod
+    def get_API_string_for_match_history(profile_id, count):
+        return "https://aoe2.net/api/player/matches?game=aoe2de&profile_id={}&count={}".format(profile_id, count)
+
+    @staticmethod
     def get_API_string_for_rating_history(leaderboard_id, profile_id, count):
         return "https://aoe2.net/api/player/ratinghistory?game=aoe2de&leaderboard_id={0}&profile_id={1}&count={2}" \
             .format(str(leaderboard_id), str(profile_id), str(count))
