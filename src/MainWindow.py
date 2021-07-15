@@ -175,9 +175,9 @@ class MainWindow(QWidget):
         # Info Metadata Bar
 
         style_sheet_orange = "color: orange"
-        style_sheet_light_blue = "color: rgb(51,149,255)"
+        # style_sheet_light_blue = "color: rgb(51,149,255)"
 
-        accented_style_sheet = style_sheet_orange if self.dark_theme else style_sheet_light_blue
+        accented_style_sheet = style_sheet_orange # if self.dark_theme else style_sheet_light_blue
 
         label_cur_pl = QLabel("Leaderboard:")
 
@@ -337,16 +337,20 @@ class MainWindow(QWidget):
                 self.current_match.leaderboard_id, player.profile_id, 1)
             response = requests.get(url_str)
 
-            DataParser.parse_player_data_from_rating_history_and_store(
-                json.loads(response.text)[0], player)
+            loads = json.loads(response.text)
+            if len(loads) != 0:
+                DataParser.parse_player_data_from_rating_history_and_store(
+                loads[0], player)
 
         for player in self.current_match.team_2_players:
             url_str = APIStringGenerator.get_API_string_for_rating_history(
                 self.current_match.leaderboard_id, player.profile_id, 1)
             response = requests.get(url_str)
-            DataParser.parse_player_data_from_rating_history_and_store(
-                json.loads(response.text)[0], player)
 
+            loads = json.loads(response.text)
+            if len(loads) != 0:
+                DataParser.parse_player_data_from_rating_history_and_store(
+                    loads[0], player)
         self.sig_player_data_updated.emit()
 
     def player_profiles_updated(self):

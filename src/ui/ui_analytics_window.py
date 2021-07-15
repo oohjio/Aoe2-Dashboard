@@ -203,7 +203,7 @@ class Ui_AnalyticsWindow(object):
         self.pd_winperc_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
         self.mh_tab_load_line_edit_4.setInputMask("")
         self.mh_tab_load_line_edit_4.setText("")
-        self.mh_tab_load_line_edit_4.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"50", None))
+        self.mh_tab_load_line_edit_4.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"5", None))
         self.mh_tab_load_more_button_4.setText(QCoreApplication.translate("AnalyticsWindow", u"Load More", None))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.match_history_tab), QCoreApplication.translate("AnalyticsWindow", u"Match History", None))
         self.rh_tab_load_line_edit.setInputMask("")

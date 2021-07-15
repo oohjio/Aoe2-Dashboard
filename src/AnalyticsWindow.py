@@ -12,6 +12,9 @@ from AnalyticsWidgets import MatchDetailWidget
 
 class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
 
+    # SIGNALS
+    # return type is a tuple where [0] is either 0 or 1 for success and [1] is the data
+
     sig_player_data_loaded = Signal(tuple)
     sig_match_history_loaded = Signal(tuple)
 
@@ -23,6 +26,8 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
         self.profile_id = profile_id
         self.player_data = None
 
+
+
         # SIGNALS
         self.sig_player_data_loaded.connect(self.player_data_loaded)
         self.sig_match_history_loaded.connect(self.match_history_loaded)
@@ -31,23 +36,26 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
         self.data_handler = DataHandler()
         self.data_handler.get_basic_player_data(self.profile_id, finish_signal=self.sig_player_data_loaded)
 
+        self.matches = []
+        self.matches_loaded = 0
+        self.is_currently_loading_matches = False
+
+
     def set_up_UI(self):
         self.setupUi(self)
 
         # self.setLayout(self.toplevel_v_layout)
-        # image = DataHandler.get_civ_icons_for_id(10)
 
-        # label = QLabel(self)
-        # label.setPixmap(QPixmap.fromImage(image))
 
         # SIGNALS
         self.tab_widget.currentChanged.connect(self.tab_widget_changed_index)
         self.tab_widget_changed_index(0)
 
+
+        self.mh_tab_scroll_area_4.verticalScrollBar().actionTriggered.connect(self.scrollbarAction)
         self.mh_tab_load_more_button_4.clicked.connect(self.match_history_load_more_button_clicked)
 
-    def tab_widget_changed_index(self, index: int):
-        print(index)
+
 
 
     # UI Signals
@@ -56,21 +64,55 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
         self.main_window.analytics_window_closed(self)
 
     def match_history_load_more_button_clicked(self):
-        self.data_handler.load_last_matches(self.profile_id, 5, self.sig_match_history_loaded)
+        self.is_currently_loading_matches = True
 
+        load_matches = 5
+        try:
+            load_matches = int(self.mh_tab_load_line_edit_4.text())
+        except ValueError:
+            pass
+        else:
+            if load_matches > 50:
+                load_matches = 50
 
+        self.data_handler.load_last_matches(self.profile_id, load_matches, self.matches_loaded, self.sig_match_history_loaded)
+        self.mh_tab_load_line_edit_4.setText(str(load_matches))
+
+    def scrollbarAction(self, action: int):
+        slider = self.mh_tab_scroll_area_4.verticalScrollBar()
+
+        max = slider.maximum()
+        current = slider.sliderPosition()
+        state = float(current) / float(max)
+
+        if state > 0.99:
+            pass
+            # load new Data
+            # if not self.is_currently_loading_matches:
+            #    self.data_handler.load_last_matches(self.profile_id, 5, self.matches_loaded, self.sig_match_history_loaded)
+
+    def tab_widget_changed_index(self, index: int):
+        print(index)
 
     # show match history
 
     def match_history_loaded(self, data):
-        print(data)
-        # Display first Match
+
         v_layout = QVBoxLayout()
+        if self.scrollAreaWidgetContents_9.layout() is not None:
+            v_layout = self.scrollAreaWidgetContents_9.layout()
         for match in data[1]:
             match_view = MatchDetailWidget(None, match)
-            v_layout.addWidget(match_view)
+            v_layout.addWidget(match_view, alignment=Qt.AlignTop)
+            self.matches_loaded += 1
 
-        self.scrollAreaWidgetContents_9.setLayout(v_layout)
+        if self.scrollAreaWidgetContents_9.layout() is None:
+            self.scrollAreaWidgetContents_9.setLayout(v_layout)
+
+        self.is_currently_loading_matches = False
+
+        print(f"{self.matches_loaded = }")
+
     # load Player Data
 
     def player_data_loaded(self, data):

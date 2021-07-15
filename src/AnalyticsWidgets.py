@@ -4,53 +4,170 @@ from PySide6.QtCore import *
 from PySide6.QtWidgets import *
 from PySide6.QtGui import *
 
-from DataParser import Match
+from DataParser import Match, LocalizedAPIStrings
 from DataHandler import DataHandler
+from SettingsHandler import SettingsHandler
+
+from pyqtgraph import mkPen
 
 class MatchDetailWidget(QWidget):
     def __init__(self, parent: typing.Optional[QWidget], match: Match) -> None:
         super().__init__(parent=parent)
 
         # Size
-        self.setMinimumSize(QSize(700, 200))
         self.match = match
+        self.localized_api_strings = LocalizedAPIStrings()
 
         # Set Up UI
         grid_layout = QGridLayout()
         grid_layout.setHorizontalSpacing(4)
 
-        # Opp
-        for index, player in enumerate(match.team_2_players):
-            item = CivAndColorItem(None, player.color, player.civ_id)
-            grid_layout.addWidget(item, index, 0, Qt.AlignLeft)
+        h_metadata_layout = QHBoxLayout()
+        h_metadata_layout.setSpacing(5)
+        h_time_started_layout = QHBoxLayout()
+        h_time_started_layout.setSpacing(5)
+
+        metadata_label = QLabel("Metadata:")
+
+        accented_style_sheet = "color: orange"
+        font_italic = metadata_label.font()
+        font_bold = metadata_label.font()
+
+        font_italic.setItalic(True)
+        font_bold.setBold(True)
+
+        metadata_label.setFont(font_bold)
+
+        label_cur_pl = QLabel("Leaderboard:")
+
+        leader_board_label = QLabel(None)
+        leader_board_label.setText(self.localized_api_strings.get_key_for_leaderboard(self.match.leaderboard_id))
+        leader_board_label.setFont(font_italic)
+        leader_board_label.setStyleSheet(accented_style_sheet)
+
+        label_cur_size = QLabel("Size: ")
+        label_cur_size.setGeometry(250, 470, 30, 17)
+
+        size_label = QLabel(None)
+        num_pl_per_team = str(int(self.match.num_players / 2))
+        size_label.setText(num_pl_per_team + "v" + num_pl_per_team)
+        size_label.setFont(font_italic)
+        size_label.setStyleSheet(accented_style_sheet)
+
+        label_cur_map = QLabel("Map:")
+
+        map_label = QLabel(self.localized_api_strings.get_key_for_map(self.match.map_type))
+        map_label.setFont(font_italic)
+        map_label.setStyleSheet(accented_style_sheet)
+
+        label_cur_server = QLabel("Server:")
+
+        server_label = QLabel(None)
+        server_label.setText(self.match.server)
+        server_label.setFont(font_italic)
+        server_label.setStyleSheet(accented_style_sheet)
+
+        time_label = QLabel("Match Started: ")
+        time_label.setFont(font_bold)
+
+        time_match_started_label = QLabel("")
+        time_match_started_label.setFont(font_italic)
+        time_match_started_label.setStyleSheet(accented_style_sheet)
+
+        # Time
+        if SettingsHandler.get_saved_option_for_humanized_time():
+            time_match_started_label.setText(self.match.time_started_humanized)
+        else:
+            time_match_started_label.setText(self.match.time_started_plain)
+        
+
+        self.metadata_labels = [metadata_label, label_cur_pl, leader_board_label, label_cur_size, size_label,
+                                label_cur_map, map_label, label_cur_server, server_label]
+        self.time_started_labels = [time_label, time_match_started_label]
+
+        for l in self.metadata_labels:
+            h_metadata_layout.addWidget(l, stretch=5, alignment=Qt.AlignLeft)
+        for l in self.time_started_labels:
+            h_time_started_layout.addWidget(l, stretch=5, alignment=Qt.AlignLeft)
+
+
+
+        vertical_layout_top_level = QVBoxLayout()
+        vertical_layout_top_level.addLayout(h_metadata_layout)
+        vertical_layout_top_level.addLayout(h_time_started_layout)
+
+
+        h_match_details_layout = QHBoxLayout()
+        h_match_details_layout.setSpacing(4)
+        v_layout_opponent = QVBoxLayout()
+
+        for player in match.team_2_players:
+            h_layout = QHBoxLayout()
 
             civ_name_label = QLabel(player.civ_name)
-            grid_layout.addWidget(civ_name_label, index, 1, Qt.AlignLeft)
 
             bold_font = civ_name_label.font()
             bold_font.setBold(True)
 
-            player_name_label = QLabel(player.name)
+            player_name_label = QLabel(f"[{player.rating}] {player.name}")
             player_name_label.setFont(bold_font)
-            grid_layout.addWidget(player_name_label, index, 2, Qt.AlignLeft)
-
-        # Player
-        for index, player in enumerate(match.team_1_players):
-            item = CivAndColorItem(None, player.color, player.civ_id)
-            grid_layout.addWidget(item, index, 5, Qt.AlignRight)
 
             civ_name_label = QLabel(player.civ_name)
-            grid_layout.addWidget(civ_name_label, index, 4, Qt.AlignRight)
+            item = CivAndColorItem(None, player.color, player.civ_id)
+
+            h_layout.addWidget(item, stretch=5, alignment=Qt.AlignLeft)
+            h_layout.addWidget(civ_name_label, stretch=5, alignment=Qt.AlignLeft)
+            h_layout.addWidget(player_name_label, stretch=10, alignment=Qt.AlignLeft)
+
+            v_layout_opponent.addLayout(h_layout)
+
+        v_layout_player = QVBoxLayout()
+
+        for player in match.team_1_players:
+            h_layout = QHBoxLayout()
+
+            civ_name_label = QLabel(player.civ_name)
 
             bold_font = civ_name_label.font()
             bold_font.setBold(True)
 
-            player_name_label = QLabel(player.name)
+            player_name_label = QLabel(f"[{player.rating}] {player.name}")
             player_name_label.setFont(bold_font)
-            grid_layout.addWidget(player_name_label, index, 3, Qt.AlignRight)
+
+            civ_name_label = QLabel(player.civ_name)
+            item = CivAndColorItem(None, player.color, player.civ_id)
+
+            h_layout.addWidget(player_name_label, stretch=10, alignment=Qt.AlignRight)
+            h_layout.addWidget(civ_name_label, stretch=5, alignment=Qt.AlignRight)
+            h_layout.addWidget(item, stretch=5, alignment=Qt.AlignRight)
+
+            v_layout_player.addLayout(h_layout)
+
+        h_match_details_layout.addLayout(v_layout_opponent)
+        h_match_details_layout.addLayout(v_layout_player)
+        vertical_layout_top_level.addLayout(h_match_details_layout)
+
+        self.setLayout(vertical_layout_top_level)
+
+        return
 
 
-        self.setLayout(grid_layout)
+
+
+    def paintEvent(self, e):
+        painter = QPainter(self)
+
+        width = self.size().width()
+        height = self.size().height()
+
+        color = (95, 93, 93)
+        pen = mkPen(color, width=3)
+        painter.setPen(pen)
+
+        points = [QPointF(5, 5), QPointF(width - 5, 5), QPointF(width - 5, height - 5), QPointF(4, height - 5), QPointF(5, 5)]
+        painter.drawPolyline(points)
+
+        painter.end()
 
 
 class CivAndColorItem(QWidget):
@@ -86,7 +203,6 @@ class CivAndColorItem(QWidget):
 
         painter.drawImage(QRect(5, 5, 40, 40), self.civ_image)
 
-        from pyqtgraph import mkPen
         pen = mkPen(self.color, width=3)
         painter.setPen(pen)
         points = [QPointF(2.5, 2.5), QPointF(47.5, 2.5), QPointF(47.5, 47.5), QPointF(2.5, 47.5), QPointF(2.5, 2.5)]

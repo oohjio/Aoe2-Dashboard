@@ -14,7 +14,7 @@ class DataHandler(QObject):
     This is a convenience wrapper around the DataParser, provides Multithreading
     Not yet used in the Main Application
     """
-
+    # Todo: use QThreads and QNetworkManager
     def __init__(self):
         super().__init__()
 
@@ -22,8 +22,8 @@ class DataHandler(QObject):
         thread = Thread(target=self.__get_basic_player_data_task, args=(profile_id, finish_signal))
         thread.start()
 
-    def load_last_matches(self, profile_id: int, count: int, finish_signal: Signal):
-        thread = Thread(target=self.__load_last_matches_task(profile_id, count, finish_signal))
+    def load_last_matches(self, profile_id: int, count: int, start: int, finish_signal: Signal):
+        thread = Thread(target=self.__load_last_matches_task(profile_id, count, start, finish_signal))
         thread.start()
 
     # Tasks
@@ -42,8 +42,8 @@ class DataHandler(QObject):
             return_tuple = (1, player_info)
             finish_signal.emit(return_tuple)
 
-    def __load_last_matches_task(self, profile_id: int, count: int, finish_signal: Signal):
-        url_str = APIStringGenerator.get_API_string_for_match_history(profile_id, count)
+    def __load_last_matches_task(self, profile_id: int, count: int, start: int, finish_signal: Signal):
+        url_str = APIStringGenerator.get_API_string_for_match_history(profile_id, count, start)
         try:
             response = requests.get(url_str)
             match_history = DataParser.parse_multiple_matches(json.loads(response.text))

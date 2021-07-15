@@ -9,5 +9,5 @@ if __name__ == "__main__":
 
     window = MainWindow()
     window.show()
-    window.update()
+
     sys.exit(app.exec())
