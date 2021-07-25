@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'analytics_windowThSRMk.ui'
+## Form generated from reading UI file 'analytics_windowyzggjW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -29,11 +29,6 @@ class Ui_AnalyticsWindow(object):
         self.player_name_h_layout.setObjectName(u"player_name_h_layout")
         self.play_displ_label = QLabel(self.layoutWidget)
         self.play_displ_label.setObjectName(u"play_displ_label")
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.play_displ_label.sizePolicy().hasHeightForWidth())
-        self.play_displ_label.setSizePolicy(sizePolicy)
 
         self.player_name_h_layout.addWidget(self.play_displ_label)
 
@@ -100,43 +95,51 @@ class Ui_AnalyticsWindow(object):
         self.layoutWidget_3 = QWidget(self.match_history_tab)
         self.layoutWidget_3.setObjectName(u"layoutWidget_3")
         self.layoutWidget_3.setGeometry(QRect(10, 10, 802, 444))
-        self.mh_tab_v_layout_4 = QVBoxLayout(self.layoutWidget_3)
-        self.mh_tab_v_layout_4.setObjectName(u"mh_tab_v_layout_4")
-        self.mh_tab_v_layout_4.setContentsMargins(0, 0, 0, 0)
-        self.mh_tab_bar_h_layout_4 = QHBoxLayout()
-        self.mh_tab_bar_h_layout_4.setObjectName(u"mh_tab_bar_h_layout_4")
-        self.mh_tab_bar_h_layout_4.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.mh_tab_bar_h_layout_4.setContentsMargins(0, -1, -1, -1)
-        self.mh_tab_load_line_edit_4 = QLineEdit(self.layoutWidget_3)
-        self.mh_tab_load_line_edit_4.setObjectName(u"mh_tab_load_line_edit_4")
-        self.mh_tab_load_line_edit_4.setMaximumSize(QSize(40, 16777215))
+        self.mh_tab_v_layout = QVBoxLayout(self.layoutWidget_3)
+        self.mh_tab_v_layout.setObjectName(u"mh_tab_v_layout")
+        self.mh_tab_v_layout.setContentsMargins(0, 0, 0, 0)
+        self.mh_tab_bar_h_layout = QHBoxLayout()
+        self.mh_tab_bar_h_layout.setObjectName(u"mh_tab_bar_h_layout")
+        self.mh_tab_bar_h_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.mh_tab_bar_h_layout.setContentsMargins(0, -1, -1, -1)
+        self.mh_tab_info_label = QLabel(self.layoutWidget_3)
+        self.mh_tab_info_label.setObjectName(u"mh_tab_info_label")
+        font = QFont()
+        font.setItalic(True)
+        self.mh_tab_info_label.setFont(font)
 
-        self.mh_tab_bar_h_layout_4.addWidget(self.mh_tab_load_line_edit_4, 0, Qt.AlignRight)
+        self.mh_tab_bar_h_layout.addWidget(self.mh_tab_info_label)
 
-        self.mht_tab_bar_spacer_4 = QSpacerItem(15, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.mh_tab_load_line_edit = QLineEdit(self.layoutWidget_3)
+        self.mh_tab_load_line_edit.setObjectName(u"mh_tab_load_line_edit")
+        self.mh_tab_load_line_edit.setMaximumSize(QSize(40, 16777215))
 
-        self.mh_tab_bar_h_layout_4.addItem(self.mht_tab_bar_spacer_4)
+        self.mh_tab_bar_h_layout.addWidget(self.mh_tab_load_line_edit, 0, Qt.AlignRight)
 
-        self.mh_tab_load_more_button_4 = QPushButton(self.layoutWidget_3)
-        self.mh_tab_load_more_button_4.setObjectName(u"mh_tab_load_more_button_4")
-        self.mh_tab_load_more_button_4.setMaximumSize(QSize(100, 16777215))
+        self.mh_tab_bar_spacer = QSpacerItem(15, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
 
-        self.mh_tab_bar_h_layout_4.addWidget(self.mh_tab_load_more_button_4)
+        self.mh_tab_bar_h_layout.addItem(self.mh_tab_bar_spacer)
+
+        self.mh_tab_load_more_button = QPushButton(self.layoutWidget_3)
+        self.mh_tab_load_more_button.setObjectName(u"mh_tab_load_more_button")
+        self.mh_tab_load_more_button.setMaximumSize(QSize(100, 16777215))
+
+        self.mh_tab_bar_h_layout.addWidget(self.mh_tab_load_more_button)
 
 
-        self.mh_tab_v_layout_4.addLayout(self.mh_tab_bar_h_layout_4)
+        self.mh_tab_v_layout.addLayout(self.mh_tab_bar_h_layout)
 
-        self.mh_tab_scroll_area_4 = QScrollArea(self.layoutWidget_3)
-        self.mh_tab_scroll_area_4.setObjectName(u"mh_tab_scroll_area_4")
-        self.mh_tab_scroll_area_4.setMinimumSize(QSize(800, 400))
-        self.mh_tab_scroll_area_4.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.mh_tab_scroll_area_4.setWidgetResizable(True)
-        self.scrollAreaWidgetContents_9 = QWidget()
-        self.scrollAreaWidgetContents_9.setObjectName(u"scrollAreaWidgetContents_9")
-        self.scrollAreaWidgetContents_9.setGeometry(QRect(0, 0, 796, 396))
-        self.mh_tab_scroll_area_4.setWidget(self.scrollAreaWidgetContents_9)
+        self.mh_tab_scroll_area = QScrollArea(self.layoutWidget_3)
+        self.mh_tab_scroll_area.setObjectName(u"mh_tab_scroll_area")
+        self.mh_tab_scroll_area.setMinimumSize(QSize(800, 400))
+        self.mh_tab_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.mh_tab_scroll_area.setWidgetResizable(True)
+        self.mh_tab_scroll_area_content = QWidget()
+        self.mh_tab_scroll_area_content.setObjectName(u"mh_tab_scroll_area_content")
+        self.mh_tab_scroll_area_content.setGeometry(QRect(0, 0, 796, 396))
+        self.mh_tab_scroll_area.setWidget(self.mh_tab_scroll_area_content)
 
-        self.mh_tab_v_layout_4.addWidget(self.mh_tab_scroll_area_4)
+        self.mh_tab_v_layout.addWidget(self.mh_tab_scroll_area)
 
         self.tab_widget.addTab(self.match_history_tab, "")
         self.rating_history_tab = QWidget()
@@ -144,9 +147,9 @@ class Ui_AnalyticsWindow(object):
         self.layoutWidget_2 = QWidget(self.rating_history_tab)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
         self.layoutWidget_2.setGeometry(QRect(10, 10, 802, 444))
-        self.mh_tab_v_layout = QVBoxLayout(self.layoutWidget_2)
-        self.mh_tab_v_layout.setObjectName(u"mh_tab_v_layout")
-        self.mh_tab_v_layout.setContentsMargins(0, 0, 0, 0)
+        self.rh_tab_v_layout = QVBoxLayout(self.layoutWidget_2)
+        self.rh_tab_v_layout.setObjectName(u"rh_tab_v_layout")
+        self.rh_tab_v_layout.setContentsMargins(0, 0, 0, 0)
         self.rh_tab_bar_h_layout = QHBoxLayout()
         self.rh_tab_bar_h_layout.setObjectName(u"rh_tab_bar_h_layout")
         self.rh_tab_bar_h_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
@@ -157,9 +160,9 @@ class Ui_AnalyticsWindow(object):
 
         self.rh_tab_bar_h_layout.addWidget(self.rh_tab_load_line_edit, 0, Qt.AlignRight)
 
-        self.rht_tab_bar_spacer = QSpacerItem(15, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.rh_tab_bar_spacer = QSpacerItem(15, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
 
-        self.rh_tab_bar_h_layout.addItem(self.rht_tab_bar_spacer)
+        self.rh_tab_bar_h_layout.addItem(self.rh_tab_bar_spacer)
 
         self.rh_tab_load_more_button = QPushButton(self.layoutWidget_2)
         self.rh_tab_load_more_button.setObjectName(u"rh_tab_load_more_button")
@@ -168,13 +171,13 @@ class Ui_AnalyticsWindow(object):
         self.rh_tab_bar_h_layout.addWidget(self.rh_tab_load_more_button)
 
 
-        self.mh_tab_v_layout.addLayout(self.rh_tab_bar_h_layout)
+        self.rh_tab_v_layout.addLayout(self.rh_tab_bar_h_layout)
 
         self.mh_tab_graphics_view = QGraphicsView(self.layoutWidget_2)
         self.mh_tab_graphics_view.setObjectName(u"mh_tab_graphics_view")
         self.mh_tab_graphics_view.setMinimumSize(QSize(800, 400))
 
-        self.mh_tab_v_layout.addWidget(self.mh_tab_graphics_view)
+        self.rh_tab_v_layout.addWidget(self.mh_tab_graphics_view)
 
         self.tab_widget.addTab(self.rating_history_tab, "")
 
@@ -201,14 +204,15 @@ class Ui_AnalyticsWindow(object):
         self.pd_losses_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
         self.pd_displ_winperc_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Win Percentage", None))
         self.pd_winperc_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
-        self.mh_tab_load_line_edit_4.setInputMask("")
-        self.mh_tab_load_line_edit_4.setText("")
-        self.mh_tab_load_line_edit_4.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"5", None))
-        self.mh_tab_load_more_button_4.setText(QCoreApplication.translate("AnalyticsWindow", u"Load More", None))
+        self.mh_tab_info_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Load matches with clicking the button. Max 50 matches at a time!", None))
+        self.mh_tab_load_line_edit.setInputMask("")
+        self.mh_tab_load_line_edit.setText("")
+        self.mh_tab_load_line_edit.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"50", None))
+        self.mh_tab_load_more_button.setText(QCoreApplication.translate("AnalyticsWindow", u"Load More", None))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.match_history_tab), QCoreApplication.translate("AnalyticsWindow", u"Match History", None))
         self.rh_tab_load_line_edit.setInputMask("")
         self.rh_tab_load_line_edit.setText("")
-        self.rh_tab_load_line_edit.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"50", None))
+        self.rh_tab_load_line_edit.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"25", None))
         self.rh_tab_load_more_button.setText(QCoreApplication.translate("AnalyticsWindow", u"Load More", None))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.rating_history_tab), QCoreApplication.translate("AnalyticsWindow", u"Rating History", None))
     # retranslateUi

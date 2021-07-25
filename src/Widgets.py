@@ -30,23 +30,32 @@ class RatingPlotWidget(pg.PlotWidget):
         bottom_axis: pg.AxisItem = self.getAxis("bottom")
         bottom_axis.setGrid(10)
 
-        self.data_team_ranking = None
-        self.data_1v1_ranking = None
+        self.data_team_RM_ranking = None
+        self.data_1v1_RM_ranking = None
+
+        self.data_team_EW_ranking = None
+        self.data_1v1_EW_ranking = None
 
         left_label_str = "Rating of " + self.player_name
         self.setLabel("left", left_label_str)
 
-        self.stored_leaderboard_ratings = np.empty(6, dtype=tuple)
-        self.stored_plot_items = np.empty(6, dtype=pg.PlotDataItem)
+        self.stored_leaderboard_ratings = np.empty(15, dtype=tuple)
+        self.stored_plot_items = np.empty(15, dtype=pg.PlotDataItem)
 
     def plot_rating(self, rating_data, leaderboard_id):
         pen = pg.mkPen((0, 0, 0), width=2)
         if leaderboard_id == 3:
-            self.data_1v1_ranking = rating_data
+            self.data_1v1_RM_ranking = rating_data
             pen = pg.mkPen((255, 96, 62), width=2)
         elif leaderboard_id == 4:
-            self.data_team_ranking = rating_data
+            self.data_team_RM_ranking = rating_data
             pen = pg.mkPen((15, 153, 246), width=2)
+        elif leaderboard_id == 14:
+            self.data_team_EW_ranking = rating_data
+            pen = pg.mkPen((82, 168, 39), width=2)
+        elif leaderboard_id == 13:
+            self.data_1v1_EW_ranking = rating_data
+            pen = pg.mkPen((226, 185, 15), width=2)
 
         ratings = rating_data[0]
         timestamps = rating_data[1]

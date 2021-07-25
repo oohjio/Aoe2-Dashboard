@@ -140,17 +140,29 @@
           <height>444</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="mh_tab_v_layout_4">
+        <layout class="QVBoxLayout" name="mh_tab_v_layout">
          <item>
-          <layout class="QHBoxLayout" name="mh_tab_bar_h_layout_4">
+          <layout class="QHBoxLayout" name="mh_tab_bar_h_layout">
            <property name="sizeConstraint">
             <enum>QLayout::SetDefaultConstraint</enum>
            </property>
            <property name="leftMargin">
             <number>0</number>
            </property>
+           <item>
+            <widget class="QLabel" name="mh_tab_info_label">
+             <property name="font">
+              <font>
+               <italic>true</italic>
+              </font>
+             </property>
+             <property name="text">
+              <string>Load matches with clicking the button. Max 50 matches at a time!</string>
+             </property>
+            </widget>
+           </item>
            <item alignment="Qt::AlignRight">
-            <widget class="QLineEdit" name="mh_tab_load_line_edit_4">
+            <widget class="QLineEdit" name="mh_tab_load_line_edit">
              <property name="maximumSize">
               <size>
                <width>40</width>
@@ -169,7 +181,7 @@
             </widget>
            </item>
            <item>
-            <spacer name="mht_tab_bar_spacer_4">
+            <spacer name="mh_tab_bar_spacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -185,7 +197,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="mh_tab_load_more_button_4">
+            <widget class="QPushButton" name="mh_tab_load_more_button">
              <property name="maximumSize">
               <size>
                <width>100</width>
@@ -200,7 +212,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QScrollArea" name="mh_tab_scroll_area_4">
+          <widget class="QScrollArea" name="mh_tab_scroll_area">
            <property name="minimumSize">
             <size>
              <width>800</width>
@@ -213,7 +225,7 @@
            <property name="widgetResizable">
             <bool>true</bool>
            </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_9">
+           <widget class="QWidget" name="mh_tab_scroll_area_content">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -241,7 +253,7 @@
           <height>444</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="mh_tab_v_layout">
+        <layout class="QVBoxLayout" name="rh_tab_v_layout">
          <item>
           <layout class="QHBoxLayout" name="rh_tab_bar_h_layout">
            <property name="sizeConstraint">
@@ -265,12 +277,12 @@
               <string/>
              </property>
              <property name="placeholderText">
-              <string>50</string>
+              <string>25</string>
              </property>
             </widget>
            </item>
            <item>
-            <spacer name="rht_tab_bar_spacer">
+            <spacer name="rh_tab_bar_spacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>

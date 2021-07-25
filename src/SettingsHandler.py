@@ -35,7 +35,7 @@ class SettingsHandler:
         settings = QSettings()
         if settings.contains(keys.k_opt_humanized_time):
             checked = settings.value(keys.k_opt_humanized_time)
-            if checked == "false" or checked == False:
+            if checked == "false" or checked is False:
                 return False
             else:
                 return True
@@ -58,11 +58,11 @@ class SettingsHandler:
             return 0
 
     @staticmethod
-    def get_1v1_display_option_from_settings() -> bool:
+    def get_1v1_RM_display_option_from_settings() -> bool:
         settings = QSettings()
-        if settings.contains(keys.k_1v1_display_option):
-            checked = settings.value(keys.k_1v1_display_option)
-            if checked == "false" or checked == False:
+        if settings.contains(keys.k_1v1_RM_display_option):
+            checked = settings.value(keys.k_1v1_RM_display_option)
+            if checked == "false" or checked is False:
                 return False
             else:
                 return True
@@ -70,11 +70,11 @@ class SettingsHandler:
             return True
 
     @staticmethod
-    def get_team_display_option_from_settings() -> bool:
+    def get_1v1_EW_display_option_from_settings() -> bool:
         settings = QSettings()
-        if settings.contains(keys.k_team_display_option):
-            checked = settings.value(keys.k_team_display_option)
-            if checked == "false" or checked == False:
+        if settings.contains(keys.k_1v1_EW_display_option):
+            checked = settings.value(keys.k_1v1_EW_display_option)
+            if checked == "false" or checked is False:
                 return False
             else:
                 return True
@@ -82,11 +82,45 @@ class SettingsHandler:
             return True
 
     @staticmethod
-    def set_1v1_display_option_in_settings(checked: bool):
+    def get_team_RM_display_option_from_settings() -> bool:
         settings = QSettings()
-        settings.setValue(keys.k_1v1_display_option, checked)
+        if settings.contains(keys.k_team_RM_display_option):
+            checked = settings.value(keys.k_team_RM_display_option)
+            if checked == "false" or checked is False:
+                return False
+            else:
+                return True
+        else:
+            return True
 
     @staticmethod
-    def set_team_display_option_in_settings(checked: bool):
+    def get_team_EW_display_option_from_settings() -> bool:
         settings = QSettings()
-        settings.setValue(keys.k_team_display_option, checked)
+        if settings.contains(keys.k_team_EW_display_option):
+            checked = settings.value(keys.k_team_EW_display_option)
+            if checked == "false" or checked is False:
+                return False
+            else:
+                return True
+        else:
+            return True
+
+    @staticmethod
+    def set_1v1_RM_display_option_in_settings(checked: bool):
+        settings = QSettings()
+        settings.setValue(keys.k_1v1_RM_display_option, checked)
+
+    @staticmethod
+    def set_1v1_EW_display_option_in_settings(checked: bool):
+        settings = QSettings()
+        settings.setValue(keys.k_1v1_EW_display_option, checked)
+
+    @staticmethod
+    def set_team_RM_display_option_in_settings(checked: bool):
+        settings = QSettings()
+        settings.setValue(keys.k_team_RM_display_option, checked)
+
+    @staticmethod
+    def set_team_EW_display_option_in_settings(checked: bool):
+        settings = QSettings()
+        settings.setValue(keys.k_team_EW_display_option, checked)

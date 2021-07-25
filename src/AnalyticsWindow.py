@@ -46,17 +46,12 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
 
         # self.setLayout(self.toplevel_v_layout)
 
-
         # SIGNALS
         self.tab_widget.currentChanged.connect(self.tab_widget_changed_index)
         self.tab_widget_changed_index(0)
 
-
-        self.mh_tab_scroll_area_4.verticalScrollBar().actionTriggered.connect(self.scrollbarAction)
-        self.mh_tab_load_more_button_4.clicked.connect(self.match_history_load_more_button_clicked)
-
-
-
+        self.mh_tab_scroll_area.verticalScrollBar().actionTriggered.connect(self.scrollbarAction)
+        self.mh_tab_load_more_button.clicked.connect(self.match_history_load_more_button_clicked)
 
     # UI Signals
 
@@ -66,20 +61,25 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
     def match_history_load_more_button_clicked(self):
         self.is_currently_loading_matches = True
 
-        load_matches = 5
+        load_matches = 0
         try:
-            load_matches = int(self.mh_tab_load_line_edit_4.text())
+            load_matches = int(self.mh_tab_load_line_edit.text())
         except ValueError:
-            pass
+            if self.mh_tab_load_line_edit.placeholderText() != "":
+                load_matches = int(self.mh_tab_load_line_edit.placeholderText())
+                self.mh_tab_load_line_edit.setPlaceholderText("")
         else:
             if load_matches > 50:
                 load_matches = 50
 
-        self.data_handler.load_last_matches(self.profile_id, load_matches, self.matches_loaded, self.sig_match_history_loaded)
-        self.mh_tab_load_line_edit_4.setText(str(load_matches))
+        self.mh_tab_load_line_edit.setText(str(load_matches))
+
+        if load_matches > 0:
+            self.data_handler.load_last_matches(self.profile_id, load_matches, self.matches_loaded,
+                                                self.sig_match_history_loaded)
 
     def scrollbarAction(self, action: int):
-        slider = self.mh_tab_scroll_area_4.verticalScrollBar()
+        slider = self.mh_tab_scroll_area.verticalScrollBar()
 
         max = slider.maximum()
         current = slider.sliderPosition()
@@ -99,15 +99,15 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
     def match_history_loaded(self, data):
 
         v_layout = QVBoxLayout()
-        if self.scrollAreaWidgetContents_9.layout() is not None:
-            v_layout = self.scrollAreaWidgetContents_9.layout()
+        if self.mh_tab_scroll_area_content.layout() is not None:
+            v_layout = self.mh_tab_scroll_area_content.layout()
         for match in data[1]:
             match_view = MatchDetailWidget(None, match)
             v_layout.addWidget(match_view, alignment=Qt.AlignTop)
             self.matches_loaded += 1
 
-        if self.scrollAreaWidgetContents_9.layout() is None:
-            self.scrollAreaWidgetContents_9.setLayout(v_layout)
+        if self.mh_tab_scroll_area_content.layout() is None:
+            self.mh_tab_scroll_area_content.setLayout(v_layout)
 
         self.is_currently_loading_matches = False
 

@@ -8,7 +8,7 @@ import requests
 from PySide6.QtCore import QCoreApplication, QTimer, SIGNAL, Qt, Signal
 from PySide6.QtGui import QFont, QIcon
 from PySide6.QtWidgets import QLabel, QToolButton, QVBoxLayout, QHBoxLayout, QGridLayout, QCheckBox, \
-    QWidget, QMessageBox
+    QWidget, QMessageBox, QProgressBar
 
 from APIStringGenerator import APIStringGenerator
 from AnalyticsWindow import AnalyticsWindow
@@ -59,6 +59,20 @@ class MainWindow(QWidget):
         self.opp_rating_plot: RatingPlotWidget = None
         self.player_rating_plot: RatingPlotWidget = None
 
+        self.opp_busy_indicator = QProgressBar()
+        self.opp_busy_indicator.setMaximumHeight(10)
+        self.opp_busy_indicator.setTextVisible(False)
+        self.opp_busy_indicator.setMinimum(0)
+        self.opp_busy_indicator.setMaximum(0)
+        self.opp_busy_indicator.setHidden(True)
+
+        self.player_busy_indicator = QProgressBar()
+        self.player_busy_indicator.setMaximumHeight(10)
+        self.player_busy_indicator.setTextVisible(False)
+        self.player_busy_indicator.setMinimum(0)
+        self.player_busy_indicator.setMaximum(0)
+        self.player_busy_indicator.setHidden(True)
+
         # set the timer_count to 999 indicating that no timer has started yet
         self.timer_count = 999
         self.timer = QTimer()
@@ -94,17 +108,24 @@ class MainWindow(QWidget):
         # Opponent Stats
         self.opp_table = TeamTableWidget(2, 4)
 
-        self.player_rating_histories_team = np.empty((2, 4), dtype=tuple)
-        self.player_rating_histories_1v1 = np.empty((2, 4), dtype=tuple)
+        self.player_rating_histories_team_RM = np.empty((2, 4), dtype=tuple)
+        self.player_rating_histories_1v1_RM = np.empty((2, 4), dtype=tuple)
+
+        self.player_rating_histories_team_EW = np.empty((2, 4), dtype=tuple)
+        self.player_rating_histories_1v1_EW = np.empty((2, 4), dtype=tuple)
 
         self.left_layout = QVBoxLayout()
         self.left_layout.addWidget(self.opp_label)
         self.left_layout.addWidget(self.opp_table)
+        self.left_layout.addWidget(self.opp_busy_indicator)
+
         self.left_layout.addSpacing(15)
 
         self.right_layout = QVBoxLayout()
         self.right_layout.addWidget(self.player_label)
         self.right_layout.addWidget(self.player_table)
+        self.right_layout.addWidget(self.player_busy_indicator)
+
         self.right_layout.addSpacing(15)
 
         # Bar
@@ -152,32 +173,53 @@ class MainWindow(QWidget):
 
         legend_label.setFont(font_bold)
 
-        rating_1v1_legend_label = QLabel("1v1 Rank")
-        rating_team_legend_label = QLabel("Team Rank")
+        # RM
+        rating_1v1_RM_legend_label = QLabel("1v1 RM")
+        rating_team_RM_legend_label = QLabel("Team RM")
 
-        legend_item_team = LegendItem(None, (15, 153, 246))
-        legend_item_1v1 = LegendItem(None, (255, 96, 62))
+        legend_item_team_RM = LegendItem(None, (15, 153, 246))
+        legend_item_1v1_RM = LegendItem(None, (255, 96, 62))
+
+        h_item_team_RM = QHBoxLayout()
+        h_item_team_RM.addWidget(legend_item_team_RM)
+        h_item_team_RM.addWidget(rating_team_RM_legend_label)
+
+        h_item_1v1_RM = QHBoxLayout()
+        h_item_1v1_RM.addWidget(legend_item_1v1_RM)
+        h_item_1v1_RM.addWidget(rating_1v1_RM_legend_label)
+
+        # EW
+        rating_1v1_EW_legend_label = QLabel("1v1 EW")
+        rating_team_EW_legend_label = QLabel("Team EW")
+
+        legend_item_team_EW = LegendItem(None, (82, 168, 39))
+        legend_item_1v1_EW = LegendItem(None, (226, 185, 15))
+
+        h_item_team_EW = QHBoxLayout()
+        h_item_team_EW.addWidget(legend_item_team_EW)
+        h_item_team_EW.addWidget(rating_team_EW_legend_label)
+
+        h_item_1v1_EW = QHBoxLayout()
+        h_item_1v1_EW.addWidget(legend_item_1v1_EW)
+        h_item_1v1_EW.addWidget(rating_1v1_EW_legend_label)
+
+        # Assemble
 
         v_legend_layout = QVBoxLayout()
         v_legend_layout.addWidget(legend_label)
 
-        h_item_team = QHBoxLayout()
-        h_item_team.addWidget(legend_item_team)
-        h_item_team.addWidget(rating_team_legend_label)
+        v_legend_layout.addLayout(h_item_1v1_RM)
+        v_legend_layout.addLayout(h_item_team_RM)
 
-        h_item_1v1 = QHBoxLayout()
-        h_item_1v1.addWidget(legend_item_1v1)
-        h_item_1v1.addWidget(rating_1v1_legend_label)
-
-        v_legend_layout.addLayout(h_item_1v1)
-        v_legend_layout.addLayout(h_item_team)
+        v_legend_layout.addLayout(h_item_1v1_EW)
+        v_legend_layout.addLayout(h_item_team_EW)
 
         # Info Metadata Bar
 
         style_sheet_orange = "color: orange"
         # style_sheet_light_blue = "color: rgb(51,149,255)"
 
-        accented_style_sheet = style_sheet_orange # if self.dark_theme else style_sheet_light_blue
+        accented_style_sheet = style_sheet_orange  # if self.dark_theme else style_sheet_light_blue
 
         label_cur_pl = QLabel("Leaderboard:")
 
@@ -238,22 +280,36 @@ class MainWindow(QWidget):
         # Display Options
         options_label = QLabel("Options")
         options_label.setFont(font_bold)
+        # RM
+        check_box_1v1_RM = QCheckBox("1v1 RM")
+        check_box_1v1_RM.setChecked(
+            SettingsHandler.get_1v1_RM_display_option_from_settings())
 
-        check_box_1v1 = QCheckBox("Display 1v1")
-        check_box_1v1.setChecked(
-            SettingsHandler.get_1v1_display_option_from_settings())
+        check_box_team_RM = QCheckBox("Team RM")
+        check_box_team_RM.setChecked(
+            SettingsHandler.get_team_RM_display_option_from_settings())
 
-        check_box_team = QCheckBox("Display Team")
-        check_box_team.setChecked(
-            SettingsHandler.get_team_display_option_from_settings())
+        check_box_1v1_RM.stateChanged.connect(self.check_box_1v1_RM_changed)
+        check_box_team_RM.stateChanged.connect(self.check_box_team_RM_changed)
 
-        check_box_1v1.stateChanged.connect(self.check_box_1v1_changed)
-        check_box_team.stateChanged.connect(self.check_box_team_changed)
+        # EW 
+        check_box_1v1_EW = QCheckBox("1v1 EW")
+        check_box_1v1_EW.setChecked(
+            SettingsHandler.get_1v1_EW_display_option_from_settings())
+
+        check_box_team_EW = QCheckBox("Team EW")
+        check_box_team_EW.setChecked(
+            SettingsHandler.get_team_EW_display_option_from_settings())
+
+        check_box_1v1_EW.stateChanged.connect(self.check_box_1v1_EW_changed)
+        check_box_team_EW.stateChanged.connect(self.check_box_team_EW_changed)
 
         v_display_option_layout = QVBoxLayout()
         v_display_option_layout.addWidget(options_label)
-        v_display_option_layout.addWidget(check_box_1v1)
-        v_display_option_layout.addWidget(check_box_team)
+        v_display_option_layout.addWidget(check_box_1v1_RM)
+        v_display_option_layout.addWidget(check_box_team_RM)
+        v_display_option_layout.addWidget(check_box_1v1_EW)
+        v_display_option_layout.addWidget(check_box_team_EW)
 
         center_layout_v = QVBoxLayout()
         center_layout_v.addLayout(v_display_option_layout)
@@ -314,9 +370,9 @@ class MainWindow(QWidget):
 
     def player_data_loaded(self):
         players_per_team = int(self.current_match.num_players / 2)
-        self.player_rating_histories_team = np.empty(
+        self.player_rating_histories_team_RM = np.empty(
             (2, players_per_team), dtype=tuple)
-        self.player_rating_histories_1v1 = np.empty(
+        self.player_rating_histories_1v1_RM = np.empty(
             (2, players_per_team), dtype=tuple)
         # Player Team
         self.player_table.update_team(self.current_match.team_1_players)
@@ -340,7 +396,7 @@ class MainWindow(QWidget):
             loads = json.loads(response.text)
             if len(loads) != 0:
                 DataParser.parse_player_data_from_rating_history_and_store(
-                loads[0], player)
+                    loads[0], player)
 
         for player in self.current_match.team_2_players:
             url_str = APIStringGenerator.get_API_string_for_rating_history(
@@ -380,46 +436,77 @@ class MainWindow(QWidget):
 
     def load_player_rating_history(self, team, player, profile_id, player_name):
         count = 50
-        leaderboard_id_1v1 = 3  # 1v1 RM
-        leaderboard_id_team = 4  # Team RM
+        leaderboard_id_1v1_RM = 3  # 1v1 RM
+        leaderboard_id_team_RM = 4  # Team RM
 
-        url_str_1v1 = APIStringGenerator.get_API_string_for_rating_history(
-            leaderboard_id_1v1, profile_id, count)
-        url_str_team = APIStringGenerator.get_API_string_for_rating_history(
-            leaderboard_id_team, profile_id, count)
+        leaderboard_id_1v1_EW = 13  # 1v1 RM
+        leaderboard_id_team_EW = 14  # Team RM
+
+        url_str_1v1_RM = APIStringGenerator.get_API_string_for_rating_history(
+            leaderboard_id_1v1_RM, profile_id, count)
+        url_str_team_RM = APIStringGenerator.get_API_string_for_rating_history(
+            leaderboard_id_team_RM, profile_id, count)
+
+        url_str_1v1_EW = APIStringGenerator.get_API_string_for_rating_history(
+            leaderboard_id_1v1_EW, profile_id, count)
+        url_str_team_EW = APIStringGenerator.get_API_string_for_rating_history(
+            leaderboard_id_team_EW, profile_id, count)
+
         try:
-            response_team = requests.get(url_str_team)
-            data_team_ranking = json.loads(response_team.text)
+            response_team_RM = requests.get(url_str_team_RM)
+            data_team_ranking_RM = json.loads(response_team_RM.text)
 
-            response_1v1 = requests.get(url_str_1v1)
-            data_1v1_ranking = json.loads(response_1v1.text)
+            response_1v1_RM = requests.get(url_str_1v1_RM)
+            data_1v1_ranking_RM = json.loads(response_1v1_RM.text)
 
-            ratings_team, timestamps_team = DataParser.compile_ratings_history(
-                data_team_ranking)
-            ratings_1v1, timestamps_1v1 = DataParser.compile_ratings_history(
-                data_1v1_ranking)
+            ratings_team_RM, timestamps_team_RM = DataParser.compile_ratings_history(
+                data_team_ranking_RM)
+            ratings_1v1_RM, timestamps_1v1_RM = DataParser.compile_ratings_history(
+                data_1v1_ranking_RM)
+
+            response_team_EW = requests.get(url_str_team_EW)
+            data_team_ranking_EW = json.loads(response_team_EW.text)
+
+            response_1v1_EW = requests.get(url_str_1v1_EW)
+            data_1v1_ranking_EW = json.loads(response_1v1_EW.text)
+
+            ratings_team_EW, timestamps_team_EW = DataParser.compile_ratings_history(
+                data_team_ranking_EW)
+            ratings_1v1_EW, timestamps_1v1_EW = DataParser.compile_ratings_history(
+                data_1v1_ranking_EW)
+
         except:
             self.display_network_error()
             return
-        data = (team, player, profile_id, player_name, ratings_1v1, timestamps_1v1, ratings_team, timestamps_team)
+        data = (
+            team, player, profile_id, player_name,
+            ratings_1v1_RM, timestamps_1v1_RM, ratings_team_RM, timestamps_team_RM,
+            ratings_1v1_EW, timestamps_1v1_EW, ratings_team_EW, timestamps_team_EW)
         self.sig_rating_history_loaded.emit(data)
 
     def player_rating_history_loaded(self, data: tuple):
         """
 
-        :param data: Tuple(team, player, profile_id, player_name, ratings_1v1,
-                            timestamps_1v1, ratings_team, timestamps_team
+        :param data: Tuple(team, player, profile_id, player_name, 
+                            ratings_1v1_RM, timestamps_1v1_RM, ratings_team_RM, timestamps_team_RM, 
+                            ratings_1v1_EW, timestamps_1v1_EW, ratings_team_EW, timestamps_team_EW
         :return:
         """
         team, player = data[0], data[1]
         profile_id, player_name = data[2], data[3]
-        ratings_1v1, timestamps_1v1, ratings_team, timestamps_team = data[4:8]
+        ratings_1v1_RM, timestamps_1v1_RM, ratings_team_RM, timestamps_team_RM = data[4:8]
+        ratings_1v1_EW, timestamps_1v1_EW, ratings_team_EW, timestamps_team_EW = data[8:12]
 
         plot_widget = RatingPlotWidget(parent=self, player_name=player_name)
         plot_widget.plot_rating(
-            rating_data=[ratings_team, timestamps_team], leaderboard_id=4)
+            rating_data=[ratings_team_RM, timestamps_team_RM], leaderboard_id=4)
         plot_widget.plot_rating(
-            rating_data=[ratings_1v1, timestamps_1v1], leaderboard_id=3)
+            rating_data=[ratings_1v1_RM, timestamps_1v1_RM], leaderboard_id=3)
+
+        plot_widget.plot_rating(
+            rating_data=[ratings_team_EW, timestamps_team_EW], leaderboard_id=14)
+        plot_widget.plot_rating(
+            rating_data=[ratings_1v1_EW, timestamps_1v1_EW], leaderboard_id=13)
 
         plot_widget.setMinimumSize(300, 200)
 
@@ -429,22 +516,34 @@ class MainWindow(QWidget):
                 self.player_rating_plot.close()
             self.player_rating_plot = plot_widget
             self.right_layout.addWidget(self.player_rating_plot)
+            self.player_busy_indicator.setHidden(True)
         if team == 2:
             if self.opp_rating_plot is not None:
                 self.left_layout.removeWidget(self.opp_rating_plot)
                 self.opp_rating_plot.close()
             self.opp_rating_plot = plot_widget
             self.left_layout.addWidget(self.opp_rating_plot)
+            self.opp_busy_indicator.setHidden(True)
 
-        self.player_rating_histories_team[team -
-                                          1][player] = (ratings_team, timestamps_team)
-        self.player_rating_histories_1v1[team -
-                                         1][player] = (ratings_1v1, timestamps_1v1)
+        self.player_rating_histories_team_RM[team -
+                                             1][player] = (ratings_team_RM, timestamps_team_RM)
+        self.player_rating_histories_1v1_RM[team -
+                                            1][player] = (ratings_1v1_RM, timestamps_1v1_RM)
+
+        self.player_rating_histories_team_EW[team -
+                                             1][player] = (ratings_team_EW, timestamps_team_EW)
+        self.player_rating_histories_1v1_EW[team -
+                                            1][player] = (ratings_1v1_EW, timestamps_1v1_EW)
 
         plot_widget.update_displayed_plots(
-            3, SettingsHandler.get_1v1_display_option_from_settings())
+            3, SettingsHandler.get_1v1_RM_display_option_from_settings())
         plot_widget.update_displayed_plots(
-            4, SettingsHandler.get_team_display_option_from_settings())
+            4, SettingsHandler.get_team_RM_display_option_from_settings())
+
+        plot_widget.update_displayed_plots(
+            13, SettingsHandler.get_1v1_EW_display_option_from_settings())
+        plot_widget.update_displayed_plots(
+            14, SettingsHandler.get_team_EW_display_option_from_settings())
 
     def player_selection_changed(self, team: int, player: int):
         """
@@ -458,26 +557,33 @@ class MainWindow(QWidget):
             player_info = self.current_match.team_1_players[player]
             profile_id = player_info.profile_id
             player_name = player_info.name
+            self.player_busy_indicator.setHidden(False)
         if team == 2:
             player_info = self.current_match.team_2_players[player]
             profile_id = player_info.profile_id
             player_name = player_info.name
+            self.opp_busy_indicator.setHidden(False)
 
         """
         for saving network resources the rating history can be reused
         in player_rating_histories is an array that contains for each player in a matrix a 
         tuple with ratings and timestamps
         """
-        ratings_team = None
+        ratings_team_RM = None
 
-        item = self.player_rating_histories_team[team - 1][player]
+        item = self.player_rating_histories_team_RM[team - 1][player]
         if item is not None:
-            ratings_team, timestamps_team = self.player_rating_histories_team[team - 1][player]
-            ratings_1v1, timestamps_1v1 = self.player_rating_histories_1v1[team - 1][player]
-            data = (team, player, profile_id, player_name, ratings_1v1, timestamps_1v1, ratings_team, timestamps_team)
+            ratings_team_RM, timestamps_team_RM = self.player_rating_histories_team_RM[team - 1][player]
+            ratings_1v1_RM, timestamps_1v1_RM = self.player_rating_histories_1v1_RM[team - 1][player]
+
+            ratings_team_EW, timestamps_team_EW = self.player_rating_histories_team_EW[team - 1][player]
+            ratings_1v1_EW, timestamps_1v1_EW = self.player_rating_histories_1v1_EW[team - 1][player]
+
+            data = (team, player, profile_id, player_name, ratings_1v1_RM, timestamps_1v1_RM, ratings_team_RM,
+                    timestamps_team_RM, ratings_1v1_EW, timestamps_1v1_EW, ratings_team_EW, timestamps_team_EW)
             self.sig_rating_history_loaded.emit(data)
 
-        if ratings_team is None:
+        if ratings_team_RM is None:
             thread = Thread(target=self.load_player_rating_history, args=(team, player, profile_id, player_name))
             thread.start()
 
@@ -512,19 +618,33 @@ class MainWindow(QWidget):
         self.player_rating_plot.update_displayed_plots(leaderboard_id, checked)
         self.opp_rating_plot.update_displayed_plots(leaderboard_id, checked)
 
-    def check_box_1v1_changed(self, state: int):
+    def check_box_1v1_RM_changed(self, state: int):
         # 0: not checked, 2: checked
         checked = True if state == 2 else False
-        SettingsHandler.set_1v1_display_option_in_settings(checked)
+        SettingsHandler.set_1v1_RM_display_option_in_settings(checked)
 
         self.update_display_options(3, checked)
 
-    def check_box_team_changed(self, state: int):
+    def check_box_team_RM_changed(self, state: int):
         # 0: not checked, 2: checked
         checked = True if state == 2 else False
-        SettingsHandler.set_team_display_option_in_settings(checked)
+        SettingsHandler.set_team_RM_display_option_in_settings(checked)
 
         self.update_display_options(4, checked)
+
+    def check_box_1v1_EW_changed(self, state: int):
+        # 0: not checked, 2: checked
+        checked = True if state == 2 else False
+        SettingsHandler.set_1v1_EW_display_option_in_settings(checked)
+
+        self.update_display_options(13, checked)
+
+    def check_box_team_EW_changed(self, state: int):
+        # 0: not checked, 2: checked
+        checked = True if state == 2 else False
+        SettingsHandler.set_team_EW_display_option_in_settings(checked)
+
+        self.update_display_options(14, checked)
 
     @staticmethod
     def display_network_error():

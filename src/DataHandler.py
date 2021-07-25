@@ -2,7 +2,7 @@ import os.path
 from threading import Thread
 
 import requests
-from PySide6.QtCore import Signal, QObject
+from PySide6.QtCore import Signal, QObject, QThread
 from PySide6.QtGui import QImage
 
 from APIStringGenerator import APIStringGenerator
@@ -15,8 +15,12 @@ class DataHandler(QObject):
     Not yet used in the Main Application
     """
     # Todo: use QThreads and QNetworkManager
+
     def __init__(self):
         super().__init__()
+
+    def get_basic_player_data_qthread(self, profile_id, finish_singal: Signal):
+        pass
 
     def get_basic_player_data(self, profile_id, finish_signal: Signal):
         thread = Thread(target=self.__get_basic_player_data_task, args=(profile_id, finish_signal))
