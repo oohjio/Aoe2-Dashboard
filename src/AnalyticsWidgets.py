@@ -7,8 +7,10 @@ from PySide6.QtGui import *
 from DataParser import Match, LocalizedAPIStrings
 from DataHandler import DataHandler
 from SettingsHandler import SettingsHandler
+from Widgets import RatingPlotWidget
 
 from pyqtgraph import mkPen
+import pyqtgraph as pg
 
 class MatchDetailWidget(QWidget):
     def __init__(self, parent: typing.Optional[QWidget], match: Match) -> None:
@@ -209,3 +211,6 @@ class CivAndColorItem(QWidget):
         painter.drawPolyline(points)
 
         painter.end()
+
+
+

@@ -486,11 +486,9 @@ class MainWindow(QWidget):
 
     def player_rating_history_loaded(self, data: tuple):
         """
-
-        :param data: Tuple(team, player, profile_id, player_name, 
+        :param data: Tuple(team, player, profile_id, player_name,
                             ratings_1v1_RM, timestamps_1v1_RM, ratings_team_RM, timestamps_team_RM, 
                             ratings_1v1_EW, timestamps_1v1_EW, ratings_team_EW, timestamps_team_EW
-        :return:
         """
         team, player = data[0], data[1]
         profile_id, player_name = data[2], data[3]

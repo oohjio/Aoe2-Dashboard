@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'analytics_windowyzggjW.ui'
+## Form generated from reading UI file 'analytics_windowovRKbV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -146,7 +146,7 @@ class Ui_AnalyticsWindow(object):
         self.rating_history_tab.setObjectName(u"rating_history_tab")
         self.layoutWidget_2 = QWidget(self.rating_history_tab)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(10, 10, 802, 444))
+        self.layoutWidget_2.setGeometry(QRect(10, 10, 802, 452))
         self.rh_tab_v_layout = QVBoxLayout(self.layoutWidget_2)
         self.rh_tab_v_layout.setObjectName(u"rh_tab_v_layout")
         self.rh_tab_v_layout.setContentsMargins(0, 0, 0, 0)
@@ -154,11 +154,11 @@ class Ui_AnalyticsWindow(object):
         self.rh_tab_bar_h_layout.setObjectName(u"rh_tab_bar_h_layout")
         self.rh_tab_bar_h_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.rh_tab_bar_h_layout.setContentsMargins(0, -1, -1, -1)
-        self.rh_tab_load_line_edit = QLineEdit(self.layoutWidget_2)
-        self.rh_tab_load_line_edit.setObjectName(u"rh_tab_load_line_edit")
-        self.rh_tab_load_line_edit.setMaximumSize(QSize(40, 16777215))
+        self.rh_info_label = QLabel(self.layoutWidget_2)
+        self.rh_info_label.setObjectName(u"rh_info_label")
+        self.rh_info_label.setFont(font)
 
-        self.rh_tab_bar_h_layout.addWidget(self.rh_tab_load_line_edit, 0, Qt.AlignRight)
+        self.rh_tab_bar_h_layout.addWidget(self.rh_info_label)
 
         self.rh_tab_bar_spacer = QSpacerItem(15, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
 
@@ -172,6 +172,11 @@ class Ui_AnalyticsWindow(object):
 
 
         self.rh_tab_v_layout.addLayout(self.rh_tab_bar_h_layout)
+
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setObjectName(u"verticalLayout")
+
+        self.rh_tab_v_layout.addLayout(self.verticalLayout)
 
         self.mh_tab_graphics_view = QGraphicsView(self.layoutWidget_2)
         self.mh_tab_graphics_view.setObjectName(u"mh_tab_graphics_view")
@@ -210,10 +215,8 @@ class Ui_AnalyticsWindow(object):
         self.mh_tab_load_line_edit.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"50", None))
         self.mh_tab_load_more_button.setText(QCoreApplication.translate("AnalyticsWindow", u"Load More", None))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.match_history_tab), QCoreApplication.translate("AnalyticsWindow", u"Match History", None))
-        self.rh_tab_load_line_edit.setInputMask("")
-        self.rh_tab_load_line_edit.setText("")
-        self.rh_tab_load_line_edit.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"25", None))
-        self.rh_tab_load_more_button.setText(QCoreApplication.translate("AnalyticsWindow", u"Load More", None))
+        self.rh_info_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Load rating for all Leaderboards with clicking the button", None))
+        self.rh_tab_load_more_button.setText(QCoreApplication.translate("AnalyticsWindow", u"Load", None))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.rating_history_tab), QCoreApplication.translate("AnalyticsWindow", u"Rating History", None))
     # retranslateUi
 
