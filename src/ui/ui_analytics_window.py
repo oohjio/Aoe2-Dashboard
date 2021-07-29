@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'analytics_windowovRKbV.ui'
+## Form generated from reading UI file 'analytics_windowtyEynp.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -21,7 +21,7 @@ class Ui_AnalyticsWindow(object):
         AnalyticsWindow.setMinimumSize(QSize(850, 560))
         self.layoutWidget = QWidget(AnalyticsWindow)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 20, 827, 554))
+        self.layoutWidget.setGeometry(QRect(10, 20, 827, 572))
         self.toplevel_v_layout = QVBoxLayout(self.layoutWidget)
         self.toplevel_v_layout.setObjectName(u"toplevel_v_layout")
         self.toplevel_v_layout.setContentsMargins(0, 0, 0, 0)
@@ -36,6 +36,53 @@ class Ui_AnalyticsWindow(object):
         self.player_name_label.setObjectName(u"player_name_label")
 
         self.player_name_h_layout.addWidget(self.player_name_label)
+
+        self.h_layout_ladder_buttons = QHBoxLayout()
+        self.h_layout_ladder_buttons.setObjectName(u"h_layout_ladder_buttons")
+        self.button_1v1_RM = QToolButton(self.layoutWidget)
+        self.button_1v1_RM.setObjectName(u"button_1v1_RM")
+        self.button_1v1_RM.setEnabled(True)
+        self.button_1v1_RM.setMaximumSize(QSize(55, 18))
+        self.button_1v1_RM.setCheckable(True)
+        self.button_1v1_RM.setChecked(True)
+        self.button_1v1_RM.setAutoExclusive(True)
+        self.button_1v1_RM.setToolButtonStyle(Qt.ToolButtonTextOnly)
+        self.button_1v1_RM.setArrowType(Qt.NoArrow)
+
+        self.h_layout_ladder_buttons.addWidget(self.button_1v1_RM)
+
+        self.button_1v1_EW = QToolButton(self.layoutWidget)
+        self.button_1v1_EW.setObjectName(u"button_1v1_EW")
+        self.button_1v1_EW.setMaximumSize(QSize(55, 18))
+        self.button_1v1_EW.setCheckable(True)
+        self.button_1v1_EW.setAutoExclusive(True)
+        self.button_1v1_EW.setToolButtonStyle(Qt.ToolButtonTextOnly)
+        self.button_1v1_EW.setArrowType(Qt.NoArrow)
+
+        self.h_layout_ladder_buttons.addWidget(self.button_1v1_EW)
+
+        self.button_team_RM = QToolButton(self.layoutWidget)
+        self.button_team_RM.setObjectName(u"button_team_RM")
+        self.button_team_RM.setMaximumSize(QSize(65, 18))
+        self.button_team_RM.setCheckable(True)
+        self.button_team_RM.setAutoExclusive(True)
+        self.button_team_RM.setToolButtonStyle(Qt.ToolButtonTextOnly)
+        self.button_team_RM.setArrowType(Qt.NoArrow)
+
+        self.h_layout_ladder_buttons.addWidget(self.button_team_RM)
+
+        self.button_team_EW = QToolButton(self.layoutWidget)
+        self.button_team_EW.setObjectName(u"button_team_EW")
+        self.button_team_EW.setMaximumSize(QSize(65, 20))
+        self.button_team_EW.setCheckable(True)
+        self.button_team_EW.setAutoExclusive(True)
+        self.button_team_EW.setToolButtonStyle(Qt.ToolButtonTextOnly)
+        self.button_team_EW.setArrowType(Qt.NoArrow)
+
+        self.h_layout_ladder_buttons.addWidget(self.button_team_EW)
+
+
+        self.player_name_h_layout.addLayout(self.h_layout_ladder_buttons)
 
 
         self.toplevel_v_layout.addLayout(self.player_name_h_layout)
@@ -123,6 +170,9 @@ class Ui_AnalyticsWindow(object):
         self.mh_tab_load_more_button = QPushButton(self.layoutWidget_3)
         self.mh_tab_load_more_button.setObjectName(u"mh_tab_load_more_button")
         self.mh_tab_load_more_button.setMaximumSize(QSize(100, 16777215))
+        self.mh_tab_load_more_button.setCheckable(False)
+        self.mh_tab_load_more_button.setChecked(False)
+        self.mh_tab_load_more_button.setFlat(False)
 
         self.mh_tab_bar_h_layout.addWidget(self.mh_tab_load_more_button)
 
@@ -201,6 +251,10 @@ class Ui_AnalyticsWindow(object):
         AnalyticsWindow.setWindowTitle(QCoreApplication.translate("AnalyticsWindow", u"Analytics", None))
         self.play_displ_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Analytics of", None))
         self.player_name_label.setText(QCoreApplication.translate("AnalyticsWindow", u"TextLabel", None))
+        self.button_1v1_RM.setText(QCoreApplication.translate("AnalyticsWindow", u"1v1 RM", None))
+        self.button_1v1_EW.setText(QCoreApplication.translate("AnalyticsWindow", u"1v1 EW", None))
+        self.button_team_RM.setText(QCoreApplication.translate("AnalyticsWindow", u"Team RM", None))
+        self.button_team_EW.setText(QCoreApplication.translate("AnalyticsWindow", u"Team EW", None))
         self.pd_displ_rating_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Rating", None))
         self.pd_rating_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
         self.pd_displ_wins_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Wins", None))
@@ -209,10 +263,10 @@ class Ui_AnalyticsWindow(object):
         self.pd_losses_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
         self.pd_displ_winperc_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Win Percentage", None))
         self.pd_winperc_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
-        self.mh_tab_info_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Load matches with clicking the button. Max 50 matches at a time!", None))
+        self.mh_tab_info_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Load matches with clicking the button. Max 1000 matches at a time!", None))
         self.mh_tab_load_line_edit.setInputMask("")
         self.mh_tab_load_line_edit.setText("")
-        self.mh_tab_load_line_edit.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"50", None))
+        self.mh_tab_load_line_edit.setPlaceholderText(QCoreApplication.translate("AnalyticsWindow", u"1000", None))
         self.mh_tab_load_more_button.setText(QCoreApplication.translate("AnalyticsWindow", u"Load More", None))
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.match_history_tab), QCoreApplication.translate("AnalyticsWindow", u"Match History", None))
         self.rh_info_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Load rating for all Leaderboards with clicking the button", None))

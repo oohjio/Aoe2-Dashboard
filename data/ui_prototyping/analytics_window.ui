@@ -25,7 +25,7 @@
      <x>10</x>
      <y>20</y>
      <width>827</width>
-     <height>554</height>
+     <height>572</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="toplevel_v_layout">
@@ -44,6 +44,116 @@
          <string>TextLabel</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="h_layout_ladder_buttons">
+        <item>
+         <widget class="QToolButton" name="button_1v1_RM">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>55</width>
+            <height>18</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>1v1 RM</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
+          </property>
+          <property name="arrowType">
+           <enum>Qt::NoArrow</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="button_1v1_EW">
+          <property name="maximumSize">
+           <size>
+            <width>55</width>
+            <height>18</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>1v1 EW</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
+          </property>
+          <property name="arrowType">
+           <enum>Qt::NoArrow</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="button_team_RM">
+          <property name="maximumSize">
+           <size>
+            <width>65</width>
+            <height>18</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Team RM</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
+          </property>
+          <property name="arrowType">
+           <enum>Qt::NoArrow</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="button_team_EW">
+          <property name="maximumSize">
+           <size>
+            <width>65</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Team EW</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <property name="toolButtonStyle">
+           <enum>Qt::ToolButtonTextOnly</enum>
+          </property>
+          <property name="arrowType">
+           <enum>Qt::NoArrow</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -125,7 +235,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="match_history_tab">
        <attribute name="title">
@@ -157,7 +267,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Load matches with clicking the button. Max 50 matches at a time!</string>
+              <string>Load matches with clicking the button. Max 1000 matches at a time!</string>
              </property>
             </widget>
            </item>
@@ -176,7 +286,7 @@
               <string/>
              </property>
              <property name="placeholderText">
-              <string>50</string>
+              <string>1000</string>
              </property>
             </widget>
            </item>
@@ -206,6 +316,15 @@
              </property>
              <property name="text">
               <string>Load More</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
              </property>
             </widget>
            </item>

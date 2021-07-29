@@ -19,9 +19,8 @@ class DataHandler(QObject):
     def __init__(self):
         super().__init__()
 
-
-    def get_basic_player_data(self, profile_id, finish_signal: Signal):
-        thread = Thread(target=self.__get_basic_player_data_task, args=(profile_id, finish_signal))
+    def get_basic_player_data_for_leaderboard(self, leaderboard_id, profile_id, finish_signal: Signal):
+        thread = Thread(target=self.__get_basic_player_data_task, args=(leaderboard_id, profile_id, finish_signal))
         thread.start()
 
     def load_last_matches(self, profile_id: int, count: int, start: int, finish_signal: Signal):
@@ -31,10 +30,14 @@ class DataHandler(QObject):
     def load_rating_history_all_lb(self, profile_id: int, count: int, finish_signal: Signal):
         thread = Thread(target=self.__load_rating_history__all_lb_task, args=(profile_id, count, finish_signal))
         thread.start()
+    def load_match_with_timestamp_for_leaderboard(self, profile_id: int, timestamp: int, leaderboard_id: int, finish_signal):
+        thread = Thread(target=self.__load_match_with_timestamp_for_leaderboard_task, args=(profile_id, timestamp, leaderboard_id, finish_signal))
+        thread.start()
+
     # Tasks
 
-    def __get_basic_player_data_task(self, profile_id, finish_signal: Signal):
-        url_str = APIStringGenerator.get_API_string_for_rating_history(3, profile_id, 1)
+    def __get_basic_player_data_task(self, leaderboard_id, profile_id, finish_signal: Signal):
+        url_str = APIStringGenerator.get_API_string_for_rating_history(leaderboard_id, profile_id, 1)
 
         try:
             response = requests.get(url_str)
@@ -97,6 +100,9 @@ class DataHandler(QObject):
             return_tuple = (1, data)
             finish_signal.emit(return_tuple)
 
+    def __load_match_with_timestamp_for_leaderboard_task(self, profile_id: int, timestamp: int, leaderboard_id: int, finish_signal):
+        pass
+
     @staticmethod
     def get_civ_icon_for_id(civ_id: int) -> QImage:
         mapping = dict()
@@ -107,9 +113,15 @@ class DataHandler(QObject):
                 l = e.split(",")
                 if l[0] == "": break
                 mapping.update({int(l[0]): l[1]})
-
-        civ_name = mapping[civ_id]
-        path = os.path.dirname(__file__) + "/../img/civs/{}.png".format(civ_name)
-        image = QImage(path)
+        try:
+            civ_name = mapping[civ_id]
+        except KeyError:
+            # Todo: Default Civ Icon
+            civ_name = "aztecs"
+            path = os.path.dirname(__file__) + "/../img/civs/{}.png".format(civ_name)
+            image = QImage(path)
+        else:
+            path = os.path.dirname(__file__) + "/../img/civs/{}.png".format(civ_name)
+            image = QImage(path)
 
         return image

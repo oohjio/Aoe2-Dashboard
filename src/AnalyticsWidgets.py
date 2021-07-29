@@ -13,21 +13,23 @@ from pyqtgraph import mkPen
 import pyqtgraph as pg
 
 class MatchDetailWidget(QWidget):
-    def __init__(self, parent: typing.Optional[QWidget], match: Match) -> None:
+    def __init__(self, parent: typing.Optional[QWidget], match: Match, has_close_button: bool) -> None:
         super().__init__(parent=parent)
 
         # Size
         self.match = match
+        self.has_close_button = has_close_button
         self.localized_api_strings = LocalizedAPIStrings()
+        self.collapsed = False
 
         # Set Up UI
         grid_layout = QGridLayout()
         grid_layout.setHorizontalSpacing(4)
 
-        h_metadata_layout = QHBoxLayout()
-        h_metadata_layout.setSpacing(5)
-        h_time_started_layout = QHBoxLayout()
-        h_time_started_layout.setSpacing(5)
+        self.self.h_metadata_layout = QHBoxLayout()
+        self.h_metadata_layout.setSpacing(5)
+        self.h_time_started_layout = QHBoxLayout()
+        self.h_time_started_layout.setSpacing(5)
 
         metadata_label = QLabel("Metadata:")
 
@@ -69,6 +71,13 @@ class MatchDetailWidget(QWidget):
         server_label.setFont(font_italic)
         server_label.setStyleSheet(accented_style_sheet)
 
+        self.close_button = QToolButton()
+        if not self.has_close_button:
+            self.close_button.setHidden(True)
+        self.close_button.setMaximumSize(QSize(18, 18))
+        self.close_button.setArrowType(Qt.DownArrow)
+        self.close_button.clicked.connect(self.close_button_clicked)
+
         time_label = QLabel("Match Started: ")
         time_label.setFont(font_bold)
 
@@ -88,15 +97,16 @@ class MatchDetailWidget(QWidget):
         self.time_started_labels = [time_label, time_match_started_label]
 
         for l in self.metadata_labels:
-            h_metadata_layout.addWidget(l, stretch=5, alignment=Qt.AlignLeft)
+            self.h_metadata_layout.addWidget(l, stretch=5, alignment=Qt.AlignLeft)
         for l in self.time_started_labels:
-            h_time_started_layout.addWidget(l, stretch=5, alignment=Qt.AlignLeft)
+            self.h_time_started_layout.addWidget(l, stretch=5, alignment=Qt.AlignLeft)
 
+        self.h_metadata_layout.addWidget(self.close_button, alignment=Qt.AlignRight)
 
 
         vertical_layout_top_level = QVBoxLayout()
-        vertical_layout_top_level.addLayout(h_metadata_layout)
-        vertical_layout_top_level.addLayout(h_time_started_layout)
+        vertical_layout_top_level.addLayout(self.h_metadata_layout)
+        vertical_layout_top_level.addLayout(self.h_time_started_layout)
 
 
         h_match_details_layout = QHBoxLayout()
@@ -153,7 +163,8 @@ class MatchDetailWidget(QWidget):
 
         return
 
-
+    def close_button_clicked(self):
+        self.close()
 
 
     def paintEvent(self, e):

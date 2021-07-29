@@ -1,4 +1,6 @@
 import typing
+import math
+import arrow
 
 import numpy as np
 import pyqtgraph as pg
@@ -21,6 +23,10 @@ class RatingPlotWidget(pg.PlotWidget):
 
         self.player_name = player_name
         self.setBackground(None)
+
+        self.current_hovered_point = None   # ("timestamp", "lb")
+        self.curent_text_box = None
+        self.registered_click_signal = None
 
         self.setMouseEnabled(x=False, y=False)
 
@@ -78,6 +84,122 @@ class RatingPlotWidget(pg.PlotWidget):
 
         self.stored_plot_items[leaderboard_id].updateItems()
 
+    def set_up_for_big_scale_display(self, show: bool):
+        for _plot in self.stored_plot_items:
+            if _plot is not None:
+                plot: pg.PlotDataItem = _plot
+
+                #show Symbols
+                plot.setSymbolPen("w")
+                plot.setSymbol("o")
+                plot.setSymbolSize(5)
+
+    def register_clicked_signal(self, clicked_signal: Signal):
+        self.sceneObj.sigMouseMoved.connect(self.mouse_moved)
+        self.sceneObj.sigMouseClicked.connect(self.mouse_clicked)
+        self.registered_click_signal = clicked_signal
+
+    def mouse_moved(self, evt):
+        vb: pg.ViewBox = self.getViewBox()
+        mouse_point = vb.mapSceneToView(evt)
+
+        res = self.search_point(mouse_point)
+        if res is None:
+            if self.curent_text_box != None:
+                self.removeItem(self.curent_text_box)
+            return
+        rating, timestamp, index, lb = res
+
+        arrow_time = arrow.get(int(timestamp))
+        time_date = arrow_time.format("YYYY-MM-DD")
+
+        text = f"R: {rating}, D: {time_date}\nClick to see more!"
+        text_box = pg.TextItem(text=text, anchor=(-0.2, 0.5), angle=0, border='w', fill=(150, 150, 150, 100))
+
+        if self.curent_text_box != None:
+            self.removeItem(self.curent_text_box)
+
+        self.addItem(text_box)
+        text_box.setPos(timestamp, rating)
+
+        self.current_hovered_point = (timestamp, lb)
+        self.curent_text_box = text_box
+
+    def mouse_clicked(self, evt):
+        # Es ist egal wo geklickt wird, es wird ein Singal an AnalyticsWindow gesendet (wird vorher übergeben)
+        # Mit den Argument timestamp und leaderboard des momentanen gehoverten Datenpunkt
+        # Dann wird ein Match mit dem Zeitcode gesucht und dargestellt
+        if self.current_hovered_point != None:
+            self.registered_click_signal.emit(self.current_hovered_point)
+
+
+    # Todo: make a subfunction
+    def search_point(self, mouse_point):
+        mouse_timestamp = mouse_point.x()
+        mouse_rating = mouse_point.y()
+        # check if a datapoint is in range
+        min_distance = 9999999999
+        min_value = (0, 0, 0, 0)
+        for index, value in enumerate(self.data_1v1_RM_ranking[0]):
+            rating = value
+            timestamp = self.data_1v1_RM_ranking[1][index]
+            timestamp_distance = abs(mouse_timestamp - timestamp) / 1000
+            rating_distance = abs(mouse_rating - rating)
+
+            distance = math.sqrt(timestamp_distance ** 2 + rating_distance ** 2)
+            if distance < min_distance:
+                min_distance = distance
+                min_value = (rating, timestamp, index, 3)
+            if distance < 5:
+                break
+
+        if min_distance < 10:
+            return min_value
+
+        for index, value in enumerate(self.data_team_RM_ranking[0]):
+            rating = value
+            timestamp = self.data_team_RM_ranking[1][index]
+            timestamp_distance = abs(mouse_timestamp - timestamp) / 1000
+            rating_distance = abs(mouse_rating - rating)
+
+            distance = math.sqrt(timestamp_distance ** 2 + rating_distance ** 2)
+            if distance < min_distance:
+                min_distance = distance
+                min_value = (rating, timestamp, index, 4)
+            if distance < 2:
+                break
+
+        if min_distance < 10:
+            return min_value
+
+        for index, value in enumerate(self.data_1v1_EW_ranking[0]):
+            rating = value
+            timestamp = self.data_1v1_EW_ranking[1][index]
+            timestamp_distance = abs(mouse_timestamp - timestamp) / 1000
+            rating_distance = abs(mouse_rating - rating)
+
+            distance = math.sqrt(timestamp_distance ** 2 + rating_distance ** 2)
+            if distance < min_distance:
+                min_distance = distance
+                min_value = (rating, timestamp, index, 13)
+
+        if min_distance < 10:
+            return min_value
+
+        for index, value in enumerate(self.data_team_EW_ranking[0]):
+            rating = value
+            timestamp = self.data_team_EW_ranking[1][index]
+            timestamp_distance = abs(mouse_timestamp - timestamp) / 1000
+            rating_distance = abs(mouse_rating - rating)
+
+            distance = math.sqrt(timestamp_distance ** 2 + rating_distance ** 2)
+            if distance < min_distance:
+                min_distance = distance
+                min_value = (rating, timestamp, index, 14)
+
+
+        if min_distance < 10:
+            return min_value
 
 class TeamTableWidget(pg.TableWidget):
     """
