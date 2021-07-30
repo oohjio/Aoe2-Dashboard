@@ -1,3 +1,6 @@
+#  Copyright (C)  2021 oohjio, https://github.com/oohjio
+#  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3 as published by the Free Software Foundation.
+
 import typing
 
 from PySide6.QtCore import *
@@ -26,7 +29,7 @@ class MatchDetailWidget(QWidget):
         grid_layout = QGridLayout()
         grid_layout.setHorizontalSpacing(4)
 
-        self.self.h_metadata_layout = QHBoxLayout()
+        self.h_metadata_layout = QHBoxLayout()
         self.h_metadata_layout.setSpacing(5)
         self.h_time_started_layout = QHBoxLayout()
         self.h_time_started_layout.setSpacing(5)

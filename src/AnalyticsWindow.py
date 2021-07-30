@@ -1,3 +1,6 @@
+#  Copyright (C)  2021 oohjio, https://github.com/oohjio
+#  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3 as published by the Free Software Foundation.
+
 import json
 
 from PySide6.QtCore import *
@@ -62,6 +65,14 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
     def set_up_UI(self):
         self.setupUi(self)
 
+        # Layouts da QtDesinger dumm ist
+        self.setLayout(self.toplevel_v_layout)
+        self.toplevel_v_layout.setContentsMargins(15, 15, 15, 15)
+        self.match_history_tab.setLayout(self.mh_tab_v_layout)
+        self.mh_tab_v_layout.setContentsMargins(10, 10, 10, 10)
+        self.rating_history_tab.setLayout(self.rh_tab_v_layout)
+        self.rh_tab_v_layout.setContentsMargins(10, 10, 10, 10)
+
         # SIGNALS
         self.tab_widget.currentChanged.connect(self.tab_widget_changed_index)
         self.tab_widget_changed_index(0)
@@ -94,6 +105,12 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
 
         self.rh_tab_v_layout.addWidget(self.rh_busy_indicator)
         self.mh_tab_v_layout.addWidget(self.mh_busy_indicator)
+
+        # Stlye Highlight
+        style_sheet_orange = "color: orange"
+        highlighted_labels = [self.play_displ_label, self.pd_displ_rating_label, self.pd_displ_wins_label, self.pd_displ_losses_label, self.pd_displ_winperc_label, self.play_displ_lb_label]
+        for e in highlighted_labels:
+            e.setStyleSheet(style_sheet_orange)
 
     # UI Signals
 
@@ -128,8 +145,8 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
                 load_matches = int(self.mh_tab_load_line_edit.placeholderText())
                 self.mh_tab_load_line_edit.setPlaceholderText("")
         else:
-            if load_matches > 100:
-                load_matches = 100
+            if load_matches > 1000:
+                load_matches = 1000
 
         self.mh_tab_load_line_edit.setText(str(load_matches))
 
@@ -361,3 +378,12 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
         self.pd_wins_label.setText(str(player_data.wins))
         self.pd_losses_label.setText(str(player_data.losses))
         self.pd_winperc_label.setText(player_data.win_percentage_str)
+
+        if self.current_player_data_ladder == 3:
+            self.play_lb_label.setText("1v1 RM")
+        elif self.current_player_data_ladder == 4:
+            self.play_lb_label.setText("Team RM")
+        elif self.current_player_data_ladder == 13:
+            self.play_lb_label.setText("1v1 EW")
+        elif self.current_player_data_ladder == 14:
+            self.play_lb_label.setText("Team EW")

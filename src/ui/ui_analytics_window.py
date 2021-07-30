@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'analytics_windowtyEynp.ui'
+## Form generated from reading UI file 'analytics_windowzddcxj.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -17,11 +17,11 @@ class Ui_AnalyticsWindow(object):
     def setupUi(self, AnalyticsWindow):
         if not AnalyticsWindow.objectName():
             AnalyticsWindow.setObjectName(u"AnalyticsWindow")
-        AnalyticsWindow.resize(850, 590)
-        AnalyticsWindow.setMinimumSize(QSize(850, 560))
+        AnalyticsWindow.resize(980, 800)
+        AnalyticsWindow.setMinimumSize(QSize(980, 800))
         self.layoutWidget = QWidget(AnalyticsWindow)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 20, 827, 572))
+        self.layoutWidget.setGeometry(QRect(10, 20, 952, 758))
         self.toplevel_v_layout = QVBoxLayout(self.layoutWidget)
         self.toplevel_v_layout.setObjectName(u"toplevel_v_layout")
         self.toplevel_v_layout.setContentsMargins(0, 0, 0, 0)
@@ -37,6 +37,16 @@ class Ui_AnalyticsWindow(object):
 
         self.player_name_h_layout.addWidget(self.player_name_label)
 
+        self.play_displ_lb_label = QLabel(self.layoutWidget)
+        self.play_displ_lb_label.setObjectName(u"play_displ_lb_label")
+
+        self.player_name_h_layout.addWidget(self.play_displ_lb_label)
+
+        self.play_lb_label = QLabel(self.layoutWidget)
+        self.play_lb_label.setObjectName(u"play_lb_label")
+
+        self.player_name_h_layout.addWidget(self.play_lb_label)
+
         self.h_layout_ladder_buttons = QHBoxLayout()
         self.h_layout_ladder_buttons.setObjectName(u"h_layout_ladder_buttons")
         self.button_1v1_RM = QToolButton(self.layoutWidget)
@@ -51,16 +61,6 @@ class Ui_AnalyticsWindow(object):
 
         self.h_layout_ladder_buttons.addWidget(self.button_1v1_RM)
 
-        self.button_1v1_EW = QToolButton(self.layoutWidget)
-        self.button_1v1_EW.setObjectName(u"button_1v1_EW")
-        self.button_1v1_EW.setMaximumSize(QSize(55, 18))
-        self.button_1v1_EW.setCheckable(True)
-        self.button_1v1_EW.setAutoExclusive(True)
-        self.button_1v1_EW.setToolButtonStyle(Qt.ToolButtonTextOnly)
-        self.button_1v1_EW.setArrowType(Qt.NoArrow)
-
-        self.h_layout_ladder_buttons.addWidget(self.button_1v1_EW)
-
         self.button_team_RM = QToolButton(self.layoutWidget)
         self.button_team_RM.setObjectName(u"button_team_RM")
         self.button_team_RM.setMaximumSize(QSize(65, 18))
@@ -70,6 +70,16 @@ class Ui_AnalyticsWindow(object):
         self.button_team_RM.setArrowType(Qt.NoArrow)
 
         self.h_layout_ladder_buttons.addWidget(self.button_team_RM)
+
+        self.button_1v1_EW = QToolButton(self.layoutWidget)
+        self.button_1v1_EW.setObjectName(u"button_1v1_EW")
+        self.button_1v1_EW.setMaximumSize(QSize(55, 18))
+        self.button_1v1_EW.setCheckable(True)
+        self.button_1v1_EW.setAutoExclusive(True)
+        self.button_1v1_EW.setToolButtonStyle(Qt.ToolButtonTextOnly)
+        self.button_1v1_EW.setArrowType(Qt.NoArrow)
+
+        self.h_layout_ladder_buttons.addWidget(self.button_1v1_EW)
 
         self.button_team_EW = QToolButton(self.layoutWidget)
         self.button_team_EW.setObjectName(u"button_team_EW")
@@ -135,13 +145,13 @@ class Ui_AnalyticsWindow(object):
 
         self.tab_widget = QTabWidget(self.layoutWidget)
         self.tab_widget.setObjectName(u"tab_widget")
-        self.tab_widget.setMinimumSize(QSize(825, 500))
+        self.tab_widget.setMinimumSize(QSize(900, 700))
         self.tab_widget.setTabPosition(QTabWidget.North)
         self.match_history_tab = QWidget()
         self.match_history_tab.setObjectName(u"match_history_tab")
         self.layoutWidget_3 = QWidget(self.match_history_tab)
         self.layoutWidget_3.setObjectName(u"layoutWidget_3")
-        self.layoutWidget_3.setGeometry(QRect(10, 10, 802, 444))
+        self.layoutWidget_3.setGeometry(QRect(10, 10, 952, 644))
         self.mh_tab_v_layout = QVBoxLayout(self.layoutWidget_3)
         self.mh_tab_v_layout.setObjectName(u"mh_tab_v_layout")
         self.mh_tab_v_layout.setContentsMargins(0, 0, 0, 0)
@@ -181,12 +191,23 @@ class Ui_AnalyticsWindow(object):
 
         self.mh_tab_scroll_area = QScrollArea(self.layoutWidget_3)
         self.mh_tab_scroll_area.setObjectName(u"mh_tab_scroll_area")
-        self.mh_tab_scroll_area.setMinimumSize(QSize(800, 400))
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.mh_tab_scroll_area.sizePolicy().hasHeightForWidth())
+        self.mh_tab_scroll_area.setSizePolicy(sizePolicy)
+        self.mh_tab_scroll_area.setMinimumSize(QSize(600, 600))
         self.mh_tab_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.mh_tab_scroll_area.setWidgetResizable(True)
         self.mh_tab_scroll_area_content = QWidget()
         self.mh_tab_scroll_area_content.setObjectName(u"mh_tab_scroll_area_content")
-        self.mh_tab_scroll_area_content.setGeometry(QRect(0, 0, 796, 396))
+        self.mh_tab_scroll_area_content.setGeometry(QRect(0, 0, 946, 596))
+        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.mh_tab_scroll_area_content.sizePolicy().hasHeightForWidth())
+        self.mh_tab_scroll_area_content.setSizePolicy(sizePolicy1)
+        self.mh_tab_scroll_area_content.setMinimumSize(QSize(600, 0))
         self.mh_tab_scroll_area.setWidget(self.mh_tab_scroll_area_content)
 
         self.mh_tab_v_layout.addWidget(self.mh_tab_scroll_area)
@@ -250,10 +271,12 @@ class Ui_AnalyticsWindow(object):
     def retranslateUi(self, AnalyticsWindow):
         AnalyticsWindow.setWindowTitle(QCoreApplication.translate("AnalyticsWindow", u"Analytics", None))
         self.play_displ_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Analytics of", None))
-        self.player_name_label.setText(QCoreApplication.translate("AnalyticsWindow", u"TextLabel", None))
+        self.player_name_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
+        self.play_displ_lb_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Leaderboard", None))
+        self.play_lb_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))
         self.button_1v1_RM.setText(QCoreApplication.translate("AnalyticsWindow", u"1v1 RM", None))
-        self.button_1v1_EW.setText(QCoreApplication.translate("AnalyticsWindow", u"1v1 EW", None))
         self.button_team_RM.setText(QCoreApplication.translate("AnalyticsWindow", u"Team RM", None))
+        self.button_1v1_EW.setText(QCoreApplication.translate("AnalyticsWindow", u"1v1 EW", None))
         self.button_team_EW.setText(QCoreApplication.translate("AnalyticsWindow", u"Team EW", None))
         self.pd_displ_rating_label.setText(QCoreApplication.translate("AnalyticsWindow", u"Rating", None))
         self.pd_rating_label.setText(QCoreApplication.translate("AnalyticsWindow", u"None", None))

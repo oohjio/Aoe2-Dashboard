@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>850</width>
-    <height>590</height>
+    <width>980</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>850</width>
-    <height>560</height>
+    <width>980</width>
+    <height>800</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
     <rect>
      <x>10</x>
      <y>20</y>
-     <width>827</width>
-     <height>572</height>
+     <width>952</width>
+     <height>758</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="toplevel_v_layout">
@@ -41,7 +41,21 @@
       <item>
        <widget class="QLabel" name="player_name_label">
         <property name="text">
-         <string>TextLabel</string>
+         <string>None</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="play_displ_lb_label">
+        <property name="text">
+         <string>Leaderboard</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="play_lb_label">
+        <property name="text">
+         <string>None</string>
         </property>
        </widget>
       </item>
@@ -79,15 +93,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="button_1v1_EW">
+         <widget class="QToolButton" name="button_team_RM">
           <property name="maximumSize">
            <size>
-            <width>55</width>
+            <width>65</width>
             <height>18</height>
            </size>
           </property>
           <property name="text">
-           <string>1v1 EW</string>
+           <string>Team RM</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -104,15 +118,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QToolButton" name="button_team_RM">
+         <widget class="QToolButton" name="button_1v1_EW">
           <property name="maximumSize">
            <size>
-            <width>65</width>
+            <width>55</width>
             <height>18</height>
            </size>
           </property>
           <property name="text">
-           <string>Team RM</string>
+           <string>1v1 EW</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -227,8 +241,8 @@
      <widget class="QTabWidget" name="tab_widget">
       <property name="minimumSize">
        <size>
-        <width>825</width>
-        <height>500</height>
+        <width>900</width>
+        <height>700</height>
        </size>
       </property>
       <property name="tabPosition">
@@ -246,8 +260,8 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>802</width>
-          <height>444</height>
+          <width>952</width>
+          <height>644</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="mh_tab_v_layout">
@@ -332,10 +346,16 @@
          </item>
          <item>
           <widget class="QScrollArea" name="mh_tab_scroll_area">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>800</width>
-             <height>400</height>
+             <width>600</width>
+             <height>600</height>
             </size>
            </property>
            <property name="horizontalScrollBarPolicy">
@@ -349,9 +369,21 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>796</width>
-              <height>396</height>
+              <width>946</width>
+              <height>596</height>
              </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>600</width>
+              <height>0</height>
+             </size>
             </property>
            </widget>
           </widget>

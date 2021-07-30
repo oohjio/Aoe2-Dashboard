@@ -1,3 +1,6 @@
+#  Copyright (C)  2021 oohjio, https://github.com/oohjio
+#  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3 as published by the Free Software Foundation.
+
 import typing
 import math
 import arrow
@@ -131,6 +134,7 @@ class RatingPlotWidget(pg.PlotWidget):
         # Dann wird ein Match mit dem Zeitcode gesucht und dargestellt
         if self.current_hovered_point != None:
             self.registered_click_signal.emit(self.current_hovered_point)
+
 
 
     # Todo: make a subfunction
