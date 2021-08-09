@@ -8,9 +8,9 @@ from threading import Thread
 
 import numpy as np
 import requests
-from PySide6.QtCore import QCoreApplication, QTimer, SIGNAL, Qt, Signal
-from PySide6.QtGui import QFont, QIcon
-from PySide6.QtWidgets import QLabel, QToolButton, QVBoxLayout, QHBoxLayout, QGridLayout, QCheckBox, \
+from PySide2.QtCore import QCoreApplication, QTimer, SIGNAL, Qt, Signal
+from PySide2.QtGui import QFont, QIcon
+from PySide2.QtWidgets import QLabel, QToolButton, QVBoxLayout, QHBoxLayout, QGridLayout, QCheckBox, \
     QWidget, QMessageBox, QProgressBar
 
 from APIStringGenerator import APIStringGenerator
@@ -30,6 +30,8 @@ class MainWindow(QWidget):
     sig_player_data_updated = Signal()
     sig_player_data_loaded = Signal()
     sig_rating_history_loaded = Signal(tuple)
+
+    is_running_windows = True
 
     def __init__(self):
         super().__init__()

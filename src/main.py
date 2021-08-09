@@ -3,14 +3,20 @@
 
 import sys
 
-from PySide6.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
 
 from MainWindow import MainWindow
+
+import qtmodern.styles
+import qtmodern.windows
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     window = MainWindow()
-    window.show()
 
-    sys.exit(app.exec())
+    qtmodern.styles.dark(app)
+    mw = qtmodern.windows.ModernWindow(window)
+    mw.show()
+
+    sys.exit(app.exec_())

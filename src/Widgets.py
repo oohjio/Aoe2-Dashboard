@@ -7,9 +7,9 @@ import arrow
 
 import numpy as np
 import pyqtgraph as pg
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 
 from APIStringGenerator import APIStringGenerator
 from DataParser import BasicPlayerInfo

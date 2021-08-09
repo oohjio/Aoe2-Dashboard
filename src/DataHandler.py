@@ -5,8 +5,8 @@ import os.path
 from threading import Thread
 
 import requests
-from PySide6.QtCore import Signal, QObject, QThread
-from PySide6.QtGui import QImage
+from PySide2.QtCore import Signal, QObject, QThread
+from PySide2.QtGui import QImage
 
 from APIStringGenerator import APIStringGenerator
 from DataParser import *

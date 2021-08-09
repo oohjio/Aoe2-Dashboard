@@ -6,9 +6,9 @@ import os.path
 from threading import Thread
 
 import requests
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QCloseEvent
-from PySide6.QtWidgets import *
+from PySide2.QtCore import Qt, Signal
+from PySide2.QtGui import QCloseEvent
+from PySide2.QtWidgets import *
 
 from APIStringGenerator import APIStringGenerator
 from SettingsHandler import SettingsHandler

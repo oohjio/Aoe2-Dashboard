@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 import arrow
 import numpy as np
-from PySide6.QtCore import QSettings
+from PySide2.QtCore import QSettings
 
 import keys as keys
 
