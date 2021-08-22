@@ -28,152 +28,160 @@
   ],
   "civ": [
     {
-      "id": 0,
-      "string": "Aztekler"
-    },
-    {
       "id": 1,
-      "string": "Berberiler"
-    },
-    {
-      "id": 2,
       "string": "Britonlar"
     },
     {
-      "id": 3,
-      "string": "Bulgarlar"
-    },
-    {
-      "id": 4,
-      "string": "Burgundians"
-    },
-    {
-      "id": 5,
-      "string": "Birmanlar"
-    },
-    {
-      "id": 6,
-      "string": "Bizansl\u0131lar"
-    },
-    {
-      "id": 7,
-      "string": "Keltler"
-    },
-    {
-      "id": 8,
-      "string": "\u00c7inliler"
-    },
-    {
-      "id": 9,
-      "string": "Kumanlar"
-    },
-    {
-      "id": 10,
-      "string": "Etiyopyal\u0131lar"
-    },
-    {
-      "id": 11,
+      "id": 2,
       "string": "Franklar"
     },
     {
-      "id": 12,
+      "id": 3,
       "string": "Gotlar"
     },
     {
-      "id": 13,
-      "string": "Hunlar"
-    },
-    {
-      "id": 14,
-      "string": "\u0130nkalar"
-    },
-    {
-      "id": 15,
-      "string": "Hintler"
-    },
-    {
-      "id": 16,
-      "string": "\u0130talyanlar"
-    },
-    {
-      "id": 17,
-      "string": "Japonlar"
-    },
-    {
-      "id": 18,
-      "string": "Kmerler"
-    },
-    {
-      "id": 19,
-      "string": "Koreliler"
-    },
-    {
-      "id": 20,
-      "string": "Litvanyal\u0131lar"
-    },
-    {
-      "id": 21,
-      "string": "Macarlar"
-    },
-    {
-      "id": 22,
-      "string": "Malaylar"
-    },
-    {
-      "id": 23,
-      "string": "Malililer"
-    },
-    {
-      "id": 24,
-      "string": "Mayalar"
-    },
-    {
-      "id": 25,
-      "string": "Mo\u011follar"
-    },
-    {
-      "id": 26,
-      "string": "Persler"
-    },
-    {
-      "id": 27,
-      "string": "Portekizliler"
-    },
-    {
-      "id": 28,
-      "string": "Sarazenler"
-    },
-    {
-      "id": 29,
-      "string": "Sicilians"
-    },
-    {
-      "id": 30,
-      "string": "Slavlar"
-    },
-    {
-      "id": 31,
-      "string": "\u0130spanyollar"
-    },
-    {
-      "id": 32,
-      "string": "Tatarlar"
-    },
-    {
-      "id": 33,
+      "id": 4,
       "string": "T\u00f6tonlar"
     },
     {
-      "id": 34,
+      "id": 5,
+      "string": "Japonlar"
+    },
+    {
+      "id": 6,
+      "string": "\u00c7inliler"
+    },
+    {
+      "id": 7,
+      "string": "Bizansl\u0131lar"
+    },
+    {
+      "id": 8,
+      "string": "Persler"
+    },
+    {
+      "id": 9,
+      "string": "Sarazenler"
+    },
+    {
+      "id": 10,
       "string": "T\u00fcrkler"
     },
     {
-      "id": 35,
+      "id": 11,
+      "string": "Vikingler"
+    },
+    {
+      "id": 12,
+      "string": "Mo\u011follar"
+    },
+    {
+      "id": 13,
+      "string": "Keltler"
+    },
+    {
+      "id": 14,
+      "string": "\u0130spanyollar"
+    },
+    {
+      "id": 15,
+      "string": "Aztekler"
+    },
+    {
+      "id": 16,
+      "string": "Mayalar"
+    },
+    {
+      "id": 17,
+      "string": "Hunlar"
+    },
+    {
+      "id": 18,
+      "string": "Koreliler"
+    },
+    {
+      "id": 19,
+      "string": "\u0130talyanlar"
+    },
+    {
+      "id": 20,
+      "string": "Hintler"
+    },
+    {
+      "id": 21,
+      "string": "\u0130nkalar"
+    },
+    {
+      "id": 22,
+      "string": "Macarlar"
+    },
+    {
+      "id": 23,
+      "string": "Slavlar"
+    },
+    {
+      "id": 24,
+      "string": "Portekizliler"
+    },
+    {
+      "id": 25,
+      "string": "Etiyopyal\u0131lar"
+    },
+    {
+      "id": 26,
+      "string": "Malililer"
+    },
+    {
+      "id": 27,
+      "string": "Berberiler"
+    },
+    {
+      "id": 28,
+      "string": "Kmerler"
+    },
+    {
+      "id": 29,
+      "string": "Malaylar"
+    },
+    {
+      "id": 30,
+      "string": "Birmanlar"
+    },
+    {
+      "id": 31,
       "string": "Vietnaml\u0131lar"
     },
     {
+      "id": 32,
+      "string": "Bulgarlar"
+    },
+    {
+      "id": 33,
+      "string": "Tatarlar"
+    },
+    {
+      "id": 34,
+      "string": "Kumanlar"
+    },
+    {
+      "id": 35,
+      "string": "Litvanyal\u0131lar"
+    },
+    {
       "id": 36,
-      "string": "Vikingler"
+      "string": "Burgundians"
+    },
+    {
+      "id": 37,
+      "string": "Sicilians"
+    },
+    {
+      "id": 38,
+      "string": "Poles"
+    },
+    {
+      "id": 39,
+      "string": "Bohemians"
     }
   ],
   "game_type": [
@@ -708,8 +716,12 @@
       "string": "Caucasus"
     },
     {
-      "id": 136137,
-      "string": "Unknown #136137"
+      "id": 136,
+      "string": "Caucasus"
+    },
+    {
+      "id": 137,
+      "string": "\u00d6zel Harita Havuzu"
     },
     {
       "id": 138,

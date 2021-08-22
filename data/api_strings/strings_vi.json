@@ -28,152 +28,160 @@
   ],
   "civ": [
     {
-      "id": 0,
-      "string": "Aztec"
-    },
-    {
       "id": 1,
-      "string": "Berber"
-    },
-    {
-      "id": 2,
       "string": "Briton"
     },
     {
-      "id": 3,
-      "string": "Bulgaria"
-    },
-    {
-      "id": 4,
-      "string": "Burgundians"
-    },
-    {
-      "id": 5,
-      "string": "Mi\u1ebfn \u0110i\u1ec7n"
-    },
-    {
-      "id": 6,
-      "string": "\u0110\u00f4ng La M\u00e3"
-    },
-    {
-      "id": 7,
-      "string": "Celt"
-    },
-    {
-      "id": 8,
-      "string": "Trung Qu\u1ed1c"
-    },
-    {
-      "id": 9,
-      "string": "Cuman"
-    },
-    {
-      "id": 10,
-      "string": "Ethiopia"
-    },
-    {
-      "id": 11,
+      "id": 2,
       "string": "Frank"
     },
     {
-      "id": 12,
+      "id": 3,
       "string": "Goth"
     },
     {
-      "id": 13,
-      "string": "Hung"
-    },
-    {
-      "id": 14,
-      "string": "Inca"
-    },
-    {
-      "id": 15,
-      "string": "\u1ea4n \u0110\u1ed9"
-    },
-    {
-      "id": 16,
-      "string": "Italy"
-    },
-    {
-      "id": 17,
-      "string": "Nh\u1eadt B\u1ea3n"
-    },
-    {
-      "id": 18,
-      "string": "Khmer"
-    },
-    {
-      "id": 19,
-      "string": "Tri\u1ec1u Ti\u00ean"
-    },
-    {
-      "id": 20,
-      "string": "Litva"
-    },
-    {
-      "id": 21,
-      "string": "Magyar"
-    },
-    {
-      "id": 22,
-      "string": "M\u00e3 Lai"
-    },
-    {
-      "id": 23,
-      "string": "Mali"
-    },
-    {
-      "id": 24,
-      "string": "Maya"
-    },
-    {
-      "id": 25,
-      "string": "M\u00f4ng C\u1ed5"
-    },
-    {
-      "id": 26,
-      "string": "Ba T\u01b0"
-    },
-    {
-      "id": 27,
-      "string": "B\u1ed3 \u0110\u00e0o Nha"
-    },
-    {
-      "id": 28,
-      "string": "Saracen"
-    },
-    {
-      "id": 29,
-      "string": "Sicilians"
-    },
-    {
-      "id": 30,
-      "string": "Slav"
-    },
-    {
-      "id": 31,
-      "string": "T\u00e2y Ban Nha"
-    },
-    {
-      "id": 32,
-      "string": "Tatar"
-    },
-    {
-      "id": 33,
+      "id": 4,
       "string": "Teuton"
     },
     {
-      "id": 34,
+      "id": 5,
+      "string": "Nh\u1eadt B\u1ea3n"
+    },
+    {
+      "id": 6,
+      "string": "Trung Qu\u1ed1c"
+    },
+    {
+      "id": 7,
+      "string": "\u0110\u00f4ng La M\u00e3"
+    },
+    {
+      "id": 8,
+      "string": "Ba T\u01b0"
+    },
+    {
+      "id": 9,
+      "string": "Saracen"
+    },
+    {
+      "id": 10,
       "string": "\u0110\u1ed9t Quy\u1ebft"
     },
     {
-      "id": 35,
+      "id": 11,
+      "string": "Viking"
+    },
+    {
+      "id": 12,
+      "string": "M\u00f4ng C\u1ed5"
+    },
+    {
+      "id": 13,
+      "string": "Celt"
+    },
+    {
+      "id": 14,
+      "string": "T\u00e2y Ban Nha"
+    },
+    {
+      "id": 15,
+      "string": "Aztec"
+    },
+    {
+      "id": 16,
+      "string": "Maya"
+    },
+    {
+      "id": 17,
+      "string": "Hung"
+    },
+    {
+      "id": 18,
+      "string": "Tri\u1ec1u Ti\u00ean"
+    },
+    {
+      "id": 19,
+      "string": "Italy"
+    },
+    {
+      "id": 20,
+      "string": "\u1ea4n \u0110\u1ed9"
+    },
+    {
+      "id": 21,
+      "string": "Inca"
+    },
+    {
+      "id": 22,
+      "string": "Magyar"
+    },
+    {
+      "id": 23,
+      "string": "Slav"
+    },
+    {
+      "id": 24,
+      "string": "B\u1ed3 \u0110\u00e0o Nha"
+    },
+    {
+      "id": 25,
+      "string": "Ethiopia"
+    },
+    {
+      "id": 26,
+      "string": "Mali"
+    },
+    {
+      "id": 27,
+      "string": "Berber"
+    },
+    {
+      "id": 28,
+      "string": "Khmer"
+    },
+    {
+      "id": 29,
+      "string": "M\u00e3 Lai"
+    },
+    {
+      "id": 30,
+      "string": "Mi\u1ebfn \u0110i\u1ec7n"
+    },
+    {
+      "id": 31,
       "string": "\u0110\u1ea1i Vi\u1ec7t"
     },
     {
+      "id": 32,
+      "string": "Bulgaria"
+    },
+    {
+      "id": 33,
+      "string": "Tatar"
+    },
+    {
+      "id": 34,
+      "string": "Cuman"
+    },
+    {
+      "id": 35,
+      "string": "Litva"
+    },
+    {
       "id": 36,
-      "string": "Viking"
+      "string": "Burgundians"
+    },
+    {
+      "id": 37,
+      "string": "Sicilians"
+    },
+    {
+      "id": 38,
+      "string": "Poles"
+    },
+    {
+      "id": 39,
+      "string": "Bohemians"
     }
   ],
   "game_type": [
@@ -708,8 +716,12 @@
       "string": "Caucasus"
     },
     {
-      "id": 136137,
-      "string": "Unknown #136137"
+      "id": 136,
+      "string": "Caucasus"
+    },
+    {
+      "id": 137,
+      "string": "Nh\u00f3m b\u1ea3n \u0111\u1ed3 t\u00f9y ch\u1ec9nh"
     },
     {
       "id": 138,

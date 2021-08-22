@@ -27,8 +27,8 @@ class RatingPlotWidget(pg.PlotWidget):
         self.player_name = player_name
         self.setBackground(None)
 
-        self.current_hovered_point = None   # ("timestamp", "lb")
-        self.curent_text_box = None
+        self.current_hovered_point = None  # ("timestamp", "lb")
+        self.current_text_box = None
         self.registered_click_signal = None
 
         self.setMouseEnabled(x=False, y=False)
@@ -92,7 +92,7 @@ class RatingPlotWidget(pg.PlotWidget):
             if _plot is not None:
                 plot: pg.PlotDataItem = _plot
 
-                #show Symbols
+                # show Symbols
                 plot.setSymbolPen("w")
                 plot.setSymbol("o")
                 plot.setSymbolSize(5)
@@ -108,8 +108,8 @@ class RatingPlotWidget(pg.PlotWidget):
 
         res = self.search_point(mouse_point)
         if res is None:
-            if self.curent_text_box != None:
-                self.removeItem(self.curent_text_box)
+            if self.current_text_box is not None:
+                self.removeItem(self.current_text_box)
             return
         rating, timestamp, index, lb = res
 
@@ -119,23 +119,22 @@ class RatingPlotWidget(pg.PlotWidget):
         text = f"R: {rating}, D: {time_date}\nClick to see more!"
         text_box = pg.TextItem(text=text, anchor=(-0.2, 0.5), angle=0, border='w', fill=(150, 150, 150, 100))
 
-        if self.curent_text_box != None:
-            self.removeItem(self.curent_text_box)
+        if self.current_text_box is not None:
+            self.removeItem(self.current_text_box)
 
         self.addItem(text_box)
         text_box.setPos(timestamp, rating)
 
         self.current_hovered_point = (timestamp, lb)
-        self.curent_text_box = text_box
+        self.current_text_box = text_box
 
     def mouse_clicked(self, evt):
         # Es ist egal wo geklickt wird, es wird ein Singal an AnalyticsWindow gesendet (wird vorher übergeben)
         # Mit den Argument timestamp und leaderboard des momentanen gehoverten Datenpunkt
         # Dann wird ein Match mit dem Zeitcode gesucht und dargestellt
-        if self.current_hovered_point != None:
+
+        if self.current_hovered_point is not None:
             self.registered_click_signal.emit(self.current_hovered_point)
-
-
 
     # Todo: make a subfunction
     def search_point(self, mouse_point):
@@ -201,9 +200,9 @@ class RatingPlotWidget(pg.PlotWidget):
                 min_distance = distance
                 min_value = (rating, timestamp, index, 14)
 
-
         if min_distance < 10:
             return min_value
+
 
 class TeamTableWidget(pg.TableWidget):
     """
@@ -232,13 +231,13 @@ class TeamTableWidget(pg.TableWidget):
         self.cellDoubleClicked.connect(self.cell_double_clicked)
 
         self.player_data = np.zeros(
-            4, dtype=[('Name', object), ('Civ', object), ('Rating', int), ('Win %', float)])
+            5, dtype=[('Name', object), ('Civ', object), ('Rating', int), ('Win %', float)])
 
         self.players = np.empty(number_of_players, dtype=BasicPlayerInfo)
 
         for x in range(0, self.number_of_players):
             player_name = "Player " + str(x + 1)
-            self.player_data[x] = (player_name, 'Civ', 0, 0)
+            self.player_data[x] = (player_name, 'Civ', 0, 0,)
 
         self.setData(self.player_data)
 
@@ -290,7 +289,8 @@ class LegendItem(QWidget):
     def __init__(self, parent: typing.Optional[QWidget], color) -> None:
         super().__init__(parent=parent)
 
-        self.setMinimumSize(30, 10)
+        self.setMinimumSize(40, 10)
+        self.setMaximumSize(40, 10)
         self.color = color
 
     def paintEvent(self, e):

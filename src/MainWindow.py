@@ -15,6 +15,7 @@ from PySide2.QtWidgets import QLabel, QToolButton, QVBoxLayout, QHBoxLayout, QGr
 
 from APIStringGenerator import APIStringGenerator
 from AnalyticsWindow import AnalyticsWindow
+from AcknowledgementsWindow import AcknowledgementsWindow
 from DataParser import BasicPlayerInfo, Match, DataParser, LocalizedAPIStrings
 from PrefPanel import PrefPanel
 from SettingsHandler import SettingsHandler
@@ -155,6 +156,12 @@ class MainWindow(QWidget):
         show_analytics_button.setIcon(analytics_icon)
         show_analytics_button.clicked.connect(self.show_analytics)
 
+        show_acknowledgement_button = QToolButton()
+        show_acknowledgement_button.setMinimumSize(35, 35)
+        acknowledgement_icon = QIcon(os.path.dirname(__file__) + "/../img/resources/attribution_white_24dp.svg")
+        show_acknowledgement_button.setIcon(acknowledgement_icon)
+        show_acknowledgement_button.clicked.connect(self.show_acknowledgements)
+
         self.reload_label = QLabel("")
 
         font_italic = self.reload_label.font()
@@ -172,6 +179,7 @@ class MainWindow(QWidget):
         self.bar_layout.addWidget(refresh_button)
         self.bar_layout.addWidget(pref_button)
         self.bar_layout.addWidget(show_analytics_button)
+        self.bar_layout.addWidget(show_acknowledgement_button)
 
         # Display Legend
         legend_label = QLabel("Legend")
@@ -179,34 +187,50 @@ class MainWindow(QWidget):
         legend_label.setFont(font_bold)
 
         # RM
-        rating_1v1_RM_legend_label = QLabel("1v1 RM")
-        rating_team_RM_legend_label = QLabel("Team RM")
+        check_box_1v1_RM = QCheckBox("1v1 RM")
+        check_box_1v1_RM.setChecked(
+            SettingsHandler.get_1v1_RM_display_option_from_settings())
+
+        check_box_team_RM = QCheckBox("Team RM")
+        check_box_team_RM.setChecked(
+            SettingsHandler.get_team_RM_display_option_from_settings())
+
+        check_box_1v1_RM.stateChanged.connect(self.check_box_1v1_RM_changed)
+        check_box_team_RM.stateChanged.connect(self.check_box_team_RM_changed)
 
         legend_item_team_RM = LegendItem(None, (15, 153, 246))
         legend_item_1v1_RM = LegendItem(None, (255, 96, 62))
 
         h_item_team_RM = QHBoxLayout()
         h_item_team_RM.addWidget(legend_item_team_RM)
-        h_item_team_RM.addWidget(rating_team_RM_legend_label)
+        h_item_team_RM.addWidget(check_box_team_RM)
 
         h_item_1v1_RM = QHBoxLayout()
         h_item_1v1_RM.addWidget(legend_item_1v1_RM)
-        h_item_1v1_RM.addWidget(rating_1v1_RM_legend_label)
+        h_item_1v1_RM.addWidget(check_box_1v1_RM)
 
         # EW
-        rating_1v1_EW_legend_label = QLabel("1v1 EW")
-        rating_team_EW_legend_label = QLabel("Team EW")
+        check_box_1v1_EW = QCheckBox("1v1 EW")
+        check_box_1v1_EW.setChecked(
+            SettingsHandler.get_1v1_EW_display_option_from_settings())
+
+        check_box_team_EW = QCheckBox("Team EW")
+        check_box_team_EW.setChecked(
+            SettingsHandler.get_team_EW_display_option_from_settings())
+
+        check_box_1v1_EW.stateChanged.connect(self.check_box_1v1_EW_changed)
+        check_box_team_EW.stateChanged.connect(self.check_box_team_EW_changed)
 
         legend_item_team_EW = LegendItem(None, (82, 168, 39))
         legend_item_1v1_EW = LegendItem(None, (226, 185, 15))
 
         h_item_team_EW = QHBoxLayout()
         h_item_team_EW.addWidget(legend_item_team_EW)
-        h_item_team_EW.addWidget(rating_team_EW_legend_label)
+        h_item_team_EW.addWidget(check_box_team_EW)
 
         h_item_1v1_EW = QHBoxLayout()
         h_item_1v1_EW.addWidget(legend_item_1v1_EW)
-        h_item_1v1_EW.addWidget(rating_1v1_EW_legend_label)
+        h_item_1v1_EW.addWidget(check_box_1v1_EW)
 
         # Assemble
 
@@ -282,43 +306,9 @@ class MainWindow(QWidget):
         self.hidden_labels.extend(self.metadata_labels)
         self.hidden_labels.extend(self.time_labels)
 
-        # Display Options
-        options_label = QLabel("Options")
-        options_label.setFont(font_bold)
-        # RM
-        check_box_1v1_RM = QCheckBox("1v1 RM")
-        check_box_1v1_RM.setChecked(
-            SettingsHandler.get_1v1_RM_display_option_from_settings())
-
-        check_box_team_RM = QCheckBox("Team RM")
-        check_box_team_RM.setChecked(
-            SettingsHandler.get_team_RM_display_option_from_settings())
-
-        check_box_1v1_RM.stateChanged.connect(self.check_box_1v1_RM_changed)
-        check_box_team_RM.stateChanged.connect(self.check_box_team_RM_changed)
-
-        # EW 
-        check_box_1v1_EW = QCheckBox("1v1 EW")
-        check_box_1v1_EW.setChecked(
-            SettingsHandler.get_1v1_EW_display_option_from_settings())
-
-        check_box_team_EW = QCheckBox("Team EW")
-        check_box_team_EW.setChecked(
-            SettingsHandler.get_team_EW_display_option_from_settings())
-
-        check_box_1v1_EW.stateChanged.connect(self.check_box_1v1_EW_changed)
-        check_box_team_EW.stateChanged.connect(self.check_box_team_EW_changed)
-
-        v_display_option_layout = QVBoxLayout()
-        v_display_option_layout.addWidget(options_label)
-        v_display_option_layout.addWidget(check_box_1v1_RM)
-        v_display_option_layout.addWidget(check_box_team_RM)
-        v_display_option_layout.addWidget(check_box_1v1_EW)
-        v_display_option_layout.addWidget(check_box_team_EW)
-
         center_layout_v = QVBoxLayout()
-        center_layout_v.addLayout(v_display_option_layout)
-        center_layout_v.addSpacing(15)
+        # center_layout_v.addLayout(v_display_option_layout)
+        # center_layout_v.addSpacing(15)
         center_layout_v.addLayout(v_legend_layout)
         center_layout_v.addSpacing(12)
 
@@ -658,7 +648,8 @@ class MainWindow(QWidget):
 
         message_box.exec()
 
-    # Pref Panel
+    # Manage Windows
+
     def open_pref_panel(self):
         pref_panel = PrefPanel(main_window=self)
         pref_panel.setGeometry(500, 500, 300, 150)
@@ -676,12 +667,17 @@ class MainWindow(QWidget):
         self.player_table.update_civ_names()
         self.opp_table.update_civ_names()
 
-    # Show Analytics
+    def show_acknowledgements(self):
+        acknowledgement_window = AcknowledgementsWindow(main_window=self)
+        acknowledgement_window.show()
+
+        self.active_windows.append(acknowledgement_window)
+
     def show_analytics(self):
         analytics_window = AnalyticsWindow(main_window=self, profile_id=SettingsHandler.get_profile_id_from_settings())
         analytics_window.show()
 
         self.active_windows.append(analytics_window)
 
-    def analytics_window_closed(self, analytics_window: AnalyticsWindow):
-        self.active_windows.remove(analytics_window)
+    def active_window_closed(self, window: QWidget):
+        self.active_windows.remove(window)

@@ -8,7 +8,7 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 from DataHandler import DataHandler
-from DataParser import BasicPlayerInfo
+from DataParser import BasicPlayerInfo, DataParser
 from ui.ui_analytics_window import Ui_AnalyticsWindow
 
 from AnalyticsWidgets import MatchDetailWidget
@@ -106,7 +106,7 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
         self.rh_tab_v_layout.addWidget(self.rh_busy_indicator)
         self.mh_tab_v_layout.addWidget(self.mh_busy_indicator)
 
-        # Stlye Highlight
+        # Style Highlight
         style_sheet_orange = "color: orange"
         highlighted_labels = [self.play_displ_label, self.pd_displ_rating_label, self.pd_displ_wins_label, self.pd_displ_losses_label, self.pd_displ_winperc_label, self.play_displ_lb_label]
         for e in highlighted_labels:
@@ -131,7 +131,7 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
                                                                     finish_signal=self.sig_player_data_loaded)
 
     def closeEvent(self, event: QCloseEvent) -> None:
-        self.main_window.analytics_window_closed(self)
+        self.main_window.active_window_closed(self)
 
     def match_history_load_more_button_clicked(self):
         self.mh_busy_indicator.setHidden(False)
@@ -311,7 +311,7 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
                 min_index = index
 
         if min_index != -1:
-            if self.mh_match_detail_widget != None:
+            if self.mh_match_detail_widget is not None:
                 self.mh_match_detail_widget.close()
             match = self.loaded_match_detail_widgets[min_index].match
             match_widget = MatchDetailWidget(None, match, has_close_button=True)
@@ -337,6 +337,13 @@ class AnalyticsWindow(QWidget, Ui_AnalyticsWindow):
             self.mh_tab_scroll_area_content.setLayout(v_layout)
 
         self.is_currently_loading_matches = False
+
+        # Greife Namen ab falls möglich:
+        match = data[1][0]
+        if match is not None:
+            name = DataParser.get_player_name_from_match_with_id(match=match, player_id=self.profile_id)
+            if name is not None:
+                self.player_name_label.setText(name)
 
         print(f"{self.mh_matches_loaded = }")
         self.mh_busy_indicator.setHidden(True)

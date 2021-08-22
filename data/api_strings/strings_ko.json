@@ -28,152 +28,160 @@
   ],
   "civ": [
     {
-      "id": 0,
-      "string": "\uc544\uc988\ud14d"
-    },
-    {
       "id": 1,
-      "string": "\ubca0\ub974\ubca0\ub974\uc778"
-    },
-    {
-      "id": 2,
       "string": "\ube0c\ub9ac\ud2bc\uc778"
     },
     {
-      "id": 3,
-      "string": "\ubd88\uac00\ub9ac\uc544\uc778"
-    },
-    {
-      "id": 4,
-      "string": "Burgundians"
-    },
-    {
-      "id": 5,
-      "string": "\ubc84\ub9c8\uc778"
-    },
-    {
-      "id": 6,
-      "string": "\ube44\uc794\ud2f0\uc6c0\uc871"
-    },
-    {
-      "id": 7,
-      "string": "\ucf08\ud2b8\uc871"
-    },
-    {
-      "id": 8,
-      "string": "\uc911\uad6d\uc778"
-    },
-    {
-      "id": 9,
-      "string": "\ucfe0\ub9cc\uc778"
-    },
-    {
-      "id": 10,
-      "string": "\uc5d0\ud2f0\uc624\ud53c\uc544\uc778"
-    },
-    {
-      "id": 11,
+      "id": 2,
       "string": "\ud504\ub791\ud06c\uc871"
     },
     {
-      "id": 12,
+      "id": 3,
       "string": "\uace0\ud2b8\uc871"
     },
     {
-      "id": 13,
-      "string": "\ud6c8\uc871"
-    },
-    {
-      "id": 14,
-      "string": "\uc789\uce74\uc871"
-    },
-    {
-      "id": 15,
-      "string": "\uc778\ub3c4\uc778"
-    },
-    {
-      "id": 16,
-      "string": "\uc774\ud0c8\ub9ac\uc544\uc778"
-    },
-    {
-      "id": 17,
-      "string": "\uc77c\ubcf8\uc778"
-    },
-    {
-      "id": 18,
-      "string": "\ud06c\uba54\ub974\uc778"
-    },
-    {
-      "id": 19,
-      "string": "\ud55c\uad6d\uc778"
-    },
-    {
-      "id": 20,
-      "string": "\ub9ac\ud22c\uc544\ub2c8\uc544\uc778"
-    },
-    {
-      "id": 21,
-      "string": "\ub9c8\uc790\ub974\uc871"
-    },
-    {
-      "id": 22,
-      "string": "\ub9d0\ub808\uc774\uc778"
-    },
-    {
-      "id": 23,
-      "string": "\ub9d0\ub9ac\uc778"
-    },
-    {
-      "id": 24,
-      "string": "\ub9c8\uc57c"
-    },
-    {
-      "id": 25,
-      "string": "\ubabd\uace8\uc778"
-    },
-    {
-      "id": 26,
-      "string": "\ud398\ub974\uc2dc\uc544\uc778"
-    },
-    {
-      "id": 27,
-      "string": "\ud3ec\ub974\ud22c\uac08\uc778"
-    },
-    {
-      "id": 28,
-      "string": "\uc0ac\ub77c\uc13c\uc871"
-    },
-    {
-      "id": 29,
-      "string": "Sicilians"
-    },
-    {
-      "id": 30,
-      "string": "\uc2ac\ub77c\ube0c\uc871"
-    },
-    {
-      "id": 31,
-      "string": "\uc2a4\ud398\uc778\uc778"
-    },
-    {
-      "id": 32,
-      "string": "\ud0c0\ud0c0\ub974"
-    },
-    {
-      "id": 33,
+      "id": 4,
       "string": "\ud29c\ud134\uc871"
     },
     {
-      "id": 34,
+      "id": 5,
+      "string": "\uc77c\ubcf8\uc778"
+    },
+    {
+      "id": 6,
+      "string": "\uc911\uad6d\uc778"
+    },
+    {
+      "id": 7,
+      "string": "\ube44\uc794\ud2f0\uc6c0\uc871"
+    },
+    {
+      "id": 8,
+      "string": "\ud398\ub974\uc2dc\uc544\uc778"
+    },
+    {
+      "id": 9,
+      "string": "\uc0ac\ub77c\uc13c\uc871"
+    },
+    {
+      "id": 10,
       "string": "\ud280\ub974\ud06c\uc871"
     },
     {
-      "id": 35,
+      "id": 11,
+      "string": "\ubc14\uc774\ud0b9\uc871"
+    },
+    {
+      "id": 12,
+      "string": "\ubabd\uace8\uc778"
+    },
+    {
+      "id": 13,
+      "string": "\ucf08\ud2b8\uc871"
+    },
+    {
+      "id": 14,
+      "string": "\uc2a4\ud398\uc778\uc778"
+    },
+    {
+      "id": 15,
+      "string": "\uc544\uc988\ud14d"
+    },
+    {
+      "id": 16,
+      "string": "\ub9c8\uc57c"
+    },
+    {
+      "id": 17,
+      "string": "\ud6c8\uc871"
+    },
+    {
+      "id": 18,
+      "string": "\ud55c\uad6d\uc778"
+    },
+    {
+      "id": 19,
+      "string": "\uc774\ud0c8\ub9ac\uc544\uc778"
+    },
+    {
+      "id": 20,
+      "string": "\uc778\ub3c4\uc778"
+    },
+    {
+      "id": 21,
+      "string": "\uc789\uce74\uc871"
+    },
+    {
+      "id": 22,
+      "string": "\ub9c8\uc790\ub974\uc871"
+    },
+    {
+      "id": 23,
+      "string": "\uc2ac\ub77c\ube0c\uc871"
+    },
+    {
+      "id": 24,
+      "string": "\ud3ec\ub974\ud22c\uac08\uc778"
+    },
+    {
+      "id": 25,
+      "string": "\uc5d0\ud2f0\uc624\ud53c\uc544\uc778"
+    },
+    {
+      "id": 26,
+      "string": "\ub9d0\ub9ac\uc778"
+    },
+    {
+      "id": 27,
+      "string": "\ubca0\ub974\ubca0\ub974\uc778"
+    },
+    {
+      "id": 28,
+      "string": "\ud06c\uba54\ub974\uc778"
+    },
+    {
+      "id": 29,
+      "string": "\ub9d0\ub808\uc774\uc778"
+    },
+    {
+      "id": 30,
+      "string": "\ubc84\ub9c8\uc778"
+    },
+    {
+      "id": 31,
       "string": "\ubca0\ud2b8\ub0a8\uc778"
     },
     {
+      "id": 32,
+      "string": "\ubd88\uac00\ub9ac\uc544\uc778"
+    },
+    {
+      "id": 33,
+      "string": "\ud0c0\ud0c0\ub974"
+    },
+    {
+      "id": 34,
+      "string": "\ucfe0\ub9cc\uc778"
+    },
+    {
+      "id": 35,
+      "string": "\ub9ac\ud22c\uc544\ub2c8\uc544\uc778"
+    },
+    {
       "id": 36,
-      "string": "\ubc14\uc774\ud0b9\uc871"
+      "string": "Burgundians"
+    },
+    {
+      "id": 37,
+      "string": "Sicilians"
+    },
+    {
+      "id": 38,
+      "string": "Poles"
+    },
+    {
+      "id": 39,
+      "string": "Bohemians"
     }
   ],
   "game_type": [
@@ -708,8 +716,12 @@
       "string": "Caucasus"
     },
     {
-      "id": 136137,
-      "string": "Unknown #136137"
+      "id": 136,
+      "string": "Caucasus"
+    },
+    {
+      "id": 137,
+      "string": "\uc0ac\uc6a9\uc790 \uc9c0\uc815 \uc9c0\ub3c4 \ud480"
     },
     {
       "id": 138,

@@ -14,6 +14,8 @@ from Widgets import RatingPlotWidget
 
 from pyqtgraph import mkPen
 import pyqtgraph as pg
+import os
+
 
 class MatchDetailWidget(QWidget):
     def __init__(self, parent: typing.Optional[QWidget], match: Match, has_close_button: bool) -> None:
@@ -26,13 +28,16 @@ class MatchDetailWidget(QWidget):
         self.collapsed = False
 
         # Set Up UI
-        grid_layout = QGridLayout()
-        grid_layout.setHorizontalSpacing(4)
+        self.metadata_labels = []
+        self.time_started_labels = []
 
         self.h_metadata_layout = QHBoxLayout()
         self.h_metadata_layout.setSpacing(5)
         self.h_time_started_layout = QHBoxLayout()
         self.h_time_started_layout.setSpacing(5)
+
+        grid_layout = QGridLayout()
+        grid_layout.setHorizontalSpacing(4)
 
         metadata_label = QLabel("Metadata:")
 
@@ -74,11 +79,18 @@ class MatchDetailWidget(QWidget):
         server_label.setFont(font_italic)
         server_label.setStyleSheet(accented_style_sheet)
 
+        self.collapse_button = QToolButton()
         self.close_button = QToolButton()
         if not self.has_close_button:
+            self.collapse_button.setHidden(True)
             self.close_button.setHidden(True)
+        self.collapse_button.setMaximumSize(QSize(18, 18))
+        self.collapse_button.setArrowType(Qt.DownArrow)
+        self.collapse_button.clicked.connect(self.collapse_button_clicked)
+
         self.close_button.setMaximumSize(QSize(18, 18))
-        self.close_button.setArrowType(Qt.DownArrow)
+        close_icon = QIcon(os.path.dirname(__file__) + "/../img/resources/close_white_24dp.svg")
+        self.close_button.setIcon(close_icon)
         self.close_button.clicked.connect(self.close_button_clicked)
 
         time_label = QLabel("Match Started: ")
@@ -93,7 +105,6 @@ class MatchDetailWidget(QWidget):
             time_match_started_label.setText(self.match.time_started_humanized)
         else:
             time_match_started_label.setText(self.match.time_started_plain)
-        
 
         self.metadata_labels = [metadata_label, label_cur_pl, leader_board_label, label_cur_size, size_label,
                                 label_cur_map, map_label, label_cur_server, server_label]
@@ -104,19 +115,20 @@ class MatchDetailWidget(QWidget):
         for l in self.time_started_labels:
             self.h_time_started_layout.addWidget(l, stretch=5, alignment=Qt.AlignLeft)
 
+        self.h_metadata_layout.addWidget(self.collapse_button, alignment=Qt.AlignRight)
         self.h_metadata_layout.addWidget(self.close_button, alignment=Qt.AlignRight)
-
 
         vertical_layout_top_level = QVBoxLayout()
         vertical_layout_top_level.addLayout(self.h_metadata_layout)
         vertical_layout_top_level.addLayout(self.h_time_started_layout)
 
-
-        h_match_details_layout = QHBoxLayout()
-        h_match_details_layout.setSpacing(4)
+        self.h_match_details_layout = QHBoxLayout()
+        self.h_match_details_layout.setSpacing(4)
         v_layout_opponent = QVBoxLayout()
 
-        for player in match.team_2_players:
+        self.details_items: [QWidget] = []
+
+        for player in self.match.team_2_players:
             h_layout = QHBoxLayout()
 
             civ_name_label = QLabel(player.civ_name)
@@ -136,9 +148,20 @@ class MatchDetailWidget(QWidget):
 
             v_layout_opponent.addLayout(h_layout)
 
+            self.details_items.extend([civ_name_label, player_name_label, item])
+
+            if player.player_won:
+                # add crown
+                label = QLabel()
+                won_icon = QIcon(os.path.dirname(__file__) + "/../img/symbols/crown/crown-312077.svg")
+                pixmap = won_icon.pixmap(QSize(30, 30))
+                label.setPixmap(pixmap)
+                h_layout.insertWidget(2, label, alignment=Qt.AlignRight)
+                self.details_items.append(label)
+
         v_layout_player = QVBoxLayout()
 
-        for player in match.team_1_players:
+        for player in self.match.team_1_players:
             h_layout = QHBoxLayout()
 
             civ_name_label = QLabel(player.civ_name)
@@ -158,17 +181,35 @@ class MatchDetailWidget(QWidget):
 
             v_layout_player.addLayout(h_layout)
 
-        h_match_details_layout.addLayout(v_layout_opponent)
-        h_match_details_layout.addLayout(v_layout_player)
-        vertical_layout_top_level.addLayout(h_match_details_layout)
+            self.details_items.extend([civ_name_label, player_name_label, item])
+
+            if player.player_won:
+                # add crown
+                label = QLabel()
+                won_icon = QIcon(os.path.dirname(__file__) + "/../img/symbols/crown/crown-312077.svg")
+                pixmap = won_icon.pixmap(QSize(30, 30))
+                label.setPixmap(pixmap)
+                h_layout.insertWidget(1, label, alignment=Qt.AlignLeft)
+                self.details_items.append(label)
+
+        self.h_match_details_layout.addLayout(v_layout_opponent)
+        self.h_match_details_layout.addLayout(v_layout_player)
+        vertical_layout_top_level.addLayout(self.h_match_details_layout)
 
         self.setLayout(vertical_layout_top_level)
 
-        return
+    def collapse_button_clicked(self):
+        if self.collapsed is False:
+            self.collapsed = True
+            self.collapse_button.setArrowType(Qt.ArrowType.LeftArrow)
+        else:
+            self.collapsed = False
+            self.collapse_button.setArrowType(Qt.ArrowType.DownArrow)
+        for e in self.details_items:
+            e.setHidden(self.collapsed)
 
     def close_button_clicked(self):
         self.close()
-
 
     def paintEvent(self, e):
         painter = QPainter(self)
@@ -180,7 +221,8 @@ class MatchDetailWidget(QWidget):
         pen = mkPen(color, width=3)
         painter.setPen(pen)
 
-        points = [QPointF(5, 5), QPointF(width - 5, 5), QPointF(width - 5, height - 5), QPointF(4, height - 5), QPointF(5, 5)]
+        points = [QPointF(5, 5), QPointF(width - 5, 5), QPointF(width - 5, height - 5), QPointF(4, height - 5),
+                  QPointF(5, 5)]
         painter.drawPolyline(points)
 
         painter.end()
@@ -225,6 +267,3 @@ class CivAndColorItem(QWidget):
         painter.drawPolyline(points)
 
         painter.end()
-
-
-

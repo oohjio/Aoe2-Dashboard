@@ -25,6 +25,8 @@ class BasicPlayerInfo:
 
     profile_id: int
 
+    player_won: bool
+
     @property
     def win_percentage(self) -> float:
         if self.losses == 0:
@@ -85,7 +87,7 @@ class DataParser:
         wins = rating_json.get("num_wins", 0)
         losses = rating_json.get("num_losses", 0)
 
-        player_data = BasicPlayerInfo(name, rating, wins, losses, 0, 0, 0, 0)
+        player_data = BasicPlayerInfo(name, rating, wins, losses, 0, 0, 0, 0, False)
         return player_data
 
     @staticmethod
@@ -140,14 +142,15 @@ class DataParser:
             player_team = player.get("team", 0)
             player_color = player.get("color", 999)
             player_rating = player.get("rating", 0)
+            player_won = player.get("won", False)
             if player_rating is None:
-                # If the last match isnt recent, rating cann be None, will be updated in the Main Menu
+                # If the last match isn't recent, rating can be None, will be updated later
                 player_rating = 0
             player_civ_id = player.get("civ", 999)
             player_profile_id = player.get("profile_id", 0)
 
             player_info = BasicPlayerInfo(player_name, player_rating, 0, 0, player_team, player_color, player_civ_id,
-                                          player_profile_id)
+                                          player_profile_id, player_won)
             if player_team == 1:
                 team_1.append(player_info)
             if player_team == 2:
@@ -168,6 +171,14 @@ class DataParser:
         new_match = Match(match_uuid, match_map_type, match_is_ranked, match_num_players, match_leaderboard_id,
                           match_server, match_time, team_1, team_2)
         return new_match
+
+    @staticmethod
+    def get_player_name_from_match_with_id(match: Match, player_id: int):
+        for player in match.team_1_players:
+            if player.profile_id == player_id:
+                return player.name
+
+        return None
 
 
 class LocalizedAPIStrings:

@@ -28,152 +28,160 @@
   ],
   "civ": [
     {
-      "id": 0,
-      "string": "Azteken"
-    },
-    {
       "id": 1,
-      "string": "Berbers"
-    },
-    {
-      "id": 2,
       "string": "Britten"
     },
     {
-      "id": 3,
-      "string": "Bulgaren"
-    },
-    {
-      "id": 4,
-      "string": "Burgundians"
-    },
-    {
-      "id": 5,
-      "string": "Birmezen"
-    },
-    {
-      "id": 6,
-      "string": "Byzantijnen"
-    },
-    {
-      "id": 7,
-      "string": "Celten"
-    },
-    {
-      "id": 8,
-      "string": "Chinezen"
-    },
-    {
-      "id": 9,
-      "string": "Koemanen"
-    },
-    {
-      "id": 10,
-      "string": "Ethiopi\u00ebrs"
-    },
-    {
-      "id": 11,
+      "id": 2,
       "string": "Franken"
     },
     {
-      "id": 12,
+      "id": 3,
       "string": "Goten"
     },
     {
-      "id": 13,
-      "string": "Hunnen"
-    },
-    {
-      "id": 14,
-      "string": "Incas"
-    },
-    {
-      "id": 15,
-      "string": "Indi\u00ebrs"
-    },
-    {
-      "id": 16,
-      "string": "Italianen"
-    },
-    {
-      "id": 17,
-      "string": "Japanners"
-    },
-    {
-      "id": 18,
-      "string": "Khmer"
-    },
-    {
-      "id": 19,
-      "string": "Koreanen"
-    },
-    {
-      "id": 20,
-      "string": "Litouwers"
-    },
-    {
-      "id": 21,
-      "string": "Hongaren"
-    },
-    {
-      "id": 22,
-      "string": "Maleiers"
-    },
-    {
-      "id": 23,
-      "string": "Malinezen"
-    },
-    {
-      "id": 24,
-      "string": "Mayas"
-    },
-    {
-      "id": 25,
-      "string": "Mongolen"
-    },
-    {
-      "id": 26,
-      "string": "Perzen"
-    },
-    {
-      "id": 27,
-      "string": "Portugezen"
-    },
-    {
-      "id": 28,
-      "string": "Saracenen"
-    },
-    {
-      "id": 29,
-      "string": "Sicilians"
-    },
-    {
-      "id": 30,
-      "string": "Slaven"
-    },
-    {
-      "id": 31,
-      "string": "Spanjaarden"
-    },
-    {
-      "id": 32,
-      "string": "Tataren"
-    },
-    {
-      "id": 33,
+      "id": 4,
       "string": "Teutonen"
     },
     {
-      "id": 34,
+      "id": 5,
+      "string": "Japanners"
+    },
+    {
+      "id": 6,
+      "string": "Chinezen"
+    },
+    {
+      "id": 7,
+      "string": "Byzantijnen"
+    },
+    {
+      "id": 8,
+      "string": "Perzen"
+    },
+    {
+      "id": 9,
+      "string": "Saracenen"
+    },
+    {
+      "id": 10,
       "string": "Turken"
     },
     {
-      "id": 35,
+      "id": 11,
+      "string": "Vikingen"
+    },
+    {
+      "id": 12,
+      "string": "Mongolen"
+    },
+    {
+      "id": 13,
+      "string": "Celten"
+    },
+    {
+      "id": 14,
+      "string": "Spanjaarden"
+    },
+    {
+      "id": 15,
+      "string": "Azteken"
+    },
+    {
+      "id": 16,
+      "string": "Mayas"
+    },
+    {
+      "id": 17,
+      "string": "Hunnen"
+    },
+    {
+      "id": 18,
+      "string": "Koreanen"
+    },
+    {
+      "id": 19,
+      "string": "Italianen"
+    },
+    {
+      "id": 20,
+      "string": "Indi\u00ebrs"
+    },
+    {
+      "id": 21,
+      "string": "Incas"
+    },
+    {
+      "id": 22,
+      "string": "Hongaren"
+    },
+    {
+      "id": 23,
+      "string": "Slaven"
+    },
+    {
+      "id": 24,
+      "string": "Portugezen"
+    },
+    {
+      "id": 25,
+      "string": "Ethiopi\u00ebrs"
+    },
+    {
+      "id": 26,
+      "string": "Malinezen"
+    },
+    {
+      "id": 27,
+      "string": "Berbers"
+    },
+    {
+      "id": 28,
+      "string": "Khmer"
+    },
+    {
+      "id": 29,
+      "string": "Maleiers"
+    },
+    {
+      "id": 30,
+      "string": "Birmezen"
+    },
+    {
+      "id": 31,
       "string": "Vietnamezen"
     },
     {
+      "id": 32,
+      "string": "Bulgaren"
+    },
+    {
+      "id": 33,
+      "string": "Tataren"
+    },
+    {
+      "id": 34,
+      "string": "Koemanen"
+    },
+    {
+      "id": 35,
+      "string": "Litouwers"
+    },
+    {
       "id": 36,
-      "string": "Vikingen"
+      "string": "Burgundians"
+    },
+    {
+      "id": 37,
+      "string": "Sicilians"
+    },
+    {
+      "id": 38,
+      "string": "Poles"
+    },
+    {
+      "id": 39,
+      "string": "Bohemians"
     }
   ],
   "game_type": [
@@ -708,8 +716,12 @@
       "string": "Caucasus"
     },
     {
-      "id": 136137,
-      "string": "Unknown #136137"
+      "id": 136,
+      "string": "Caucasus"
+    },
+    {
+      "id": 137,
+      "string": "Custom Map Pool"
     },
     {
       "id": 138,
